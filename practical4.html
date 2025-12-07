@@ -3,107 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajazz AK680 Keyboard</title>
+    <title>Fullsize 100% Keyboard</title>
 
     <!-- Custom font -->
-    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
 
     <style>
         body {
             margin: 0;
-            padding: 40px;
-            background: #e5dfd4; /* ретро фон */
-            font-family: "Manrope", sans-serif;
+            padding: 20px;
+            background: #ececec;
+            font-family: 'Roboto Mono', monospace;
             display: flex;
-            justify-content: center;
-            align-items: center;
             flex-direction: column;
+            align-items: center;
         }
 
         h1 {
-            margin-bottom: 25px;
-            font-size: 36px;
-            color: #5c4a3e;
+            margin-bottom: 20px;
+            font-size: 32px;
         }
 
+        /* Main keyboard grid */
         .keyboard {
             display: grid;
             grid-template-columns: repeat(30, 1fr);
             gap: 10px;
-            width: 1300px;
-            background: #d9d3c8;
+            width: 1500px;
+            background: #ddd;
             padding: 25px;
             border-radius: 20px;
             box-shadow: 0 10px 25px rgba(0,0,0,0.25);
         }
 
+        /* Key style */
         .key {
-            background: #f4e9c9; /* milk yellow */
-            padding: 15px 10px;
-            text-align: center;
+            background: #ffffff;
             border-radius: 10px;
-            box-shadow: 0 6px 0px #c4b89f;
-            font-size: 16px;
-            transition: 0.15s ease;
+            box-shadow: 0 5px 0 #bdbdbd;
+            text-align: center;
+            padding: 14px 5px;
             user-select: none;
-            border: 2px solid #d8ccb0;
+            transition: 0.15s;
+            border: 1px solid #cfcfcf;
+            font-size: 15px;
             font-weight: 600;
         }
 
-        /* Hover */
         .key:hover {
-            background: #f0e0b5;
+            background: #f3f3f3;
             cursor: pointer;
         }
 
-        /* Active press */
         .key:active {
-            transform: translateY(5px);
-            box-shadow: 0 1px 0px #b3a78e inset;
-            background: #e8d6a1;
+            transform: translateY(4px);
+            box-shadow: 0 1px 0 #aaa inset;
+            background: #ebebeb;
         }
 
-        /* Special color keys */
-        .green { background: #b7d3a8; box-shadow: 0 6px 0px #8ea785; }
-        .green:hover { background: #aecf9c; }
-        .green:active { background: #9fc889; }
-
-        .brown { background: #c8b29a; box-shadow: 0 6px 0px #a69278; }
-        .brown:hover { background: #c1a98e; }
-        .brown:active { background: #b79d82; }
-
-        /* Key widths */
+        /* Different key widths */
         .w2 { grid-column: span 2; }
         .w3 { grid-column: span 3; }
         .w4 { grid-column: span 4; }
         .w5 { grid-column: span 5; }
         .w6 { grid-column: span 6; }
-        .space { grid-column: span 12; }
+        .space { grid-column: span 8; }
+
+        /* Right cluster and numpad alignment */
+        .gap { grid-column: span 2; background: none; box-shadow: none; border: none; }
     </style>
 </head>
 <body>
 
-<h1>Ajazz AK680 — Fullsize Keyboard</h1>
+<h1>Fullsize 100% Keyboard</h1>
 
 <div class="keyboard">
 
-    <!-- ROW 1 -->
-    <div class="key brown">Esc</div>
+    <!-- Row 1 (F-row) -->
+    <div class="key">Esc</div>
+    <div class="gap"></div>
     <div class="key">F1</div>
     <div class="key">F2</div>
     <div class="key">F3</div>
     <div class="key">F4</div>
-    <div class="key green">F5</div>
-    <div class="key green">F6</div>
-    <div class="key green">F7</div>
-    <div class="key green">F8</div>
+    <div class="gap"></div>
+    <div class="key">F5</div>
+    <div class="key">F6</div>
+    <div class="key">F7</div>
+    <div class="key">F8</div>
+    <div class="gap"></div>
     <div class="key">F9</div>
     <div class="key">F10</div>
     <div class="key">F11</div>
     <div class="key">F12</div>
+    <div class="gap"></div>
+    <div class="key">PrtSc</div>
+    <div class="key">ScrLk</div>
+    <div class="key">Pause</div>
 
-    <!-- ROW 2 -->
-    <div class="key w2 brown">Tab</div>
+    <!-- Row 2 -->
+    <div class="key">`</div>
+    <div class="key">1</div>
+    <div class="key">2</div>
+    <div class="key">3</div>
+    <div class="key">4</div>
+    <div class="key">5</div>
+    <div class="key">6</div>
+    <div class="key">7</div>
+    <div class="key">8</div>
+    <div class="key">9</div>
+    <div class="key">0</div>
+    <div class="key">-</div>
+    <div class="key">=</div>
+    <div class="key w3">Backspace</div>
+
+    <div class="gap"></div>
+
+    <div class="key">Ins</div>
+    <div class="key">Home</div>
+    <div class="key">PgUp</div>
+
+    <div class="gap"></div>
+
+    <div class="key">Num</div>
+    <div class="key">/</div>
+    <div class="key">*</div>
+    <div class="key">-</div>
+
+    <!-- Row 3 -->
+    <div class="key w2">Tab</div>
     <div class="key">Q</div>
     <div class="key">W</div>
     <div class="key">E</div>
@@ -114,10 +142,25 @@
     <div class="key">I</div>
     <div class="key">O</div>
     <div class="key">P</div>
-    <div class="key w3 brown">Backspace</div>
+    <div class="key">[</div>
+    <div class="key">]</div>
+    <div class="key w2">\\</div>
 
-    <!-- ROW 3 -->
-    <div class="key w3 brown">Caps</div>
+    <div class="gap"></div>
+
+    <div class="key">Del</div>
+    <div class="key">End</div>
+    <div class="key">PgDn</div>
+
+    <div class="gap"></div>
+
+    <div class="key">7</div>
+    <div class="key">8</div>
+    <div class="key">9</div>
+    <div class="key">+</div>
+
+    <!-- Row 4 -->
+    <div class="key w3">Caps</div>
     <div class="key">A</div>
     <div class="key">S</div>
     <div class="key">D</div>
@@ -127,10 +170,20 @@
     <div class="key">J</div>
     <div class="key">K</div>
     <div class="key">L</div>
-    <div class="key w4 green">Enter</div>
+    <div class="key">;</div>
+    <div class="key">'</div>
+    <div class="key w3">Enter</div>
 
-    <!-- ROW 4 -->
-    <div class="key w4 green">Shift</div>
+    <div class="gap"></div>
+    <div class="gap"></div>
+
+    <div class="key">4</div>
+    <div class="key">5</div>
+    <div class="key">6</div>
+    <div class="key">+</div>
+
+    <!-- Row 5 -->
+    <div class="key w4">Shift</div>
     <div class="key">Z</div>
     <div class="key">X</div>
     <div class="key">C</div>
@@ -138,17 +191,40 @@
     <div class="key">B</div>
     <div class="key">N</div>
     <div class="key">M</div>
-    <div class="key w3 green">Shift</div>
+    <div class="key">,</div>
+    <div class="key">.</div>
+    <div class="key">/</div>
+    <div class="key w4">Shift</div>
 
-    <!-- ROW 5 -->
-    <div class="key w2 brown">Ctrl</div>
-    <div class="key w2 brown">Win</div>
-    <div class="key w2 brown">Alt</div>
+    <div class="gap"></div>
+    <div class="key">↑</div>
+    <div class="gap"></div>
+
+    <div class="key">1</div>
+    <div class="key">2</div>
+    <div class="key">3</div>
+    <div class="key w2">Enter</div>
+
+    <!-- Row 6 -->
+    <div class="key w2">Ctrl</div>
+    <div class="key w2">Win</div>
+    <div class="key w2">Alt</div>
+
     <div class="key space">Space</div>
-    <div class="key w2 brown">Alt</div>
-    <div class="key w2 brown">Fn</div>
-    <div class="key w2 brown">Menu</div>
-    <div class="key w2 brown">Ctrl</div>
+
+    <div class="key w2">Alt</div>
+    <div class="key w2">Fn</div>
+    <div class="key w2">Ctrl</div>
+
+    <div class="gap"></div>
+
+    <div class="key">←</div>
+    <div class="key">↓</div>
+    <div class="key">→</div>
+
+    <div class="key w2">0</div>
+    <div class="key">.</div>
+    <div class="key w2">Enter</div>
 
 </div>
 
