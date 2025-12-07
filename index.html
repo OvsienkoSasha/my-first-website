@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Особистий веб-сайт Овсієнка О.В.</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Особистий веб-сайт | Овсієнко О.В.</title>
   <style>
     * {
       margin: 0;
@@ -15,80 +15,94 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       line-height: 1.6;
       color: #333;
+      background-color: #fafafa;
     }
 
     header {
-      background-color: #222;
+      background-color: #1a1a1a;
       color: white;
       text-align: center;
       padding: 1rem 0;
     }
 
     header h1 {
-      font-size: 1.3rem;
+      font-size: 1.6rem;
       margin-bottom: 0.5rem;
-      line-height: 1.3;
     }
 
-    nav {
-      margin-top: 0.5rem;
+    nav ul {
+      list-style: none;
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.5rem 0;
+      flex-wrap: wrap;
     }
 
     nav a {
-      color: #99f;
+      color: #64b5f6;
       text-decoration: none;
-      margin: 0 8px;
       font-weight: 500;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
     }
 
-    nav a:hover {
-      text-decoration: underline;
-      color: #fff;
+    nav a:hover, nav a:focus {
+      background-color: #333;
     }
 
     main {
-      padding: 2rem;
-      background-color: #fff;
+      padding: 2rem 1rem;
+      min-height: calc(100vh - 180px);
     }
 
-    section {
-      margin-bottom: 2rem;
+    .page {
+      display: none;
+      max-width: 768px;
+      margin: 0 auto;
+      background: white;
       padding: 1.5rem;
       border-radius: 8px;
-      background-color: #f9f9f9;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
 
-    section h2 {
-      font-size: 1.4rem;
-      margin-bottom: 0.5rem;
-      color: #222;
-    }
-
-    .profile-pic {
-      max-width: 200px;
-      border-radius: 50%;
-      border: 3px solid #ddd;
-      margin: 0 auto 1rem;
+    /* Перша сторінка — головна — видима завжди, якщо нічого не обрано */
+    #home,
+    .page:target {
       display: block;
     }
 
-    .email {
-      font-size: 1.1rem;
-      margin-top: 1rem;
-      color: #0056b3;
-      font-weight: bold;
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      color: #1a1a1a;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 1rem 0;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+
+    .empty {
+      color: #777;
+      font-style: italic;
+      text-align: center;
+      margin: 2rem 0;
     }
 
     footer {
-      background-color: #222;
-      color: white;
+      background-color: #1a1a1a;
+      color: #aaa;
       text-align: center;
-      padding: 1rem 0;
+      padding: 1.2rem 1rem;
       margin-top: 2rem;
     }
 
     footer a {
-      color: #99f;
+      color: #64b5f6;
       text-decoration: none;
     }
 
@@ -96,59 +110,76 @@
       text-decoration: underline;
     }
 
-    @media (max-width: 768px) {
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
       header h1 {
-        font-size: 1.2rem;
-        padding: 0 10px;
-      }
-      nav a {
-        display: inline-block;
-        margin: 4px;
-      }
-      main {
-        padding: 1.2rem;
-      }
-      .profile-pic {
-        max-width: 150px;
+        font-size: 1.3rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <!-- Шапка -->
   <header>
-    <h1>Особистий веб-сайт Овсієнка Олександра В’ячеславовича</h1>
+    <h1>Особистий веб-сайт Овсієнка О.В.</h1>
     <nav>
-      <a href="#home">Головна</a>
-      <a href="#about">Про мене</a>
-      <a href="practical2.html">Практичні роботи</a>
-      <a href="lab1.html">Лабораторні заняття</a>
+      <ul>
+        <li><a href="#home">Головна</a></li>
+        <li><a href="#about">Про мене</a></li>
+        <li><a href="#practical">Практичні роботи</a></li>
+        <li><a href="#lab">Лабораторні заняття</a></li>
+      </ul>
     </nav>
   </header>
 
-  <!-- Головна секція -->
-  <main id="home">
-    <section>
+  <main>
+    <!-- Головна -->
+    <section id="home" class="page">
       <h2>Ласкаво просимо!</h2>
-      <p>Це мій персональний сайт для навчального курсу з веб-розробки.</p>
+      <p>Це мій особистий сайт, створений для курсу з веб-розробки.</p>
+      <p>Тут будуть зібрані всі виконані мною роботи — практичні та лабораторні.</p>
     </section>
-  </main>
 
-  <!-- Секція "Про мене" -->
-  <main id="about">
-    <section>
+    <!-- Про мене -->
+    <section id="about" class="page">
       <h2>Про мене</h2>
-      <img src="https://via.placeholder.com/200x200?text=Фото+Овсієнка" alt="Овсієнко О.В." class="profile-pic">
-      <p>Я Овсієнко О.В. Студент групи ТЦР-22</p>
-      <div class="email">📧 ovsyenkos@gmail.com</div>
+      <img src="photo.jpg" alt="Фото Овсієнка Олександра">
+      <p>Я Овсієнко Олександр, студент групи ТЦР-22.</p>
+      <p><strong>Email:</strong> <a href="mailto:ovsyenkos@gmail.com">ovsyenkos@gmail.com</a></p>
+    </section>
+
+    <!-- Практичні роботи (порожньо — для майбутнього наповнення) -->
+    <section id="practical" class="page">
+      <h2>Практичні роботи</h2>
+      <p class="empty">Тут з’являться посилання на практичні роботи після їх завантаження в репозиторій.</p>
+      <!-- Приклад, як додавати пізніше (розкоментуй, коли додаватимеш):
+      <ul>
+        <li><a href="pr1/index.html">Практична робота №1 — Основи HTML</a></li>
+        <li><a href="pr2/index.html">Практична робота №2 — Стилізація форми</a></li>
+      </ul>
+      -->
+    </section>
+
+    <!-- Лабораторні заняття (порожньо — для майбутнього наповнення) -->
+    <section id="lab" class="page">
+      <h2>Лабораторні заняття</h2>
+      <p class="empty">Тут з’являться посилання на лабораторні роботи після їх завантаження в репозиторій.</p>
+      <!-- Приклад:
+      <ul>
+        <li><a href="lab1/index.
+  html">Лабораторна робота №1 — Форма реєстрації</a></li>
+        <li><a href="lab2/index.html">Лабораторна робота №2 — CSS-селектори</a></li>
+      </ul>
+      -->
     </section>
   </main>
 
-  <!-- Футер -->
   <footer>
-    © 2025 Овсієнко Олександр В’ячеславович. | 
-    <a href="https://github.com/OvsienkoSasha">GitHub</a>
+    &copy; 2025 Овсієнко Олександр В’ячеславович | 
+    <a href="https://github.com/your-username" target="_blank">GitHub</a>
   </footer>
 
 </body>
