@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Практична робота №3 — YouTube Layout (Flexbox)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background-color: #f9f9f9;
+    }
+
+    /* Шапка */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      height: 56px;
+      background-color: white;
+      border-bottom: 1px solid #e5e5e5;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+    }
+
+    .logo-section {
+      display: flex;
+      align-items: center;
+    }
+
+    .menu-btn {
+      width: 24px;
+      height: 24px;
+      margin-right: 24px;
+      background: #ff0000;
+      border-radius: 4px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: bold;
+      color: #ff0000;
+      text-decoration: none;
+    }
+
+    .search-bar {
+      display: flex;
+      flex: 1;
+      max-width: 640px;
+      margin: 0 40px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px 16px;
+      border: 1px solid #ccc;
+      border-right: none;
+      border-radius: 2px 0 0 2px;
+      font-size: 16px;
+    }
+
+    .search-bar button {
+      padding: 0 20px;
+      background: #f8f8f8;
+      border: 1px solid #ccc;
+      border-radius: 0 2px 2px 0;
+      cursor: pointer;
+    }
+
+    .user-actions {
+      display: flex;
+      align-items: center;
+    }
+
+    .icon-btn {
+      margin-left: 16px;
+      width: 24px;
+      height: 24px;
+      background: #ccc;
+      border-radius: 50%;
+    }
+
+    /* Основний контент */
+    .container {
+      display: flex;
+      margin-top: 56px; /* висота шапки */
+    }
+
+    /* Бокове меню */
+    .sidebar {
+      width: 240px;
+      position: fixed;
+      top: 56px;
+      bottom: 0;
+      background: white;
+      overflow-y: auto;
+      padding-top: 12px;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 10px 0 10px 24px;
+      cursor: pointer;
+    }
+
+    .sidebar-item:hover {
+      background-color: #f2f2f2;
+    }
+
+    .sidebar-icon {
+      width: 24px;
+      height: 24px;
+      margin-right: 24px;
+      background: #999;
+      border-radius: 50%;
+    }
+
+    .sidebar-text {
+      font-size: 14px;
+    }
+
+    /* Вміст */
+    .main-content {
+      margin-left: 240px;
+      padding: 20px 24px;
+      width: calc(100% - 240px);
+    }
+
+    .categories {
+      display: flex;
+      overflow-x: auto;
+      margin-bottom: 24px;
+      padding: 12px 0;
+    }
+
+    .category {
+      padding: 8px 12px;
+      margin-right: 12px;
+      background: #f2f2f2;
+      border-radius: 16px;
+      white-space: nowrap;
+      font-size: 14px;
+    }
+
+    .category.active {
+      background: #030303;
+      color: white;
+    }
+
+    /* Сітка відео */
+    .videos {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .video-card {
+      width: calc(100% / 4 - 12px);
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s, box-shadow 0.2s; /* ✅ плавність */
+    }
+
+    /* 🔥 Hover-ефект: підйом + тінь */
+    .video-card:hover {
+      transform: translateY(-4px); /* піднімається вгору */
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15); /* легка тінь */
+      z-index: 1; /* щоб була "над" іншими картками */
+    }
+
+    .thumbnail {
+      width: 100%;
+      height: 0;
+      padding-bottom: 56.25%; /* 16:9 */
+      background: #000;
+      position: relative;
+    }
+
+    .duration {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.8);
+      color: white;
+      font-size: 12px;
+      padding: 2px 4px;
+      border-radius: 2px;
+    }
+
+    .video-info {
+      padding: 12px 0;
+    }
+
+    .avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #999;
+      margin-right: 12px;
+    }
+
+    .video-meta {
+      display: flex;
+    }
+
+    .video-details {
+      flex: 1;
+    }
+
+    .title {
+      font-weight: 500;
+      font-size: 14px;
+      margin-bottom: 6px;
+      color: #030303;
+    }
+
+    .channel, .views {
+      font-size: 12px;
+      color: #606060;
+    }
+
+    /* Адаптивність */
+    @media (max-width: 1000px) {
+      .video-card { width: calc(100% / 3 - 11px); }
+    }
+
+    @media (max-width: 768px) {
+      .search-bar { display: none; }
+      .sidebar { display: none; }
+      .main-content {
+        margin-left: 0;
+        width: 100%;
+      }
+      .video-card { width: calc(50% - 8px); }
+    }
+
+    @media (max-width: 500px) {
+      .video-card { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Шапка -->
+  <header>
+    <div class="logo-section">
+      <div class="menu-btn"></div>
+      <a href="#" class="logo">YouTube</a>
+    </div>
+
+    <div class="search-bar">
+      <input type="text" placeholder="Пошук">
+      <button>🔍</button>
+    </div>
+
+    <div class="user-actions">
+      <div class="icon-btn"></div>
+      <div class="icon-btn"></div>
+      <div class="icon-btn"></div>
+    </div>
+  </header>
+
+  <!-- Основний контент -->
+  <div class="container">
+    <!-- Бокове меню -->
+    <aside class="sidebar">
+      <div class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        <span class="sidebar-text">Головна</span>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        <span class="sidebar-text">Короткі відео</span>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        <span class="sidebar-text">Підписки</span>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        <span class="sidebar-text">Бібліотека</span>
+      </div>
+      <div class="sidebar-item">
+        <div class="sidebar-icon"></div>
+        <span class="sidebar-text">Історія</span>
+      </div>
+    </aside>
+
+    <!-- Вміст -->
+    <main class="main-content">
+      <!-- Категорії -->
+      <div class="categories">
+        <div class="category active">Всі</div>
+        <div class="category">Музика</div>
+        <div class="category">Геймінг</div>
+        <div class="category">Навчання</div>
+        <div class="category">Спорт</div>
+        <div class="category">Розваги</div>
+        <div class="category">Технології</div>
+      </div>
+
+      <!-- Сітка відео -->
+      <div class="videos">
+        <!-- Картка 1 -->
+        <div class="video-card">
+          <div class="thumbnail">
+            <div class="duration">12:34</div>
+          </div>
+          <div class="video-info">
+            <div class="video-meta">
+              <div class="avatar"></div>
+              <div class="video-details">
+                <div class="title">Як зробити сайт на GitHub за 5 хвилин</div>
+                <div class="channel">Овсієнко О.В.</div>
+                <div class="views">1.2K переглядів • 2 дні тому</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Картка 2 -->
+        <div class="video-card">
+          <div class="thumbnail">
+            <div class="duration">8:12</div>
+          </div>
+          <div class="video-info">
+            <div class="video-meta">
+              <div class="avatar"></div>
+              <div class="video-details">
+                <div class="title">Практична робота з Flexbox</div>
+                <div class="channel">Web Dev UA</div>
+                <div class="views">5.4K переглядів • 1 тиждень тому</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Картка 3 -->
+        <div class="video-card">
+          <div class="thumbnail"><div class="duration">15:01</div></div>
+          <div class="video-info">
+            <div class="video-meta">
+              <div class="avatar"></div>
+              <div class="video-details">
+                <div class="title">CSS Grid vs Flexbox</div>
+                <div class="channel">Frontend Masters</div>
+                <div class="views">22K переглядів • 3 тижні тому</div>
+              </div>
+            </div>
+            </div>
+        </div>
+
+        <!-- Картка 4 -->
+        <div class="video-card">
+          <div class="thumbnail"><div class="duration">6:44</div></div>
+          <div class="video-info">
+            <div class="video-meta">
+              <div class="avatar"></div>
+              <div class="video-details">
+                <div class="title">GitHub Pages для початківців</div>
+                <div class="channel">Овсієнко О.В.</div>
+                <div class="views">890 переглядів • 5 днів тому</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+</body>
+</html>
