@@ -1,227 +1,156 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ajazz AK680 Keyboard</title>
-  <style>
-    body {
-      background: #f5f5f5;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 20px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajazz AK680 Keyboard</title>
 
-    .keyboard {
-      background: #d32f2f;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-      display: grid;
-      gap: 8px;
-      width: 100%;
-      max-width: 700px;
-    }
+    <!-- Custom font -->
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-    .row {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-    }
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #e5dfd4; /* ретро фон */
+            font-family: "Manrope", sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
 
-    .key {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 12px;
-      border-radius: 6px;
-      font-weight: bold;
-      font-size: 14px;
-      text-align: center;
-      cursor: pointer;
-      transition: transform 0.1s ease;
-      user-select: none;
-    }
+        h1 {
+            margin-bottom: 25px;
+            font-size: 36px;
+            color: #5c4a3e;
+        }
 
-    .key:hover {
-      transform: scale(1.05);
-    }
+        .keyboard {
+            display: grid;
+            grid-template-columns: repeat(30, 1fr);
+            gap: 10px;
+            width: 1300px;
+            background: #d9d3c8;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+        }
 
-    /* Білі клавіші */
-    .key.white {
-      background: #f5f5f5;
-      color: #333;
-      border: 1px solid #ddd;
-    }
+        .key {
+            background: #f4e9c9; /* milk yellow */
+            padding: 15px 10px;
+            text-align: center;
+            border-radius: 10px;
+            box-shadow: 0 6px 0px #c4b89f;
+            font-size: 16px;
+            transition: 0.15s ease;
+            user-select: none;
+            border: 2px solid #d8ccb0;
+            font-weight: 600;
+        }
 
-    /* Червоні клавіші */
-    .key.red {
-      background: #d32f2f;
-      color: white;
-      border: 1px solid #b71c1c;
-    }
+        /* Hover */
+        .key:hover {
+            background: #f0e0b5;
+            cursor: pointer;
+        }
 
-    /* Особливі клавіші */
-    .key.ctrl, .key.alt, .key.win {
-      background: #b71c1c;
-      color: white;
-      border: 1px solid #9e0000;
-    }
+        /* Active press */
+        .key:active {
+            transform: translateY(5px);
+            box-shadow: 0 1px 0px #b3a78e inset;
+            background: #e8d6a1;
+        }
 
-    .key.space {
-      background: #f5f5f5;
-      color: #333;
-      border: 1px solid #ddd;
-      width: 200px;
-      font-size: 16px;
-      padding: 8px 10px;
-    }
+        /* Special color keys */
+        .green { background: #b7d3a8; box-shadow: 0 6px 0px #8ea785; }
+        .green:hover { background: #aecf9c; }
+        .green:active { background: #9fc889; }
 
-    .key.space::before {
-      content: "❤️";
-      margin-right: 5px;
-    }
+        .brown { background: #c8b29a; box-shadow: 0 6px 0px #a69278; }
+        .brown:hover { background: #c1a98e; }
+        .brown:active { background: #b79d82; }
 
-    .key.space::after {
-      content: "❤️";
-      margin-left: 5px;
-    }
-
-    .key.logo {
-      background: #b71c1c;
-      color: white;
-      font-size: 12px;
-      padding: 6px 8px;
-      width: auto;
-    }
-
-    .key.logo span {
-      font-size: 10px;
-      display: block;
-      margin-top: 2px;
-    }
-
-    /* Стилі для великих клавіш */
-    .key.wide {
-      width: 60px;
-    }
-
-    .key.double-wide {
-      width: 100px;
-    }
-
-    .key.triple-wide {
-      width: 150px;
-    }
-
-    /* Мобільна адаптація */
-    @media (max-width: 600px) {
-      .keyboard {
-        padding: 10px;
-        max-width: 95%;
-      }
-      .key {
-        padding: 6px 8px;
-        font-size: 12px;
-      }
-      .key.space {
-        width: 150px;
-        font-size: 14px;
-      }
-    }
-  </style>
+        /* Key widths */
+        .w2 { grid-column: span 2; }
+        .w3 { grid-column: span 3; }
+        .w4 { grid-column: span 4; }
+        .w5 { grid-column: span 5; }
+        .w6 { grid-column: span 6; }
+        .space { grid-column: span 12; }
+    </style>
 </head>
 <body>
 
-  <div class="keyboard">
+<h1>Ajazz AK680 — Fullsize Keyboard</h1>
 
-    <!-- Ряд 1 -->
-    <div class="row">
-      <div class="key red wide">Esc</div>
-      <div class="key white">F1</div>
-      <div class="key white">F2</div>
-      <div class="key white">F3</div>
-      <div class="key white">F4</div>
-      <div class="key white">F5</div>
-      <div class="key white">F6</div>
-      <div class="key white">F7</div>
-      <div class="key white">F8</div>
-      <div class="key white">F9</div>
-      <div class="key white">F10</div>
-      <div class="key white">F11</div>
-      <div class="key white">F12</div>
-      <div class="key red">Ins</div>
-    </div>
+<div class="keyboard">
 
-    <!-- Ряд 2 -->
-    <div class="row">
-      <div class="key red">Tab</div>
-      <div class="key white">Q</div>
-      <div class="key white">W</div>
-      <div class="key white">E</div>
-      <div class="key white">R</div>
-      <div class="key white">T</div>
-      <div class="key white">Y</div>
-      <div class="key white">U</div>
-      <div class="key white">I</div>
-      <div class="key white">O</div>
-      <div class="key white">P</div>
-      <div class="key white">{ [</div>
-      <div class="key white">} ]</div>
-      <div class="key red">Del</div>
-    </div>
+    <!-- ROW 1 -->
+    <div class="key brown">Esc</div>
+    <div class="key">F1</div>
+    <div class="key">F2</div>
+    <div class="key">F3</div>
+    <div class="key">F4</div>
+    <div class="key green">F5</div>
+    <div class="key green">F6</div>
+    <div class="key green">F7</div>
+    <div class="key green">F8</div>
+    <div class="key">F9</div>
+    <div class="key">F10</div>
+    <div class="key">F11</div>
+    <div class="key">F12</div>
 
-    <!-- Ряд 3 -->
-    <div class="row">
-      <div class="key red logo">🏆<br><span>PLAYER ONE</span></div>
-      <div class="key white">A</div>
-      <div class="key white">S</div>
-      <div class="key white">D</div>
-      <div class="key white">F</div>
-      <div class="key white">G</div>
-      <div class="key white">H</div>
-      <div class="key white">J</div>
-      <div class="key white">K</div>
-      <div class="key white">L</div>
-      <div class="key white">: ;</div>
-      <div class="key white">" '</div>
-      <div class="key red double-wide">Enter</div>
-    </div>
+    <!-- ROW 2 -->
+    <div class="key w2 brown">Tab</div>
+    <div class="key">Q</div>
+    <div class="key">W</div>
+    <div class="key">E</div>
+    <div class="key">R</div>
+    <div class="key">T</div>
+    <div class="key">Y</div>
+    <div class="key">U</div>
+    <div class="key">I</div>
+    <div class="key">O</div>
+    <div class="key">P</div>
+    <div class="key w3 brown">Backspace</div>
 
-    <!-- Ряд 4 -->
-    <div class="row">
-      <div class="key red">Shift</div>
-      <div class="key white">Z</div>
-      <div class="key white">X</div>
-      <div class="key white">C</div>
-      <div class="key white">V</div>
-      <div class="key white">B</div>
-      <div class="key white">N</div>
-      <div class="key white">M</div>
-      <div class="key white"><</div>
-      <div class="key white">></div>
-      <div class="key white">? /</div>
-      <div class="key red">Shift</div>
-      <div class="key red">PgUp</div>
-    </div>
+    <!-- ROW 3 -->
+    <div class="key w3 brown">Caps</div>
+    <div class="key">A</div>
+    <div class="key">S</div>
+    <div class="key">D</div>
+    <div class="key">F</div>
+    <div class="key">G</div>
+    <div class="key">H</div>
+    <div class="key">J</div>
+    <div class="key">K</div>
+    <div class="key">L</div>
+    <div class="key w4 green">Enter</div>
 
-    <!-- Ряд 5 -->
-    <div class="row">
-      <div class="key ctrl">Ctrl</div>
-      <div class="key win">Win</div>
-      <div class="key alt">Alt</div>
-      <div class="key space">LET'S PLAY!</div>
-      <div class="key alt">Alt</div>
-      <div class="key fn">Fn</div>
-      <div class="key ctrl">Ctrl</div>
-      <div class="key red">PgDn</div>
-    </div>
+    <!-- ROW 4 -->
+    <div class="key w4 green">Shift</div>
+    <div class="key">Z</div>
+    <div class="key">X</div>
+    <div class="key">C</div>
+    <div class="key">V</div>
+    <div class="key">B</div>
+    <div class="key">N</div>
+    <div class="key">M</div>
+    <div class="key w3 green">Shift</div>
 
-  </div>
+    <!-- ROW 5 -->
+    <div class="key w2 brown">Ctrl</div>
+    <div class="key w2 brown">Win</div>
+    <div class="key w2 brown">Alt</div>
+    <div class="key space">Space</div>
+    <div class="key w2 brown">Alt</div>
+    <div class="key w2 brown">Fn</div>
+    <div class="key w2 brown">Menu</div>
+    <div class="key w2 brown">Ctrl</div>
+
+</div>
 
 </body>
 </html>
