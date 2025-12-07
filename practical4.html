@@ -1,269 +1,336 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Keyboard 100% — Як на скріншоті</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Повноцінна клавіатура (100%) — один файл</title>
   <style>
-    body {
-      background: #2d2d2d;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
+    /* ====== ТЕМА / ЗМІННІ ====== */
+    :root {
+      --bg: #0f1216;
+      --panel: #171b21;
+      --key: #232832;
+      --key-top: #2a3140;
+      --text: #dfe6ef;
+      --accent: #7aa2f7;
+      --radius: 10px;
+      --gap: 8px;
+
+      /* Базові розміри "1u" */
+      --u: 50px;  /* ширина клавіші */
+      --h: 52px;  /* висота клавіші */
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      height: 100%;
+      background: radial-gradient(1200px 600px at 50% -20%, #12161d 0%, #0c0f14 60%, #090c11 100%);
+      color: var(--text);
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       margin: 0;
+    }
+
+    main.keyboard {
+      max-width: 1100px;
+      margin: 40px auto;
       padding: 20px;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: var(--panel);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.45), inset 0 1px 0 rgba(255,255,255,0.03);
     }
 
-    .keyboard {
-      display: grid;
-      gap: 6px;
-      width: 100%;
-      max-width: 900px;
-    }
-
+    /* ====== РЯДИ / КЛАСТЕРИ ====== */
     .row {
       display: flex;
-      gap: 6px;
-      justify-content: center;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
     }
 
-    .key {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 4px;
-      border-radius: 4px;
-      font-size: 12px;
-      font-weight: bold;
-      text-align: center;
-      color: white;
-      background: #555;
-      border: 1px solid #444;
-      box-shadow: 0 2px 0 #333;
-      user-select: none;
-      white-space: nowrap;
-    }
-
-    .key.wide {
-      padding: 8px 8px;
-    }
-
-    .key.wider {
-      padding: 8px 16px;
-    }
-
-    .key.widest {
-      padding: 8px 24px;
-    }
-
-    .key.tall {
-      padding: 16px 4px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .key.tall > span {
-      display: block;
-      text-align: center;
-    }
-
-    .key.tall .top { font-size: 10px; opacity: 0.8; }
-    .key.tall .main { font-size: 14px; }
-    .key.tall .bottom { font-size: 10px; opacity: 0.6; }
-
-    /* Цифровий блок */
-    .numpad {
+    .row--functions {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-top: 6px;
-    }
-
-    .numpad .key {
-      font-size: 14px;
-    }
-
-    .numpad .key.zero {
-      grid-column: span 2;
-      width: auto;
-      text-align: left;
-      padding-left: 20px;
-    }
-
-    .numpad .key.enter {
-      grid-row: span 2;
-      height: 100%;
-      display: flex;
+      grid-template-columns: 1fr auto;
       align-items: center;
-      justify-content: center;
+      margin-bottom: 16px;
+    }
+    .cluster {
+      display: flex;
+      gap: var(--gap);
+      align-items: center;
+    }
+    .spacer { width: 16px; }
+
+    /* Основні три блоки: алфавіт, навігація, нампад */
+    .main {
+      display: grid;
+      grid-template-columns: 3fr 1fr 1.5fr; /* alpha / nav / numpad */
+      gap: 20px;
     }
 
-    /* Мобільна адаптація */
-    @media (max-width: 768px) {
-      .keyboard { max-width: 95%; }
-      .key { font-size: 10px; padding: 6px 2px; }
-      .key.wide { padding: 6px 4px; }
-      .key.wider { padding: 6px 8px; }
-      .key.widest { padding: 6px 12px; }
-      .numpad .key.zero { padding-left: 10px; }
+    .block {
+      padding: 12px;
+      background: linear-gradient(180deg, #151a22 0%, #121720 100%);
+      border-radius: var(--radius);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02), inset 0 -1px 0 rgba(0,0,0,0.5);
+    }
+
+    /* ====== КЛАВІШІ ====== */
+    .key {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      width: var(--u);
+      height: var(--h);
+      border-radius: 8px;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--key-top), var(--key));
+      border: 1px solid #1b212b;
+      box-shadow: 0 3px 0 #0c0f14, 0 6px 14px rgba(0,0,0,0.45);
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      user-select: none;
+      cursor: pointer;
+      transition: transform 80ms ease, box-shadow 120ms ease, filter 120ms ease, background 120ms ease;
+    }
+    .key:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #0c0f14, 0 3px 10px rgba(0,0,0,0.35);
+      filter: brightness(0.98);
+    }
+
+    /* Розміри клавіш (ширина в "u") */
+    .key--1u     { width: calc(1    * var(--u)); }
+    .key--1_25u  { width: calc(1.25 * var(--u)); }
+    .key--1_5u   { width: calc(1.5  * var(--u)); }
+    .key--1_75u  { width: calc(1.75 * var(--u)); }
+    .key--2u     { width: calc(2    * var(--u)); }
+    .key--2_25u  { width: calc(2.25 * var(--u)); }
+    .key--2_75u  { width: calc(2.75 * var(--u)); }
+    .key--6_25u  { width: calc(6.25 * var(--u)); }
+
+    /* Навігаційний блок */
+    .block--nav .row { justify-content: center; }
+    .row--arrows {
+      display: grid;
+      grid-template-columns: repeat(5, var(--u));
+      gap: var(--gap);
+    }
+    .arrow-gap { width: var(--u); }
+
+    /* Нампад: високі клавіші + і Enter */
+    .block--numpad .row { justify-content: flex-end; }
+    .numpad--plus,
+    .numpad--enter {
+      height: calc(2 * var(--h) + var(--gap)); /* дві висоти рядка */
+      grid-row: span 2;
+    }
+
+    /* Ряди нампаду як грід для високих клавіш */
+    .block--numpad .row:nth-child(2),
+    .block--numpad .row:nth-child(4) {
+      display: grid;
+      grid-template-columns: repeat(4, var(--u));
+      gap: var(--gap);
+    }
+    .block--numpad .row:nth-child(3) {
+      display: grid;
+      grid-template-columns: repeat(3, var(--u));
+      gap: var(--gap);
+    }
+
+    /* Ховер/фокус */
+    .key:hover,
+    .key:focus-visible {
+      outline: 0;
+      background: linear-gradient(180deg, #313a4d, #2a3140);
+      box-shadow: 0 3px 0 #0c0f14, 0 8px 18px rgba(0,0,0,0.55), 0 0 0 2px rgba(122,162,247,0.15);
+    }
+
+    /* Адаптивність */
+    @media (max-width: 1000px) {
+      :root { --u: 44px; --h: 48px; }
+      .main { grid-template-columns: 1fr; } /* стек блоків */
+      .block--nav, .block--numpad { order: 2; }
+    }
+    @media (max-width: 640px) {
+      :root { --u: 38px; --h: 42px; }
+      .row--functions { grid-template-columns: 1fr; gap: var(--gap); }
+    }
+
+    /* Приклад акценту (необов'язково) */
+    .key--accent {
+      color: #eaf2ff;
+      background: linear-gradient(180deg, #4b74d9, #3e63c8);
+      border-color: #3756b2;
     }
   </style>
 </head>
 <body>
-
-  <div class="keyboard">
-
-    <!-- Ряд 1: Esc, F1–F12, PrtSc, ScrLk, Pause -->
-    <div class="row">
-      <div class="key">Esc</div>
-      <div class="key">F1</div>
-      <div class="key">F2</div>
-      <div class="key">F3</div>
-      <div class="key">F4</div>
-      <div class="key">F5</div>
-      <div class="key">F6</div>
-      <div class="key">F7</div>
-      <div class="key">F8</div>
-      <div class="key">F9</div>
-      <div class="key">F10</div>
-      <div class="key">F11</div>
-      <div class="key">F12</div>
-      <div class="key tall">
-        <span class="top">PrtSc</span>
-        <span class="main">SysRq</span>
-        <span class="bottom"></span>
+  <main class="keyboard">
+    <!-- Верхній ряд: Esc + F-клавіші -->
+    <section class="row row--functions">
+      <div class="cluster cluster--esc-fn">
+        <button class="key key--1u">Esc</button>
+        <div class="spacer"></div>
+        <button class="key key--1u">F1</button>
+        <button class="key key--1u">F2</button>
+        <button class="key key--1u">F3</button>
+        <button class="key key--1u">F4</button>
+        <div class="spacer"></div>
+        <button class="key key--1u">F5</button>
+        <button class="key key--1u">F6</button>
+        <button class="key key--1u">F7</button>
+        <button class="key key--1u">F8</button>
+        <div class="spacer"></div>
+        <button class="key key--1u">F9</button>
+        <button class="key key--1u">F10</button>
+        <button class="key key--1u">F11</button>
+        <button class="key key--1u">F12</button>
       </div>
-      <div class="key tall">
-        <span class="top">ScrLk</span>
-        <span class="main"></span>
-        <span class="bottom"></span>
+      <div class="cluster cluster--media">
+        <button class="key key--1u">PrtSc</button>
+        <button class="key key--1u">Scroll</button>
+        <button class="key key--1u">Pause</button>
       </div>
-      <div class="key tall">
-        <span class="top">Pause</span>
-        <span class="main">Break</span>
-        <span class="bottom"></span>
+    </section>
+
+    <!-- Основна частина: алфавіт, навігація, нампад -->
+    <section class="main">
+      <!-- Ліворуч: алфавітний блок -->
+      <div class="block block--alpha">
+        <!-- Ряд 1: тильда + цифри -->
+        <div class="row">
+          <button class="key key--1u">~</button>
+          <button class="key key--1u">1</button>
+          <button class="key key--1u">2</button>
+          <button class="key key--1u">3</button>
+          <button class="key key--1u">4</button>
+          <button class="key key--1u">5</button>
+          <button class="key key--1u">6</button>
+          <button class="key key--1u">7</button>
+          <button class="key key--1u">8</button>
+          <button class="key key--1u">9</button>
+          <button class="key key--1u">0</button>
+          <button class="key key--1u">-</button>
+          <button class="key key--1u">=</button>
+          <button class="key key--2u">Backspace</button>
+        </div>
+
+        <!-- Ряд 2: Tab + Q ряд -->
+        <div class="row">
+          <button class="key key--1_5u">Tab</button>
+          <button class="key key--1u">Q</button>
+          <button class="key key--1u">W</button>
+          <button class="key key--1u">E</button>
+          <button class="key key--1u">R</button>
+          <button class="key key--1u">T</button>
+          <button class="key key--1u">Y</button>
+          <button class="key key--1u">U</button>
+          <button class="key key--1u">I</button>
+          <button class="key key--1u">O</button>
+          <button class="key key--1u">P</button>
+          <button class="key key--1u">[</button>
+          <button class="key key--1u">]</button>
+          <button class="key key--1_5u">\</button>
+        </div>
+
+        <!-- Ряд 3: Caps + A ряд -->
+        <div class="row">
+          <button class="key key--1_75u">Caps</button>
+          <button class="key key--1u">A</button>
+          <button class="key key--1u">S</button>
+          <button class="key key--1u">D</button>
+          <button class="key key--1u">F</button>
+          <button class="key key--1u">G</button>
+          <button class="key key--1u">H</button>
+          <button class="key key--1u">J</button>
+          <button class="key key--1u">K</button>
+          <button class="key key--1u">L</button>
+          <button class="key key--1u">;</button>
+          <button class="key key--1u">'</button>
+          <button class="key key--2_25u">Enter</button>
+        </div>
+
+        <!-- Ряд 4: Shift + Z ряд -->
+        <div class="row">
+          <button class="key key--2_25u">Shift</button>
+          <button class="key key--1u">Z</button>
+          <button class="key key--1u">X</button>
+          <button class="key key--1u">C</button>
+          <button class="key key--1u">V</button>
+          <button class="key key--1u">B</button>
+          <button class="key key--1u">N</button>
+          <button class="key key--1u">M</button>
+          <button class="key key--1u">,</button>
+          <button class="key key--1u">.</button>
+          <button class="key key--1u">/</button>
+          <button class="key key--2_75u">Shift</button>
+        </div>
+
+        <!-- Ряд 5: нижні моди + пробіл -->
+        <div class="row">
+          <button class="key key--1_25u">Ctrl</button>
+          <button class="key key--1_25u">Win</button>
+          <button class="key key--1_25u">Alt</button>
+          <button class="key key--6_25u">Space</button>
+          <button class="key key--1_25u">Alt</button>
+          <button class="key key--1_25u">Menu</button>
+          <button class="key key--1_25u">Ctrl</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Ряд 2: `123..., Backspace, Insert/Home/PgUp -->
-    <div class="row">
-      <div class="key">` ~</div>
-      <div class="key">1 !</div>
-      <div class="key">2 @</div>
-      <div class="key">3 #</div>
-      <div class="key">4 $</div>
-      <div class="key">5 %</div>
-      <div class="key">6 ^</div>
-      <div class="key">7 &</div>
-      <div class="key">8 *</div>
-      <div class="key">9 (</div>
-      <div class="key">0 )</div>
-      <div class="key">- _</div>
-      <div class="key">= +</div>
-      <div class="key wider">Backspace</div>
-      <div class="key tall">
-        <span class="top">Insert</span>
-        <span class="main">Home</span>
-        <span class="bottom">PgUp</span>
+      <!-- Центр: навігаційний кластер -->
+      <div class="block block--nav">
+        <div class="row row--nav-top">
+          <button class="key key--1u">Ins</button>
+          <button class="key key--1u">Home</button>
+          <button class="key key--1u">PgUp</button>
+        </div>
+        <div class="row row--nav-mid">
+          <button class="key key--1u">Del</button>
+          <button class="key key--1u">End</button>
+          <button class="key key--1u">PgDn</button>
+        </div>
+        <div class="row row--arrows">
+          <div class="arrow-gap"></div>
+          <button class="key key--1u">↑</button>
+          <div class="arrow-gap"></div>
+          <button class="key key--1u">←</button>
+          <button class="key key--1u">↓</button>
+          <button class="key key--1u">→</button>
+        </div>
       </div>
-    </div>
 
-    <!-- Ряд 3: Tab, QWERT..., \|, Delete/End/PgDn -->
-    <div class="row">
-      <div class="key wider">Tab</div>
-      <div class="key">Q</div>
-      <div class="key">W</div>
-      <div class="key">E</div>
-      <div class="key">R</div>
-      <div class="key">T</div>
-      <div class="key">Y</div>
-      <div class="key">U</div>
-      <div class="key">I</div>
-      <div class="key">O</div>
-      <div class="key">P</div>
-      <div class="key">[ {</div>
-      <div class="key">] }</div>
-      <div class="key wider">\ |</div>
-      <div class="key tall">
-        <span class="top">Delete</span>
-        <span class="main">End</span>
-        <span class="bottom">PgDn</span>
+      <!-- Праворуч: нампад -->
+      <div class="block block--numpad">
+        <div class="row">
+          <button class="key key--1u">Num</button>
+          <button class="key key--1u">/</button>
+          <button class="key key--1u">*</button>
+          <button class="key key--1u">-</button>
+        </div>
+        <div class="row">
+          <button class="key key--1u">7</button>
+          <button class="key key--1u">8</button>
+          <button class="key key--1u">9</button>
+          <button class="key key--1u numpad--plus" aria-label="Plus">+</button>
+        </div>
+        <div class="row">
+          <button class="key key--1u">4</button>
+          <button class="key key--1u">5</button>
+          <button class="key key--1u">6</button>
+        </div>
+        <div class="row">
+          <button class="key key--1u">1</button>
+          <button class="key key--1u">2</button>
+          <button class="key key--1u">3</button>
+          <button class="key key--1u numpad--enter" aria-label="Enter">Enter</button>
+        </div>
+        <div class="row">
+          <button class="key key--2u">0</button>
+          <button class="key key--1u">.</button>
+        </div>
       </div>
-    </div>
-
-    <!-- Ряд 4: Caps, ASDF..., Enter -->
-    <div class="row">
-      <div class="key widest">Caps Lock</div>
-      <div class="key">A</div>
-      <div class="key">S</div>
-      <div class="key">D</div>
-      <div class="key">F</div>
-      <div class="key">G</div>
-      <div class="key">H</div>
-      <div class="key">J</div>
-      <div class="key">K</div>
-      <div class="key">L</div>
-      <div class="key">; :</div>
-      <div class="key">' "</div>
-      <div class="key widest">Enter</div>
-    </div>
-
-    <!-- Ряд 5: Shift, ZXCV..., Shift, ↑ -->
-    <div class="row">
-      <div class="key widest">Shift</div>
-      <div class="key">Z</div>
-      <div class="key">X</div>
-      <div class="key">C</div>
-      <div class="key">V</div>
-      <div class="key">B</div>
-      <div class="key">N</div>
-      <div class="key">M</div>
-      <div class="key">, <</div>
-      <div class="key">. ></div>
-      <div class="key">/ ?</div>
-      <div class="key widest">Shift</div>
-      <div class="key">↑</div>
-    </div>
-
-    <!-- Ряд 6: Ctrl, Win, Alt, Space, Alt, Fn, Ctrl, ← ↓ → -->
-    <div class="row">
-      <div class="key">Ctrl</div>
-      <div class="key">Win</div>
-      <div class="key">Alt</div>
-      <div class="key widest">Space</div>
-      <div class="key">Alt</div>
-      <div class="key">Fn</div>
-      <div class="key">Ctrl</div>
-      <div class="key">←</div>
-      <div class="key">↓</div>
-      <div class="key">→</div>
-    </div>
-
-    <!-- Цифровий блок (праворуч внизу) -->
-    <div class="row">
-      <div style="flex-grow: 1;"></div> <!-- Пустий простір ліворуч -->
-      <div class="numpad">
-        <div class="key">Num<br>Lock</div>
-        <div class="key">/</div>
-        <div class="key">*</div>
-        <div class="key">-</div>
-        <div class="key">7</div>
-        <div class="key">8</div>
-        <div class="key">9</div>
-        <div class="key">+</div>
-        <div class="key">4</div>
-        <div class="key">5</div>
-        <div class="key">6</div>
-        <div class="key enter">Enter</div>
-        <div class="key zero">0</div>
-        <div class="key">.</div>
-      </div>
-    </div>
-
-  </div>
-
+    </section>
+  </main>
 </body>
 </html>
