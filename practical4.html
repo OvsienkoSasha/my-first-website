@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Повноцінна клавіатура 100%</title>
+  <title>Повноцінна клавіатура 100% — як на скріншоті</title>
   <style>
-    :root{
-      --u: 50px;          /* базова ширина клавіші (1u) */
+    :root {
+      --u: 50px;          /* базова ширина клавіші */
       --h: 50px;          /* базова висота рядка */
       --gap: 8px;
       --bg: #0f1216;
@@ -16,114 +16,158 @@
       --text: #e7eef8;
       --border: #1b212b;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
       background: radial-gradient(1100px 600px at 50% -20%, #12161d 0%, #0c0f14 60%, #090c11 100%);
-      color:var(--text);
+      color: var(--text);
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
-      display:flex; justify-content:center; padding:24px;
+      display: flex;
+      justify-content: center;
+      padding: 24px;
     }
-    .kbd{
-      width:min(1200px, 96vw);
-      background:var(--panel);
-      border-radius:16px;
-      padding:16px;
-      box-shadow:0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
+
+    .kbd {
+      width: min(1200px, 96vw);
+      background: var(--panel);
+      border-radius: 16px;
+      padding: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,.45), inset 0 1px 0 rgba(255,255,255,.04);
     }
 
     /* Верхній ряд (Esc, F1–F12, PrtSc/Scroll/Pause) */
-    .top{
-      display:flex; gap:var(--gap); align-items:center; flex-wrap:wrap; margin-bottom:16px;
+    .top {
+      display: flex;
+      gap: var(--gap);
+      align-items: center;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
     }
-    .spacer{width:20px}
 
     /* Основна область: алфавітний блок, навігація, нампад */
-    .main{
-      display:grid;
+    .main {
+      display: grid;
       grid-template-columns: 3fr 1fr 1.3fr;
-      gap:20px;
+      gap: 20px;
     }
-    .block{
-      background:linear-gradient(180deg,#151a22 0%,#121720 100%);
-      border-radius:12px; padding:12px;
+
+    .block {
+      background: linear-gradient(180deg, #151a22 0%, #121720 100%);
+      border-radius: 12px;
+      padding: 12px;
       box-shadow: inset 0 1px 0 rgba(255,255,255,.03), inset 0 -1px 0 rgba(0,0,0,.5);
     }
 
     /* Рядки всередині блоків */
-    .row{ display:flex; gap:var(--gap); margin-bottom:var(--gap); }
+    .row {
+      display: flex;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
 
     /* Клавіша */
-    .key{
-      height:var(--h);
-      min-width:var(--u);
-      display:inline-flex; align-items:center; justify-content:center;
-      padding:0 10px;
-      color:var(--text);
-      background:linear-gradient(180deg, var(--key-top), var(--key));
-      border:1px solid var(--border);
-      border-radius:8px;
-      font-weight:600; letter-spacing:.02em;
-      box-shadow:0 3px 0 #0c0f14, 0 6px 14px rgba(0,0,0,.45);
-      user-select:none; cursor:pointer;
-      transition:transform 80ms ease, box-shadow 120ms ease, filter 120ms ease, background 120ms ease;
+    .key {
+      height: var(--h);
+      min-width: var(--u);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0 10px;
+      color: var(--text);
+      background: linear-gradient(180deg, var(--key-top), var(--key));
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-weight: 600;
+      letter-spacing: .02em;
+      box-shadow: 0 3px 0 #0c0f14, 0 6px 14px rgba(0,0,0,.45);
+      user-select: none;
+      cursor: pointer;
+      transition: transform 80ms ease, box-shadow 120ms ease, filter 120ms ease, background 120ms ease;
     }
-    .key:active{ transform:translateY(2px); box-shadow:0 1px 0 #0c0f14, 0 3px 10px rgba(0,0,0,.35); filter:brightness(.98) }
-    .key:hover, .key:focus-visible{
-      outline:0;
-      background:linear-gradient(180deg,#313a4d,#2a3140);
-      box-shadow:0 3px 0 #0c0f14, 0 8px 18px rgba(0,0,0,.55), 0 0 0 2px rgba(122,162,247,.18);
+
+    .key:active {
+      transform: translateY(2px);
+      box-shadow: 0 1px 0 #0c0f14, 0 3px 10px rgba(0,0,0,.35);
+      filter: brightness(.98);
+    }
+
+    .key:hover,
+    .key:focus-visible {
+      outline: 0;
+      background: linear-gradient(180deg, #313a4d, #2a3140);
+      box-shadow: 0 3px 0 #0c0f14, 0 8px 18px rgba(0,0,0,.55), 0 0 0 2px rgba(122,162,247,.18);
     }
 
     /* Ширини (u) */
-    .w1      { width:calc(1    * var(--u)); }
-    .w1_25   { width:calc(1.25 * var(--u)); }
-    .w1_5    { width:calc(1.5  * var(--u)); }
-    .w1_75   { width:calc(1.75 * var(--u)); }
-    .w2      { width:calc(2    * var(--u)); }
-    .w2_25   { width:calc(2.25 * var(--u)); }
-    .w2_75   { width:calc(2.75 * var(--u)); }
-    .w6_25   { width:calc(6.25 * var(--u)); }
+    .w1      { width: calc(1    * var(--u)); }
+    .w1_25   { width: calc(1.25 * var(--u)); }
+    .w1_5    { width: calc(1.5  * var(--u)); }
+    .w1_75   { width: calc(1.75 * var(--u)); }
+    .w2      { width: calc(2    * var(--u)); }
+    .w2_25   { width: calc(2.25 * var(--u)); }
+    .w2_75   { width: calc(2.75 * var(--u)); }
+    .w6_25   { width: calc(6.25 * var(--u)); }
 
     /* Навігаційний блок: стрілки як T-кластер */
-    .nav .row.arrows{ display:grid; grid-template-columns: repeat(3, var(--u)); gap:var(--gap); justify-content:center }
-    .nav .row.arrows .blank{ width:var(--u) }
+    .nav .row.arrows {
+      display: grid;
+      grid-template-columns: repeat(3, var(--u));
+      gap: var(--gap);
+      justify-content: center;
+    }
+
+    .nav .row.arrows .blank {
+      width: var(--u);
+    }
 
     /* Нампад: високі + та Enter */
-    .pad .grid4{ display:grid; grid-template-columns: repeat(4, var(--u)); gap:var(--gap) }
-    .pad .grid3{ display:grid; grid-template-columns: repeat(3, var(--u)); gap:var(--gap) }
-    .key.h2{ height: calc(2 * var(--h) + var(--gap)); }
+    .pad .grid4 {
+      display: grid;
+      grid-template-columns: repeat(4, var(--u));
+      gap: var(--gap);
+    }
+
+    .pad .grid3 {
+      display: grid;
+      grid-template-columns: repeat(3, var(--u));
+      gap: var(--gap);
+    }
+
+    .key.h2 {
+      height: calc(2 * var(--h) + var(--gap));
+    }
 
     /* Адаптивність */
-    @media (max-width: 1000px){
-      :root{ --u:44px; --h:46px; }
-      .main{ grid-template-columns: 1fr; }
-      .nav, .pad{ order:2; }
+    @media (max-width: 1000px) {
+      :root { --u: 44px; --h: 46px; }
+      .main { grid-template-columns: 1fr; }
+      .nav, .pad { order: 2; }
     }
-    @media (max-width: 640px){
-      :root{ --u:38px; --h:42px; }
-      .top{ gap:6px }
+
+    @media (max-width: 640px) {
+      :root { --u: 38px; --h: 42px; }
+      .top { gap: 6px; }
     }
   </style>
 </head>
 <body>
   <div class="kbd">
+
     <!-- ВЕРХНІЙ РЯД -->
     <div class="top">
       <div class="key w1">Esc</div>
-      <div class="spacer"></div>
       <div class="key w1">F1</div><div class="key w1">F2</div><div class="key w1">F3</div><div class="key w1">F4</div>
-      <div class="spacer"></div>
       <div class="key w1">F5</div><div class="key w1">F6</div><div class="key w1">F7</div><div class="key w1">F8</div>
-      <div class="spacer"></div>
       <div class="key w1">F9</div><div class="key w1">F10</div><div class="key w1">F11</div><div class="key w1">F12</div>
-      <div class="spacer"></div>
       <div class="key w1">PrtSc</div><div class="key w1">Scroll</div><div class="key w1">Pause</div>
     </div>
 
     <div class="main">
+
       <!-- ЛІВО: АЛФА-БЛОК -->
       <div class="block alpha">
+
         <!-- Цифровий ряд -->
         <div class="row">
           <div class="key w1">~</div>
@@ -132,6 +176,7 @@
           <div class="key w1">0</div><div class="key w1">-</div><div class="key w1">=</div>
           <div class="key w2">Backspace</div>
         </div>
+
         <!-- Q ряд -->
         <div class="row">
           <div class="key w1_5">Tab</div>
@@ -140,6 +185,7 @@
           <div class="key w1">[</div><div class="key w1">]</div>
           <div class="key w1_5">\</div>
         </div>
+
         <!-- A ряд -->
         <div class="row">
           <div class="key w1_75">Caps</div>
@@ -148,6 +194,7 @@
           <div class="key w1">;</div><div class="key w1">'</div>
           <div class="key w2_25">Enter</div>
         </div>
+
         <!-- Z ряд -->
         <div class="row">
           <div class="key w2_25">Shift</div>
@@ -155,6 +202,7 @@
           <div class="key w1">N</div><div class="key w1">M</div><div class="key w1">,</div><div class="key w1">.</div><div class="key w1">/</div>
           <div class="key w2_75">Shift</div>
         </div>
+
         <!-- Нижній мод-рівень -->
         <div class="row">
           <div class="key w1_25">Ctrl</div>
@@ -165,6 +213,7 @@
           <div class="key w1_25">Menu</div>
           <div class="key w1_25">Ctrl</div>
         </div>
+
       </div>
 
       <!-- СЕРЕДИНА: НАВІГАЦІЙНИЙ КЛАСТЕР -->
@@ -209,7 +258,9 @@
           <div class="key w1">.</div>
         </div>
       </div>
+
     </div>
+
   </div>
 </body>
 </html>
