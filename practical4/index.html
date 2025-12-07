@@ -1,140 +1,276 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>100% Клавіатура</title>
-  <style>
-    :root {
-      --u: 60px; /* базова ширина клавіші */
-      --h: 60px; /* висота клавіші */
-      --gap: 6px;
-      --bg: #0f1216;
-      --key: #2a2f38;
-      --key-top: #353b47;
-      --text: #e0e6f0;
-      --border: #1c1f26;
-    }
-    body {
-      margin: 0;
-      background: var(--bg);
-      font-family: sans-serif;
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      padding: 20px;
-    }
-    .keyboard {
-      display: grid;
-      grid-template-columns: repeat(22, var(--u));
-      gap: var(--gap);
-      background: #171b21;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.45);
-    }
-    .key {
-      background: linear-gradient(180deg, var(--key-top), var(--key));
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      height: var(--h);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-weight: bold;
-      box-shadow: inset 0 -2px 0 rgba(0,0,0,0.4);
-      user-select: none;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-    .key:hover {
-      background: linear-gradient(180deg, #3c4452, #2f3540);
-      box-shadow: 0 0 0 2px rgba(122,162,247,0.2);
-    }
-    /* Ширини */
-    .w1      { grid-column: span 1; }
-    .w1_25   { width: calc(var(--u) * 1.25); }
-    .w1_5    { width: calc(var(--u) * 1.5); }
-    .w1_75   { width: calc(var(--u) * 1.75); }
-    .w2      { grid-column: span 2; }
-    .w2_25   { width: calc(var(--u) * 2.25); }
-    .w2_75   { width: calc(var(--u) * 2.75); }
-    .w6_25   { width: calc(var(--u) * 6.25); }
-    .h2      { height: calc(var(--h) * 2 + var(--gap)); }
-    .row { display: contents; }
-  </style>
+<meta charset="UTF-8">
+<title>Віртуальна клавіатура 100% (Full Size)</title>
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    background: #1a1a1a;
+    display: center;
+    align-items: center;
+    font-family: 'Segoe UI', sans-serif;
+    user-select: none;
+  }
+
+  .keyboard {
+    background: #2c2c2c;
+    padding: 20px 15px 15px;
+    border-radius: 16px;
+    box-shadow: 
+      0 20px 40px rgba(0,0,0,0.6),
+      inset 0 -8px 20px rgba(0,0,0,0.4);
+    width: 1100px;
+    max-width: 96vw;
+  }
+
+  .row {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+    gap: 8px;
+  }
+
+  .key {
+    background: linear-gradient(145deg, #3a3a3a, #2a2a2a);
+    color: #eee;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 
+      0 5px 0 #1a1a1a,
+      0 8px 15px rgba(0,0,0,0.5),
+      inset 0 1px 0 rgba(255,255,255,0.1);
+    font-size: 14px;
+    font-weight: 500;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.07s ease;
+    cursor: pointer;
+    min-height: 56px;
+  }
+
+  .key:active {
+    transform: translateY(4px);
+    box-shadow: 
+      0 1px 0 #1a1a1a,
+      0 4px 8px rgba(0,0,0,0.6);
+  }
+
+  /* Розміри клавіш */
+  .k1 { width: 56px; }
+  .k1-25 { width: calc(56px * 1.25 + 8px); }
+  .k1-5 { width: calc(56px * 1.5 + 8px); }
+  .k1-75 { width: calc(56px * 1.75 + 16px); }
+  .k2 { width: calc(56px * 2 + 8px); }
+  .k2-25 { width: calc(56px * 2.25 + 16px); }
+  .k2-75 { width: calc(56px * 2.75 + 24px); }
+  .k6-25 { width: calc(56px * 6.25 + 5*8px); }
+  .k6-5 { width: calc(56px * 6.5 + 5*8px); }
+  .k7 { width: calc(56px * 7 + 6*8px); }
+
+  .key.space {
+    width: calc(56px * 6.25 + 5*8px);
+  }
+
+  .key.caps, .key.shiftl, .key.shiftr {
+    font-size: 12px;
+    text-transform: uppercase;
+  }
+
+  .key.fn { background: #444; }
+  .key.ctrl, .key.alt, .key.win, .key.menu { background: #383838; }
+  .key.enter { border-radius: 8px 12px 8px 8px; }
+  .key.backspace { border-radius: 8px 12px 8px 8px; }
+
+  .output {
+    width: 100%;
+    max-width: 1100px;
+    height: 120px;
+    margin: 20px auto;
+    padding: 15px;
+    background: #111;
+    color: #0f0;
+    font-family: 'Courier New', monospace;
+    font-size: 18px;
+    border-radius: 10px;
+    border: 2px solid #333;
+    resize: none;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.8);
+  }
+
+  h1 {
+    color: #fff;
+    text-align: center;
+    margin: 20px 0;
+    text-shadow: 0 0 10px rgba(100,200,255,0.5);
+  }
+</style>
 </head>
 <body>
-  <div class="keyboard">
-    <!-- Верхній ряд -->
-    <div class="row">
-      <div class="key w1">Esc</div>
-      <div class="key w1">F1</div><div class="key w1">F2</div><div class="key w1">F3</div><div class="key w1">F4</div>
-      <div class="key w1">F5</div><div class="key w1">F6</div><div class="key w1">F7</div><div class="key w1">F8</div>
-      <div class="key w1">F9</div><div class="key w1">F10</div><div class="key w1">F11</div><div class="key w1">F12</div>
-      <div class="key w1">PrtSc</div><div class="key w1">Scroll</div><div class="key w1">Pause</div>
-    </div>
 
-    <!-- Цифровий ряд -->
-    <div class="row">
-      <div class="key w1">~</div>
-      <div class="key w1">1</div><div class="key w1">2</div><div class="key w1">3</div><div class="key w1">4</div>
-      <div class="key w1">5</div><div class="key w1">6</div><div class="key w1">7</div><div class="key w1">8</div>
-      <div class="key w1">9</div><div class="key w1">0</div><div class="key w1">-</div><div class="key w1">=</div>
-      <div class="key w2">Backspace</div>
-      <div class="key w1">Insert</div><div class="key w1">Home</div><div class="key w1">PgUp</div>
-      <div class="key w1">Num</div><div class="key w1">/</div><div class="key w1">*</div><div class="key w1">-</div>
-    </div>
+<h1>Віртуальна клавіатура 100% форм-фактор</h1>
 
-    <!-- QWERTY -->
-    <div class="row">
-      <div class="key w1_5">Tab</div>
-      <div class="key w1">Q</div><div class="key w1">W</div><div class="key w1">E</div><div class="key w1">R</div>
-      <div class="key w1">T</div><div class="key w1">Y</div><div class="key w1">U</div><div class="key w1">I</div>
-      <div class="key w1">O</div><div class="key w1">P</div><div class="key w1">[</div><div class="key w1">]</div>
-      <div class="key w1_5">\</div>
-      <div class="key w1">Del</div><div class="key w1">End</div><div class="key w1">PgDn</div>
-      <div class="key w1">7</div><div class="key w1">8</div><div class="key w1">9</div>
-      <div class="key w1 h2">+</div>
-    </div>
+<textarea class="output" placeholder="Натискайте клавіші на клавіатурі нижче..."></textarea>
 
-    <!-- ASDF -->
-    <div class="row">
-      <div class="key w1_75">Caps</div>
-      <div class="key w1">A</div><div class="key w1">S</div><div class="key w1">D</div><div class="key w1">F</div>
-      <div class="key w1">G</div><div class="key w1">H</div><div class="key w1">J</div><div class="key w1">K</div>
-      <div class="key w1">L</div><div class="key w1">;</div><div class="key w1">'</div>
-      <div class="key w2_25">Enter</div>
-      <div class="key w1"></div><div class="key w1"></div><div class="key w1"></div>
-      <div class="key w1">4</div><div class="key w1">5</div><div class="key w1">6</div>
-    </div>
-
-    <!-- ZXCV -->
-    <div class="row">
-      <div class="key w2_25">Shift</div>
-      <div class="key w1">Z</div><div class="key w1">X</div><div class="key w1">C</div><div class="key w1">V</div>
-      <div class="key w1">B</div><div class="key w1">N</div><div class="key w1">M</div><div class="key w1">,</div>
-      <div class="key w1">.</div><div class="key w1">/</div>
-      <div class="key w2_75">Shift</div>
-      <div class="key w1"></div><div class="key w1">↑</div><div class="key w1"></div>
-      <div class="key w1">1</div><div class="key w1">2</div><div class="key w1">3</div>
-      <div class="key w1 h2">Enter</div>
-    </div>
-    <!-- Нижній ряд -->
-    <div class="row">
-      <div class="key w1_25">Ctrl</div>
-      <div class="key w1_25">Win</div>
-      <div class="key w1_25">Alt</div>
-      <div class="key w6_25">Space</div>
-      <div class="key w1_25">Alt</div>
-      <div class="key w1_25">Menu</div>
-      <div class="key w1_25">Ctrl</div>
-      <div class="key w1">←</div>
-      <div class="key w1">↓</div>
-      <div class="key w1">→</div>
-      <div class="key w2">0</div>
-      <div class="key w1">.</div>
-    </div>
+<div class="keyboard">
+  <!-- Ряд 1: Escape та F-ряд -->
+  <div class="row">
+    <div class="key k1">Esc</div>
+    <div style="width: 20px;"></div>
+    <div class="key k1">F1</div>
+    <div class="key k1">F2</div>
+    <div class="key k1">F3</div>
+    <div class="key k1">F4</div>
+    <div style="width: 20px;"></div>
+    <div class="key k1">F5</div>
+    <div class="key k1">F6</div>
+    <div class="key k1">F7</div>
+    <div class="key k1">F8</div>
+    <div style="width: 20px;"></div>
+    <div class="key k1">F9</div>
+    <div class="key k1">F10</div>
+    <div class="key k1">F11</div>
+    <div class="key k1">F12</div>
+    <div style="width: 20px;"></div>
+    <div class="key k1">PrtSc</div>
+    <div class="key k1">ScrLk</div>
+    <div class="key k1">Pause</div>
   </div>
+
+  <!-- Ряд 2: Цифри та символи -->
+  <div class="row">
+    <div class="key k1">~<br>`</div>
+    <div class="key k1">!<br>1</div>
+    <div class="key k1">@<br>2</div>
+    <div class="key k1">#<br>3</div>
+    <div class="key k1">$<br>4</div>
+    <div class="key k1">%<br>5</div>
+    <div class="key k1">^<br>6</div>
+    <div class="key k1">&amp;<br>7</div>
+    <div class="key k1">*<br>8</div>
+    <div class="key k1">(<br>9</div>
+    <div class="key k1">)<br>0</div>
+    <div class="key k1">_<br>-</div>
+    <div class="key k1">+<br>=</div>
+    <div class="key k2 backspace">← Backspace</div>
+  </div>
+
+  <!-- Ряд 3 -->
+  <div class="row">
+    <div class="key k1-75">Tab</div>
+    <div class="key k1">Й</div>
+    <div class="key k1">Ц</div>
+    <div class="key k1">У</div>
+    <div class="key k1">К</div>
+    <div class="key k1">Е</div>
+    <div class="key k1">Н</div>
+    <div class="key k1">Г</div>
+    <div class="key k1">Ш</div>
+    <div class="key k1">Щ</div>
+    <div class="key k1">З</div>
+    <div class="key k1">Х</div>
+    <div class="key k1">Ї</div>
+    <div class="key k1-75">\</div>
+  </div>
+
+  <!-- Ряд 4 -->
+  <div class="row">
+    <div class="key k1-75 caps">Caps Lock</div>
+    <div class="key k1">Ф</div>
+    <div class="key k1">І</div>
+    <div class="key k1">В</div>
+    <div class="key k1">А</div>
+    <div class="key k1">П</div>
+    <div class="key k1">Р</div>
+    <div class="key k1">О</div>
+    <div class="key k1">Л</div>
+    <div class="key k1">Д</div>
+    <div class="key k1">Ж</div>
+    <div class="key k1">Є</div>
+    <div class="key k2-25 enter">Enter ↵</div>
+  </div>
+
+  <!-- Ряд 5 -->
+  <div class="row">
+    <div class="key k2-25 shiftl">Shift</div>
+    <div class="key k1">Я</div>
+    <div class="key k1">Ч</div>
+    <div class="key k1">С</div>
+    <div class="key k1">М</div>
+    <div class="key k1">И</div>
+    <div class="key k1">Т</div>
+    <div class="key k1">Ь</div>
+    <div class="key k1">Б</div>
+    <div class="key k1">Ю</div>
+    <div class="key k1">.</div>
+    <div class="key k2-75 shiftr">Shift</div>
+  </div>
+
+  <!-- Ряд 6: Пробіл та нижні клавіші -->
+  <div class="row">
+    <div class="key k1-25 ctrl">Ctrl</div>
+    <div class="key k1-25 win">Win</div>
+    <div class="key k1-25 alt">Alt</div>
+    <div class="key k6-25 space">&nbsp;</div>
+    <div class="key k1-25 alt">Alt</div>
+    <div class="key k1-25">Fn</div>
+    <div class="key k1-25 menu">☰</div>
+    <div class="key k1-25 ctrl">Ctrl</div>
+  </div>
+</div>
+
+<script>
+  const textarea = document.querySelector('.output');
+  const keys = document.querySelectorAll('.key');
+
+  keys.forEach(key => {
+    key.addEventListener('click', () => {
+      const text = key.innerText.trim();
+
+      if (text === '← Backspace') {
+        textarea.value = textarea.value.slice(0, -1);
+      } else if (text === 'Enter ↵') {
+        textarea.value += '\n';
+      } else if (text === 'Tab') {
+        textarea.value += '    ';
+      } else if (text === '') {
+        textarea.value += ' ';
+      } else {
+        // Обробка двосимвольних клавіш (наприклад ! та 1)
+        const lines = key.innerHTML.split('<br>');
+        const upper = lines[0];
+        const lower = lines[1] || lines[0];
+
+        // Якщо Shift натиснуто (простий варіант — завжди верхній регістр для символів)
+        if (document.querySelector('.shiftl:active') || document.querySelector('.shiftr:active')) {
+          textarea.value += upper;
+        } else {
+          textarea.value += lower;
+        }
+
+        // Простий варіант: завжди друкуємо нижній регістр, крім спецклавіш
+        const simpleText = key.textContent.replace(/[^a-zа-яёіїє0-9]/gi, '');
+        if (simpleText.length === 1) {
+          textarea.value += simpleText;
+        } else if (upper.length === 1 && !'←↵'.includes(upper)) {
+          textarea.value += upper;
+        }
+      }
+
+      textarea.focus();
+      textarea.scrollTop = textarea.scrollHeight;
+    });
+  });
+
+  // Підтримка реальної клавіатури
+  document.addEventListener('keydown', e => {
+    textarea.value += e.key === 'Enter' ? '\n' : e.key;
+    textarea.focus();
+    textarea.scrollTop = textarea.scrollHeight;
+  });
+</script>
 </body>
 </html>
