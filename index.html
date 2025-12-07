@@ -5,125 +5,30 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Особистий веб-сайт | Овсієнко О.В.</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      line-height: 1.6;
-      color: #333;
-      background-color: #fafafa;
-    }
-
-    header {
-      background-color: #1a1a1a;
-      color: white;
-      text-align: center;
-      padding: 1rem 0;
-    }
-
-    header h1 {
-      font-size: 1.6rem;
-      margin-bottom: 0.5rem;
-    }
-
-    nav ul {
-      list-style: none;
-      display: flex;
-      justify-content: center;
-      gap: 1.2rem;
-      padding: 0.5rem 0;
-      flex-wrap: wrap;
-    }
-
-    nav a {
-      color: #64b5f6;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.3rem 0.6rem;
-      border-radius: 4px;
-    }
-
-    nav a:hover, nav a:focus {
-      background-color: #333;
-    }
-
-    main {
-      padding: 2rem 1rem;
-      min-height: calc(100vh - 180px);
-    }
-
-    .page {
-      display: none;
-      max-width: 768px;
-      margin: 0 auto;
-      background: white;
-      padding: 1.5rem;
-      border-radius: 8px;
-      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
-    }
-
-    #home,
-    .page:target {
-      display: block;
-    }
-
-    h2 {
-      margin-bottom: 1rem;
-      font-size: 1.4rem;
-      color: #1a1a1a;
-    }
-
-    img {
-      max-width: 100%;
-      height: auto;
-      margin: 1rem 0;
-      border-radius: 6px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-
-    ul {
-      padding-left: 1.5rem;
-      margin: 1rem 0;
-    }
-
-    li {
-      margin-bottom: 0.6rem;
-    }
-
-    footer {
-      background-color: #1a1a1a;
-      color: #aaa;
-      text-align: center;
-      padding: 1.2rem 1rem;
-      margin-top: 2rem;
-    }
-
-    footer a {
-      color: #64b5f6;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background-color: #fafafa; }
+    header { background-color: #1a1a1a; color: white; text-align: center; padding: 1rem 0; }
+    header h1 { font-size: 1.6rem; margin-bottom: 0.5rem; }
+    nav ul { list-style: none; display: flex; justify-content: center; gap: 1.2rem; padding: 0.5rem 0; flex-wrap: wrap; }
+    nav a { color: #64b5f6; text-decoration: none; font-weight: 500; padding: 0.3rem 0.6rem; border-radius: 4px; }
+    nav a:hover, nav a:focus { background-color: #333; }
+    main { padding: 2rem 1rem; min-height: calc(100vh - 180px); }
+    .page { display: none; max-width: 768px; margin: 0 auto; background: white; padding: 1.5rem; border-radius: 8px; box-shadow: 0 2px 12px rgba(0,0,0,0.07); }
+    #home, .page:target { display: block; }
+    h2 { margin-bottom: 1rem; font-size: 1.4rem; color: #1a1a1a; }
+    img { max-width: 100%; height: auto; margin: 1rem 0; border-radius: 6px; box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+    ul { padding-left: 1.5rem; margin: 1rem 0; }
+    li { margin-bottom: 0.6rem; }
+    footer { background-color: #1a1a1a; color: #aaa; text-align: center; padding: 1.2rem 1rem; margin-top: 2rem; }
+    footer a { color: #64b5f6; text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
     @media (max-width: 600px) {
-      nav ul {
-        flex-direction: column;
-        gap: 0.4rem;
-      }
-      header h1 {
-        font-size: 1.3rem;
-      }
+      nav ul { flex-direction: column; gap: 0.4rem; }
+      header h1 { font-size: 1.3rem; }
     }
   </style>
 </head>
 <body>
-
   <header>
     <h1>Особистий веб-сайт Овсієнка О.В.</h1>
     <nav>
@@ -137,14 +42,12 @@
   </header>
 
   <main>
-    <!-- Головна -->
     <section id="home" class="page">
       <h2>Ласкаво просимо!</h2>
       <p>Це мій особистий сайт, створений для курсу з веб-розробки.</p>
       <p>Тут зібрані всі виконані мною практичні та лабораторні роботи.</p>
     </section>
 
-    <!-- Про мене -->
     <section id="about" class="page">
       <h2>Про мене</h2>
       <img src="photo.jpg" alt="Фото Овсієнка Олександра">
@@ -152,7 +55,6 @@
       <p><strong>Email:</strong> <a href="mailto:ovsyenkos@gmail.com">ovsyenkos@gmail.com</a></p>
     </section>
 
-    <!-- Практичні роботи -->
     <section id="practical" class="page">
       <h2>Практичні роботи</h2>
       <ul>
@@ -162,7 +64,6 @@
       </ul>
     </section>
 
-    <!-- Лабораторні заняття -->
     <section id="lab" class="page">
       <h2>Лабораторні заняття</h2>
       <ul>
@@ -178,6 +79,5 @@
     &copy; 2025 Овсієнко Олександр В’ячеславович | 
     <a href="https://github.com/OvsienkoSasha" target="_blank">GitHub</a>
   </footer>
-
 </body>
 </html>
