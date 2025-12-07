@@ -124,9 +124,38 @@
       justify-content: flex-start;
     }
 
+    /* ===== TAGS ===== */
+    .tags {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 15px;
+      overflow-x: auto;
+      padding-bottom: 5px;
+      width: 100%;
+    }
+
+    .tag {
+      background: #212121;
+      padding: 6px 14px;
+      border-radius: 12px;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .tag:hover {
+      background: #3a3a3a;
+    }
+
+    .tag.active {
+      background: white;
+      color: black;
+    }
+
     /* ===== VIDEO CARD ===== */
     .video-card {
-      width: 310px;
+      width: 290px;
       background-color: #181818;
       border-radius: 15px;
       overflow: hidden;
@@ -141,7 +170,7 @@
 
     .thumbnail {
       width: 100%;
-      height: 180px;
+      height: 170px;
       object-fit: cover;
     }
 
@@ -169,29 +198,6 @@
       color: #aaa;
     }
 
-    /* ===== TAGS (як у YouTube) ===== */
-    .tags {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 15px;
-      overflow-x: auto;
-    }
-
-    .tag {
-      background: #272727;
-      padding: 8px 14px;
-      border-radius: 20px;
-      font-size: 13px;
-      white-space: nowrap;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-
-    .tag:hover {
-      background: #3f3f3f;
-    }
-
-    /* SCROLLBAR HIDE (гарніше виглядає) */
     ::-webkit-scrollbar {
       height: 6px;
       width: 6px;
@@ -219,6 +225,7 @@
     <input type="text" placeholder="Пошук">
     <button>🔍</button>
   </div>
+
   <div class="header-right">
     <img src="https://cdn-icons-png.flaticon.com/512/3239/3239959.png">
     <img src="https://cdn-icons-png.flaticon.com/512/1828/1828919.png">
@@ -228,7 +235,6 @@
 
 <div class="layout">
 
-  <!-- SIDEBAR -->
   <aside>
     <div class="sidebar-item">
       <img src="https://cdn-icons-png.flaticon.com/512/1946/1946488.png">
@@ -248,12 +254,11 @@
     </div>
   </aside>
 
-  <!-- MAIN -->
   <main>
 
     <!-- TAGS -->
-    <div class="tags" style="width:100%;">
-      <div class="tag">Всі</div>
+    <div class="tags">
+      <div class="tag active">Всі</div>
       <div class="tag">Ігри</div>
       <div class="tag">Музика</div>
       <div class="tag">Новини</div>
@@ -308,6 +313,30 @@
           <h3>Подорож у гори</h3>
           <p>Travel Blog</p>
           <p>800 тис. переглядів • 5 днів тому</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <img class="thumbnail" src="https://i.ytimg.com/vi/ScMzIvxBSi4/maxresdefault.jpg">
+      <div class="video-info">
+        <img class="channel-avatar" src="https://i.pravatar.cc/150?img=5">
+        <div class="video-text">
+          <h3>Смішні моменти з ігор</h3>
+          <p>Gaming Fun</p>
+          <p>2,1 млн переглядів • 4 дні тому</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="video-card">
+      <img class="thumbnail" src="https://i.ytimg.com/vi/kXYiU_JCYtU/maxresdefault.jpg">
+      <div class="video-info">
+        <img class="channel-avatar" src="https://i.pravatar.cc/150?img=6">
+        <div class="video-text">
+          <h3>Тренування вдома без залу</h3>
+          <p>Fitness Pro</p>
+          <p>950 тис. переглядів • 1 тиждень тому</p>
         </div>
       </div>
     </div>
