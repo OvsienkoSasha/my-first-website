@@ -66,7 +66,6 @@
       box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
 
-    /* Перша сторінка — головна — видима завжди, якщо нічого не обрано */
     #home,
     .page:target {
       display: block;
@@ -86,11 +85,13 @@
       box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .empty {
-      color: #777;
-      font-style: italic;
-      text-align: center;
-      margin: 2rem 0;
+    ul {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
+    }
+
+    li {
+      margin-bottom: 0.6rem;
     }
 
     footer {
@@ -140,7 +141,7 @@
     <section id="home" class="page">
       <h2>Ласкаво просимо!</h2>
       <p>Це мій особистий сайт, створений для курсу з веб-розробки.</p>
-      <p>Тут будуть зібрані всі виконані мною роботи — практичні та лабораторні.</p>
+      <p>Тут зібрані всі виконані мною практичні та лабораторні роботи.</p>
     </section>
 
     <!-- Про мене -->
@@ -151,35 +152,29 @@
       <p><strong>Email:</strong> <a href="mailto:ovsyenkos@gmail.com">ovsyenkos@gmail.com</a></p>
     </section>
 
-    <!-- Практичні роботи (порожньо — для майбутнього наповнення) -->
+    <!-- Практичні роботи -->
     <section id="practical" class="page">
       <h2>Практичні роботи</h2>
-      <p class="empty">Тут з’являться посилання на практичні роботи після їх завантаження в репозиторій.</p>
-      <!-- Приклад, як додавати пізніше (розкоментуй, коли додаватимеш):
       <ul>
-        <li><a href="pr1/index.html">Практична робота №1 — Основи HTML</a></li>
-        <li><a href="pr2/index.html">Практична робота №2 — Стилізація форми</a></li>
+        <li><a href="practical2/index.html">Практична робота №2 — Стилізація форми</a></li>
+        <li><a href="practical3/index.html">Практична робота №3 — Макет YouTube (Flexbox)</a></li>
       </ul>
-      -->
     </section>
 
-    <!-- Лабораторні заняття (порожньо — для майбутнього наповнення) -->
+    <!-- Лабораторні заняття -->
     <section id="lab" class="page">
       <h2>Лабораторні заняття</h2>
-      <p class="empty">Тут з’являться посилання на лабораторні роботи після їх завантаження в репозиторій.</p>
-      <!-- Приклад:
       <ul>
-        <li><a href="lab1/index.
-  html">Лабораторна робота №1 — Форма реєстрації</a></li>
+        <li><a href="lab1/index.html">Лабораторна робота №1 — Форма реєстрації</a></li>
         <li><a href="lab2/index.html">Лабораторна робота №2 — CSS-селектори</a></li>
+        <li><a href="lab3/index.html">Лабораторна робота №3 — YouTube Clone (повний макет)</a></li>
       </ul>
-      -->
     </section>
   </main>
 
   <footer>
     &copy; 2025 Овсієнко Олександр В’ячеславович | 
-    <a href="https://github.com/your-username" target="_blank">GitHub</a>
+    <a href="https://github.com/ovsienkosasha" target="_blank">GitHub</a>
   </footer>
 
 </body>
