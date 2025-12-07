@@ -2,185 +2,204 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<title>Твоя клавіатура 100% — ідеально акуратна</title>
+<title>Твоя клавіатура 100% — нарешті ідеально</title>
 <style>
   body {
     margin: 0;
     padding: 20px 10px;
-    background: #0d1117;
+    background: #0b0e13;
     display: flex;
     flex-direction: column;
     align-items: center;
     font-family: system-ui, sans-serif;
     user-select: none;
   }
-  h1 { color: #58a6ff; margin: 10px 0 15px; font-size: 22px; }
+  h1 { color: #58a6ff; margin-bottom: 20px; font-size: 24px; }
   textarea {
-    width: 96%;
-    max-width: 1100px;
-    height: 100px;
-    margin-bottom: 20px;
-    background: #000;
-    color: #7ec699;
-    border: 2px solid #30363d;
-    border-radius: 10px;
-    padding: 12px;
-    font-size: 17px;
-    resize: vertical;
+    width: 96%; max-width: 1200px; height: 110px; margin-bottom: 25px;
+    background: #000; color: #8fd6b1; border: 2px solid #30363d; border-radius: 12px;
+    padding: 15px; font-size: 18px; resize: vertical;
   }
 
   .keyboard {
     background: #161b22;
-    padding: 16px 16px 20px;
-    border-radius: 16px;
-    box-shadow: 0 15px 50px rgba(0,0,0,0.8);
+    padding: 18px;
+    border-radius: 20px;
+    box-shadow: 0 25px 70px rgba(0,0,0,0.9);
     display: flex;
-    gap: 12px; /* зменшив зазор між основним блоком і правим */
+    gap: 14px;
   }
 
-  .main-block, .right-block {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-  }
-
-  .row {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
+  .row { display: flex; gap: 8px; margin-bottom: 8px; align-items: center; }
   .key {
-    width: 48px;
-    height: 48px;
-    border-radius: 9px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    font-weight: 600;
-    font-size: 12.5px;
-    color: #c9d1d9;
-    box-shadow: 0 3px 0 #010409;
-    transition: all 0.06s;
-    cursor: pointer;
+    width: 52px; height: 52px; border-radius: 10px;
+    display: flex; flex-direction: column; justify-content: center; align-items: center;
+    font-weight: 600; font-size: 13px; color: #c9d1d9;
+    box-shadow: 0 4px 0 #010409; transition: all 0.06s; cursor: pointer;
   }
   .key:active { transform: translateY(3px); box-shadow: none; }
 
   .dark   { background: #0d1117; color: #58a6ff; }
   .light  { background: #f0f6fc; color: #0d1117; }
   .accent { background: #1f6aed; color: white; }
+  .space  { background: #f0f6fc; color: #0d1117; }
 
-  /* Розміри клавіш */
-  .k1      { width: 48px; }
-  .k1-25   { width: calc(48px*1.25 + 8px); }
-  .k1-5    { width: calc(48px*1.5  + 8px); }
-  .k1-75   { width: calc(48px*1.75 + 16px); }
-  .k2      { width: calc(48px*2   + 8px); }
-  .k2-25   { width: calc(48px*2.25 + 16px); }
-  .k2-75   { width: calc(48px*2.75 + 24px); }
-  .k6-25   { width: calc(48px*6.25 + 5*8px); }
-  .space    { width: calc(48px*6.25 + 5*8px); background: #f0f6fc; color: #0d1117; }
-  .num0     { width: calc(48px*2 + 8px); }
-  .numplus, .numenter { width: 48px; height: calc(48px*2 + 8px); }
+  .k1      { width: 52px; }
+  .k1-25   { width: calc(52px*1.25 + 8px); }
+  .k1-5    { width: calc(52px*1.5  + 8px); }
+  .k1-75   { width: calc(52px*1.75 + 16px); }
+  .k2      { width: calc(52px*2   + 8px); }
+  .k2-25   { width: calc(52px*2.25 + 16px); }
+  .k2-75   { width: calc(52px*2.75 + 24px); }
+  .k6-25   { width: calc(52px*6.25 + 5*8px); }
+  .num0     { width: calc(52px*2 + 8px); }
+  .numplus, .numenter { width: 52px; height: calc(52px*2 + 8px); }
 </style>
 </head>
 <body>
 
-<h1>Твоя клавіатура 100% — ідеально акуратна версія</h1>
-<textarea placeholder="Тут буде текст..."></textarea>
+<h1>Твоя клавіатура 100% — нарешті 1 в 1</h1>
+<textarea placeholder="Натискай клавіші…"></textarea>
 
 <div class="keyboard">
 
-  <!-- ОСНОВНИЙ БЛОК -->
-  <div class="main-block">
+  <!-- ===== ОСНОВНИЙ БЛОК + СТРІЛКИ ===== -->
+  <div style="display:flex; gap:14px;">
 
-    <div class="row">
-      <div class="key k1 dark">Esc</div>
-      <div style="width:40px"></div>
-      <div class="key k1 light">F1</div><div class="key k1 light">F2</div><div class="key k1 light">F3</div><div class="key k1 light">F4</div>
-      <div style="width:24px"></div>
-      <div class="key k1 light">F5</div><div class="key k1 light">F6</div><div class="key k1 light">F7</div><div class="key k1 light">F8</div>
-      <div style="width:24px"></div>
-      <div class="key k1 light">F9</div><div class="key k1 light">F10</div><div class="key k1 light">F11</div><div class="key k1 light">F12</div>
+    <!-- Основна частина -->
+    <div>
+
+      <div class="row">
+        <div class="key k1 dark">Esc</div>
+        <div style="width:52px"></div>
+        <div class="key k1 light">F1</div><div class="key k1 light">F2</div><div class="key k1 light">F3</div><div class="key k1 light">F4</div>
+        <div style="width:30px"></div>
+        <div class="key k1 light">F5</div><div class="key k1 light">F6</div><div class="key k1 light">F7</div><div class="key k1 light">F8</div>
+        <div style="width:30px"></div>
+        <div class="key k1 light">F9</div><div class="key k1 light">F10</div><div class="key k1 light">F11</div><div class="key k1 light">F12</div>
+        <div style="width:30px"></div>
+        <div class="key k1 dark">Prt</div><div class="key k1 dark">Scr</div><div class="key k1 dark">Pau</div>
+      </div>
+
+      <div class="row">
+        <div class="key k1 dark">~<br>`</div>
+        <div class="key k1 light">!<br>1</div><div class="key k1 light">@<br>2</div><div class="key k1 light">#<br>3</div><div class="key k1 light">$<br>4</div>
+        <div class="key k1 light">%<br>5</div><div class="key k1 light">^<br>6</div><div class="key k1 light">&<br>7</div><div class="key k1 light">*<br>8</div>
+        <div class="key k1 light">(<br>9</div><div class="key k1 light">)<br>0</div><div class="key k1 light">_<br>-</div><div class="key k1 light">+<br>=</div>
+        <div class="key k2 dark">Back</div>
+      </div>
+
+      <div class="row">
+        <div class="key k1-5 dark">Tab</div>
+        <div class="key k1 light">Й</div><div class="key k1 light">Ц</div><div class="key k1 light">У</div><div class="key k1 light">К</div>
+        <div class="key k1 light">Е</div><div class="key k1 light">Н</div><div class="key k1 light">Г</div><div class="key k1 light">Ш</div>
+        <div class="key k1 light">Щ</div><div class="key k1 light">З</div><div class="key k1 light">Х</div><div class="key k1 light">Ї</div>
+        <div class="key k1 dark">\|</div>
+        </div>
+
+      <div class="row">
+        <div class="key k1-75 accent">Caps</div>
+        <div class="key k1 light">Ф</div><div class="key k1 light">І</div><div class="key k1 light">В</div><div class="key k1 light">А</div>
+        <div class="key k1 light">П</div><div class="key k1 light">Р</div><div class="key k1 light">О</div><div class="key k1 light">Л</div>
+        <div class="key k1 light">Д</div><div class="key k1 light">Ж</div><div class="key k1 light">Є</div>
+        <div class="key k2-25 dark">Enter</div>
+      </div>
+
+      <div class="row">
+        <div class="key k2-25 accent">Shift</div>
+        <div class="key k1 light">Я</div><div class="key k1 light">Ч</div><div class="key k1 light">С</div><div class="key k1 light">М</div>
+        <div class="key k1 light">И</div><div class="key k1 light">Т</div><div class="key k1 light">Ь</div><div class="key k1 light">Б</div>
+        <div class="key k1 light">Ю</div><div class="key k1 light">.<br>,</div>
+        <div class="key k2-75 accent">Shift</div>
+      </div>
+
+      <div class="row">
+        <div class="key k1-25 dark">Ctrl</div>
+        <div class="key k1-25 dark">Win</div>
+        <div class="key k1-25 dark">Alt</div>
+        <div class="key k6-25 space"></div>
+        <div class="key k1-25 dark">Alt</div>
+        <div class="key k1-25 dark">Fn</div>
+        <div class="key k1-25 dark">Menu</div>
+        <div class="key k1-25 dark">Ctrl</div>
+      </div>
+
     </div>
 
-    <div class="row">
-      <div class="key k1 dark">~<br>`</div>
-      <div class="key k1 light">!<br>1</div><div class="key k1 light">@<br>2</div><div class="key k1 light">#<br>3</div><div class="key k1 light">$<br>4</div>
-      <div class="key k1 light">%<br>5</div><div class="key k1 light">^<br>6</div><div class="key k1 light">&<br>7</div><div class="key k1 light">*<br>8</div>
-      <div class="key k1 light">(<br>9</div><div class="key k1 light">)<br>0</div><div class="key k1 light">_<br>-</div><div class="key k1 light">+<br>=</div>
-      <div class="key k2 dark">Back</div>
-      <div class="key k1 dark">Ins</div><div class="key k1 dark">Home</div><div class="key k1 dark">PgUp</div>
+    <!-- СТРІЛКИ + NUMPAD (тепер усе на своїх місцях) -->
+    <div style="display:flex; flex-direction:column; gap:8px; margin-top:60px;">
+
+      <!-- Insert / Home / PgUp + NumLock ряд -->
+      <div class="row">
+        <div class="key k1 dark">Ins</div>
+        <div class="key k1 dark">Home</div>
+        <div class="key k1 dark">PgUp</div>
+        <div style="width:14px"></div>
+        <div class="key k1 dark">Num</div>
+        <div class="key k1 dark">/</div>
+        <div class="key k1 dark">*</div>
+        <div class="key k1 dark">-</div>
+      </div>
+
+      <!-- Del / End / PgDn + 789 + -->
+      <div class="row">
+        <div class="key k1 dark">Del</div>
+        <div class="key k1 dark">End</div>
+        <div class="key k1 dark">PgDn</div>
+        <div style="width:14px"></div>
+        <div class="key k1 light">7</div>
+        <div class="key k1 light">8</div>
+        <div class="key k1 light">9</div>
+        <div class="key numplus dark">+</div>
+      </div>
+
+      <!-- стрілки вверх + 456 -->
+      <div class="row">
+        <div class="key k1 dark">Up</div>
+        <div style="width:70px"></div>
+        <div class="key k1 light">4</div>
+        <div class="key k1 light">5</div>
+        <div class="key k1 light">6</div>
+      </div>
+
+      <!-- стрілки вліво/вниз/вправо + 123 + Enter -->
+      <div class="row">
+        <div class="key k1 dark">Left</div>
+        <div class="key k1 dark">Down</div>
+        <div class="key k1 dark">Right</div>
+        <div style="width:14px"></div>
+        <div class="key k1 light">1</div>
+        <div class="key k1 light">2</div>
+        <div class="key k1 light">3</div>
+        <div class="key numenter dark">Ent</div>
+      </div>
+
+      <!-- 0 і крапка -->
+      <div class="row">
+        <div style="width: calc(52px*3 + 16px);"></div>
+        <div class="key num0 light">0</div>
+        <div class="key k1 light">.</div>
+      </div>
+
     </div>
-
-    <div class="row">
-      <div class="key k1-5 dark">Tab</div>
-      <div class="key k1 light">Й</div><div class="key k1 light">Ц</div><div class="key k1 light">У</div><div class="key k1 light">К</div>
-      <div class="key k1 light">Е</div><div class="key k1 light">Н</div><div class="key k1 light">Г</div><div class="key k1 light">Ш</div>
-      <div class="key k1 light">Щ</div><div class="key k1 light">З</div><div class="key k1 light">Х</div><div class="key k1 light">Ї</div>
-      <div class="key k1 dark">\|</div>
-      <div class="key k1 dark">Del</div><div class="key k1 dark">End</div><div class="key k1 dark">PgDn</div>
-    </div>
-
-    <div class="row">
-      <div class="key k1-75 accent">Caps</div>
-      <div class="key k1 light">Ф</div><div class="key k1 light">І</div><div class="key k1 light">В</div><div class="key k1 light">А</div>
-      <div class="key k1 light">П</div><div class="key k1 light">Р</div><div class="key k1 light">О</div><div class="key k1 light">Л</div>
-      <div class="key k1 light">Д</div><div class="key k1 light">Ж</div><div class="key k1 light">Є</div>
-      <div class="key k2-25 dark">Enter</div>
-    </div>
-
-    <div class="row">
-      <div class="key k2-25 accent">Shift</div>
-      <div class="key k1 light">Я</div><div class="key k1 light">Ч</div><div class="key k1 light">С</div><div class="key k1 light">М</div>
-      <div class="key k1 light">И</div><div class="key k1 light">Т</div><div class="key k1 light">Ь</div><div class="key k1 light">Б</div>
-      <div class="key k1 light">Ю</div><div class="key k1 light">.<br>,</div>
-      <div class="key k2-75 accent">Shift</div>
-      <div class="key k1 dark">Up</div>
-    </div>
-
-    <div class="row">
-      <div class="key k1-25 dark">Ctrl</div>
-      <div class="key k1-25 dark">Win</div>
-      <div class="key k1-25 dark">Alt</div>
-      <div class="key k6-25 space"></div>
-      <div class="key k1-25 dark">Alt</div>
-      <div class="key k1-25 dark">Fn</div>
-      <div class="key k1-25 dark">Menu</div>
-      <div class="key k1-25 dark">Ctrl</div>
-      <div class="key k1 dark">Left</div>
-      <div class="key k1 dark">Down</div>
-      <div class="key k1 dark">Right</div>
-    </div>
-
-  </div>
-
-  <!-- ПРАВИЙ БЛОК NumPad -->
-  <div class="right-block" style="margin-top: 56px;"> <!-- точно вирівнюємо по висоті */
-
-    <div class="row"><div class="key k1 dark">Num</div><div class="key k1 dark">/</div><div class="key k1 dark">*</div><div class="key k1 dark">-</div></div>
-    <div class="row"><div class="key k1 light">7</div><div class="key k1 light">8</div><div class="key k1 light">9</div><div class="key numplus dark">+</div></div>
-    <div class="row"><div class="key k1 light">4</div><div class="key k1 light">5</div><div class="key k1 light">6</div></div>
-    <div class="row"><div class="key k1 light">1</div><div class="key k1 light">2</div><div class="key k1 light">3</div><div class="key numenter dark">Ent</div></div>
-    <div class="row"><div class="key num0 light">0</div><div class="key k1 light">.</div></div>
   </div>
 
 </div>
 
 <script>
-const ta = document.querySelector('textarea');
-document.querySelectorAll('.key').forEach(k => {
-  k.addEventListener('click', () => {
-    let t = k.innerHTML.includes('<br>') ? k.innerHTML.split('<br>')[0] : k.textContent;
-    if (t.includes('Back')) ta.value = ta.value.slice(0,-1);
-    else if (t === 'Ent' || t.includes('Enter')) ta.value += '\n';
-    else if (t === 'Tab') ta.value += '    ';
-    else if (t === '') ta.value += ' ';
-    else ta.value += t;
-    ta.focus();
+  const ta = document.querySelector('textarea');
+  document.querySelectorAll('.key').forEach(k => {
+    k.addEventListener('click', () => {
+      let t = k.innerHTML.includes('<br>') ? k.innerHTML.split('<br>')[0].trim() : k.textContent.trim();
+      if (t.includes('Back')) ta.value = ta.value.slice(0,-1);
+      else if (t === 'Ent' || t.includes('Enter')) ta.value += '\n';
+      else if (t === 'Tab') ta.value += '    ';
+      else if (t === '') ta.value += ' ';
+      else ta.value += t;
+      ta.focus();
+      ta.scrollTop = ta.scrollHeight;
+    });
   });
-});
 </script>
 </body>
 </html>
