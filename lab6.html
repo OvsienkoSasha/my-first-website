@@ -2,146 +2,107 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8" />
-<title>Lab6 Pokemon Animation</title>
+<title>Pikachu Run</title>
 <style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    background: linear-gradient(#6ec6ff, #bde7ff);
-  }
+    body {
+        margin: 0;
+        overflow: hidden;
+        background: linear-gradient(#6ec6ff, #b0e7ff);
+    }
 
-  /* ХМАРИ */
-  .clouds {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 200%;
-    height: 40vh;
-    background: url('https://i.imgur.com/iy5Yd6A.png') repeat-x;
-    background-size: contain;
-    animation: cloudsMove 40s linear infinite;
-    pointer-events: none;
-  }
+    .scene {
+        width: 100vw;
+        height: 100vh;
+        position: relative;
+        overflow: hidden;
+    }
 
-  @keyframes cloudsMove {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
+    .ground {
+        position: absolute;
+        bottom: 0;
+        width: 200%;
+        height: 160px;
+        background: url('https://i.imgur.com/x3K4a4d.png');
+        background-size: cover;
+        animation: idleGrass 6s linear infinite;
+    }
 
-  /* ТРАВА */
-  .grass {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 200%;
-    height: 30vh;
-    background: url('https://i.imgur.com/5C9zQhP.png') repeat-x;
-    background-size: contain;
-    animation: grassIdle 6s linear infinite;
-  }
+    @keyframes idleGrass {
+        from { transform: translateX(0); }
+        to { transform: translateX(-200px); }
+    }
 
-  @keyframes grassIdle {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-20px); }
-  }
+    @keyframes runGrass {
+        from { transform: translateX(0); }
+        to { transform: translateX(-600px); }
+    }
 
-  .grass.run {
-    animation: grassRun 0.3s linear infinite;
-  }
-
-  @keyframes grassRun {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50px); }
-  }
-
-  /* ПІКАЧУ (спрайт з pokemondb) */
-  .pikachu {
-    position: absolute;
-    bottom: 18vh;
-    left: 50px;
-    width: 96px;
-    height: 96px;
-    background: url('https://i.imgur.com/dqQX1Qp.png'); /* sprite */
-    image-rendering: pixelated;
-    animation: idle 0.7s steps(2) infinite;
-  }
-
-  /* Idle анімація */
-  @keyframes idle {
-    from { background-position: 0 0; }
-    to   { background-position: -192px 0; }
-  }
-
-  /* Анімація бігу */
-  @keyframes run {
-    from { background-position: 0 -96px; }
-    to   { background-position: -384px -96px; }
-  }
-
-  /* Анімація стрибка */
-  @keyframes jumpAnim {
-    0% { bottom: 18vh; }
-    40% { bottom: 32vh; }
-    100% { bottom: 18vh; }
-  }
+    .pikachu {
+        position: absolute;
+        bottom: 160px;
+        left: 200px;
+        width: 80px;
+        height: 80px;
+        background: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/25.gif');
+        background-size: contain;
+        background-repeat: no-repeat;
+        image-rendering: pixelated;
+        transition: transform 0.1s;
+    }
 </style>
 </head>
 <body>
-
-<div class="clouds"></div>
-<div class="grass" id="grass"></div>
-<div class="pikachu" id="pk"></div>
-
+<div class="scene">
+    <div class="ground" id="ground"></div>
+    <div class="pikachu" id="pikachu"></div>
+</div>
 <script>
-const pk = document.getElementById("pk");
-const grass = document.getElementById("grass");
-let x = 50;
-let speed = 8;
-let isJumping = false;
-let isRunning = false;
+let pikachu = document.getElementById('pikachu');
+let ground = document.getElementById('ground');
+let x = 200;
+let vy = 0;
+let onGround = true;
 
-function move() {
-  pk.style.left = x + "px";
+function update() {
+    pikachu.style.left = x + 'px';
+    requestAnimationFrame(update);
 }
+update();
 
-// КЕРУВАННЯ
-window.addEventListener("keydown", e => {
-  if (e.code === "ArrowRight") {
-    x += speed;
-    pk.style.transform = "scaleX(1)";
-    pk.style.animation = "run 0.4s steps(4) infinite";
-    grass.classList.add("run");
-    isRunning = true;
-  }
+let keys = {};
+document.addEventListener('keydown', (e) => keys[e.key] = true);
+document.addEventListener('keyup', (e) => keys[e.key] = false);
 
-  if (e.code === "ArrowLeft") {
-    x -= speed;
-    pk.style.transform = "scaleX(-1)";
-    pk.style.animation = "run 0.4s steps(4) infinite";
-    grass.classList.add("run");
-    isRunning = true;
-  }
+setInterval(() => {
+    if (keys['ArrowRight']) {
+        x += 5;
+        pikachu.style.transform = 'scaleX(1)';
+        ground.style.animation = 'runGrass 0.3s linear infinite';
+    }
+    else if (keys['ArrowLeft']) {
+        x -= 5;
+        pikachu.style.transform = 'scaleX(-1)';
+        ground.style.animation = 'runGrass 0.3s linear infinite';
+    }
+    else {
+        ground.style.animation = 'idleGrass 6s linear infinite';
+    }
 
-  if (e.code === "Space" && !isJumping) {
-    isJumping = true;
-    pk.style.animation = "jumpAnim 0.6s ease, idle 0.7s steps(2) infinite 0.6s";
+    if (keys[' '] && onGround) {
+        vy = -12;
+        onGround = false;
+    }
 
-    setTimeout(() => {
-      isJumping = false;
-      pk.style.animation = isRunning ? "run 0.4s steps(4) infinite" : "idle 0.7s steps(2) infinite";
-    }, 600);
-  }
-  move();
-});
-
-window.addEventListener("keyup", e => {
-  if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
-    isRunning = false;
-    grass.classList.remove("run");
-    if (!isJumping) pk.style.animation = "idle 0.7s steps(2) infinite";
-  }
-});
+    if (!onGround) {
+        vy += 0.6;
+        pikachu.style.bottom = (160 - vy * -4) + 'px';
+        if (parseInt(pikachu.style.bottom) <= 160) {
+            pikachu.style.bottom = '160px';
+            onGround = true;
+            vy = 0;
+        }
+    }
+}, 16);
 </script>
-
 </body>
 </html>
