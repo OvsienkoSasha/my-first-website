@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Портфоліо — Овсієнко О.В.</title>
   <style>
     :root {
@@ -29,56 +29,47 @@
       padding: 20px 40px;
       position: sticky;
       top: 0;
-      background: rgba(255,255,255,0.9);
+      background: rgba(255,255,255,0.95);
       backdrop-filter: blur(12px);
       z-index: 10;
       border-bottom: 1px solid #eee;
     }
     header h1 { font-size: 1.3rem; font-weight: 600; }
     nav ul { list-style: none; display: flex; gap: 30px; }
-    nav a {
-      text-decoration: none;
-      color: var(--text);
-      font-weight: 500;
-      transition: color 0.3s;
-    }
+    nav a { text-decoration: none; color: var(--text); font-weight: 500; transition: color 0.3s; }
     nav a:hover { color: var(--primary); }
 
     main { max-width: var(--max-width); margin: 0 auto; padding: 40px 20px; }
 
+    /* Головна секція — тепер без фото зліва */
     .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 40px;
-      margin-bottom: 80px;
+      text-align: left;
+      margin-bottom: 50px;
     }
-    .hero-text h2 { font-size: 2.6rem; margin-bottom: 12px; }
-    .hero-text p { color: var(--muted); margin-bottom: 30px; max-width: 90%; }
+    .hero h2 {
+      font-size: 2.8rem;
+      margin-bottom: 15px;
+    }
+    .hero p {
+      color: var(--muted);
+      margin-bottom: 30px;
+      max-width: 80%;
+    }
     .btn {
       background: var(--primary);
       color: white;
-      padding: 14px 28px;
+      padding: 14px 30px;
       border-radius: var(--radius);
       text-decoration: none;
       font-weight: 600;
       display: inline-block;
       transition: transform 0.2s;
     }
-    .btn:hover { transform: translateY(-3px); }
-    .hero img {
-      width: 240px;
-      height: 240px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 7px solid #f0f0f0;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-    }
+    .btn:hover { transform: translateY(-4px); }
 
     section h3 {
       font-size: 1.7rem;
-      margin-bottom: 25px;
+      margin: 50px 0 25px;
       font-weight: 600;
     }
     .label {
@@ -89,11 +80,12 @@
       font-weight: 500;
     }
 
-    /* Картки лабораторних + ефект підняття */
+    /* Картки лабораторних */
     .cards {
       display: flex;
       gap: 25px;
       flex-wrap: wrap;
+      margin-bottom: 40px;
     }
     .card {
       background: var(--card);
@@ -108,21 +100,10 @@
       transform: translateY(-10px);
       box-shadow: 0 20px 35px rgba(0,0,0,0.15);
     }
-    .card h4 {
-      font-size: 1.2rem;
-      margin-bottom: 8px;
-      color: #222;
-    }
-    .card p { margin: 8px 0; }
-    .card small { color: var(--muted); font-size: 0.9rem; }
-    .card a {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: 500;
-    }
+    .card a { color: var(--primary); text-decoration: none; font-weight: 500; }
     .card a:hover { text-decoration: underline; }
 
-    /* Практичні роботи + той самий ефект */
+    /* Практичні */
     .pr-item {
       background: var(--card);
       padding: 18px;
@@ -143,17 +124,44 @@
       height: 90px;
       border-radius: 12px;
       object-fit: cover;
-      flex-shrink: 0;
     }
-    .pr-item h4 { margin-bottom: 6px; }
+
+    /* Фото тепер праворуч знизу */
+    .photo-sidebar {
+      float: right;
+      width: 280px;
+      margin: 0 0 40px 40px;
+      text-align: center;
+    }
+    .photo-sidebar img {
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 8px solid #f0f0f0;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+    }
+    .photo-sidebar p {
+      margin-top: 15px;
+      font-size: 1.1rem;
+      color: var(--muted);
+    }
 
     footer {
+      clear: both;
       text-align: center;
-      padding: 40px;
+      padding: 50px;
       color: #888;
-      font-size: 0.95rem;
-      margin-top: 60px;
       border-top: 1px solid #eee;
+    }
+
+    /* Для мобілок — фото стане під текстом */
+    @media (max-width: 900px) {
+      .photo-sidebar {
+        float: none;
+        margin: 40px auto;
+      }
+      .hero p { max-width: 100%; }
     }
   </style>
 </head>
@@ -172,16 +180,20 @@
 </header>
 
 <main>
+  <!-- Головна секція (без фото зліва) -->
   <section class="hero" id="home">
-    <div class="hero-text">
-      <h2>Hi, I am <br><strong>Ovsienko Oleksandr</strong></h2>
-      <p>Студент групи ТЦР-22. На цьому сайті зібрані всі виконані мною лабораторні та практичні роботи з веб-програмування.</p>
-      <a class="btn" href="resume.pdf">Download Resume</a>
-    </div>
-    <img src="photo.jpg" alt="Овсієнко Олександр" />
+    <h2>Hi, I am <br><strong>Ovsienko Oleksandr</strong></h2>
+    <p>Студент групи ТЦР-22. Тут зібрані всі мої лабораторні та практичні роботи з дисципліни «Веб-програмування» за 2025 рік.</p>
+    <a class="btn" href="resume.pdf">Download Resume</a>
   </section>
 
-  <!-- Лабораторні роботи -->
+  <!-- Фото праворуч (плаває біля контенту) -->
+  <div class="photo-sidebar">
+    <img src="photo_2025-12-08_07-37-30.jpg" alt="Овсієнко Олександр">
+    <p>Овсієнко Олександр<br>група ТЦР-22</p>
+  </div>
+
+  <!-- Лабораторні -->
   <section id="labs">
     <div class="label">2025 рік</div>
     <h3>Лабораторні роботи</h3>
@@ -190,29 +202,28 @@
         <h4>Лабораторна №1</h4>
         <p>Форма реєстрації користувача</p>
         <small>2025</small><br><br>
-        <a href="lab1/index.html" target="_blank">Переглянути →</a>
+        <a href="Переглянути →</a>
       </div>
       <div class="card">
         <h4>Лабораторна №2</h4>
-        <p>Робота з CSS-селекторами та каскадом</p>
+        <p>CSS селектори та каскад</p>
         <small>2025</small><br><br>
         <a href="lab2/index.html" target="_blank">Переглянути →</a>
       </div>
       <div class="card">
         <h4>Лабораторна №3</h4>
-        <p>YouTube клон на Flexbox + Grid</p>
+        <p>YouTube клон (Flexbox + Grid)</p>
         <small>2025</small><br><br>
         <a href="lab3/index.html" target="_blank">Переглянути →</a>
       </div>
-      <!-- Додавай сюди нові лабораторні за таким же шаблоном -->
     </div>
   </section>
 
-  <!-- Практичні роботи -->
-  <section id="pract" style="margin-top:70px;">
+  <!-- Практичні -->
+  <section id="pract">
     <h3>Практичні роботи</h3>
     <div class="pr-item">
-      <img src="matrix.jpg" alt="Практична 1">
+      <img src="pract1.jpg" alt="Практична 1">
       <div>
         <h4>Практична №1</h4>
         <p>Основи HTML — семантична розмітка</p>
@@ -220,22 +231,21 @@
       </div>
     </div>
     <div class="pr-item">
-      <img src="matrix.jpg" alt="Практична 4">
+      <img src="pract4.jpg" alt="Практична 4">
       <div>
         <h4>Практична №4</h4>
-        <p>Компонування сторінки за допомогою CSS Grid та Flexbox</p>
+        <p>Компонування за допомогою Grid та Flexbox</p>
         <small>2025</small>
       </div>
     </div>
-    <!-- Додай ще за потребою -->
   </section>
 
   <!-- Про мене -->
-  <section id="about" style="margin-top:70px;">
+  <section id="about">
     <h3>Про мене</h3>
     <p>Мене звати <strong>Овсієнко Олександр</strong>, студент групи ТЦР-22.</p>
-    <p>Цікавлюся фронтенд-розробкою, сучасними технологіями та чистими інтерфейсами.</p>
-    <p style="margin-top:15px;">
+    <p>Цікавлюся фронтенд-розробкою, сучасними технологіями, чистими інтерфейсами та анімаціями.</p>
+    <p style="margin-top:20px;">
       Email: <a href="mailto:ovsyenkos@gmail.com">ovsyenkos@gmail.com</a><br>
       GitHub: <a href="https://github.com/твій-нік" target="_blank">github.com/твій-нік</a>
     </p>
