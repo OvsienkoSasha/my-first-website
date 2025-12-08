@@ -41,7 +41,6 @@
 
     main { max-width: var(--max-width); margin: 0 auto; padding: 40px 20px; }
 
-    /* Головна секція — тепер без фото зліва */
     .hero {
       text-align: left;
       margin-bottom: 50px;
@@ -80,7 +79,6 @@
       font-weight: 500;
     }
 
-    /* Картки лабораторних */
     .cards {
       display: flex;
       gap: 25px;
@@ -103,7 +101,6 @@
     .card a { color: var(--primary); text-decoration: none; font-weight: 500; }
     .card a:hover { text-decoration: underline; }
 
-    /* Практичні */
     .pr-item {
       background: var(--card);
       padding: 18px;
@@ -126,7 +123,6 @@
       object-fit: cover;
     }
 
-    /* Фото тепер праворуч знизу */
     .photo-sidebar {
       float: right;
       width: 280px;
@@ -154,8 +150,7 @@
       color: #888;
       border-top: 1px solid #eee;
     }
-
-    /* Для мобілок — фото стане під текстом */
+    
     @media (max-width: 900px) {
       .photo-sidebar {
         float: none;
@@ -180,20 +175,17 @@
 </header>
 
 <main>
-  <!-- Головна секція (без фото зліва) -->
   <section class="hero" id="home">
     <h2>Hi, I am <br><strong>Ovsienko Oleksandr</strong></h2>
     <p>Студент групи ТЦР-22. Тут зібрані всі мої лабораторні та практичні роботи з дисципліни «Веб-програмування» за 2025 рік.</p>
     <a class="btn" href="resume.pdf">Download Resume</a>
   </section>
-
-  <!-- Фото праворуч (плаває біля контенту) -->
+  
   <div class="photo-sidebar">
     <img src="photo_2025-12-08_07-37-30.jpg" alt="Овсієнко Олександр">
     <p>Овсієнко Олександр<br>група ТЦР-22</p>
   </div>
 
-  <!-- Лабораторні -->
   <section id="labs">
     <div class="label">2025 рік</div>
     <h3>Лабораторні роботи</h3>
@@ -219,7 +211,6 @@
     </div>
   </section>
 
-  <!-- Практичні -->
   <section id="pract">
     <h3>Практичні роботи</h3>
     <div class="pr-item">
@@ -239,8 +230,7 @@
       </div>
     </div>
   </section>
-
-  <!-- Про мене -->
+  
   <section id="about">
     <h3>Про мене</h3>
     <p>Мене звати <strong>Овсієнко Олександр</strong>, студент групи ТЦР-22.</p>
