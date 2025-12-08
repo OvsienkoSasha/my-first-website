@@ -1,115 +1,97 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практична робота №1 – Розклад на місяць</title>
-
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-
-        h1 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .table-container {
-            overflow-x: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 0 15px rgba(0,0,0,0.1);
-        }
-
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 16px;
-        }
-
-        th, td {
-            border: 1px solid #ccc;
-            padding: 10px;
-            text-align: center;
-        }
-
-        th {
-            background: #2a72d6;
-            color: white;
-        }
-
-        tr:nth-child(even) {
-            background: #f9f9f9;
-        }
-
-        /* --- Адаптивність --- */
-        @media (max-width: 600px) {
-            table {
-                font-size: 14px;
-            }
-
-            th, td {
-                padding: 8px;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>Практична №1 — Розклад занять</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+      padding: 40px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: #fff;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 12px;
+      text-align: center;
+    }
+    th {
+      background: #0077cc;
+      color: #fff;
+    }
+    tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+    .subject {
+      font-weight: bold;
+      color: #333;
+    }
+    .time {
+      color: #555;
+    }
+  </style>
 </head>
-
 <body>
-
-<h1>Практична робота №1<br>Розклад занять на місяць</h1>
-
-<div class="table-container">
-    <table>
-        <tr>
-            <th>Дата</th>
-            <th>Пара</th>
-            <th>Дисципліна</th>
-            <th>Викладач</th>
-            <th>Аудиторія</th>
-        </tr>
-
-        <!-- Приклад заповнення — ти підставиш свої пари -->
-        <tr>
-            <td>03.02</td>
-            <td>1 пара</td>
-            <td>Web-технології</td>
-            <td>Іваненко І.І.</td>
-            <td>305</td>
-        </tr>
-
-        <tr>
-            <td>03.02</td>
-            <td>2 пара</td>
-            <td>Програмування</td>
-            <td>Петров П.П.</td>
-            <td>410</td>
-        </tr>
-
-        <tr>
-            <td>05.02</td>
-            <td>3 пара</td>
-            <td>Англійська</td>
-            <td>Smith A.</td>
-            <td>212</td>
-        </tr>
-
-        <tr>
-            <td>06.02</td>
-            <td>1 пара</td>
-            <td>Вища математика</td>
-            <td>Гнатюк М.В.</td>
-            <td>115</td>
-        </tr>
-
-        <!-- додай скільки треба -->
-    </table>
-</div>
-
+  <h1>Розклад занять — Група КН-25</h1>
+  <table>
+    <tr>
+      <th>Дата</th>
+      <th>День</th>
+      <th>1 пара<br><span class="time">08:30–10:05</span></th>
+      <th>2 пара<br><span class="time">10:25–12:00</span></th>
+      <th>3 пара<br><span class="time">12:20–13:55</span></th>
+      <th>4 пара<br><span class="time">14:15–15:50</span></th>
+    </tr>
+    <tr>
+      <td>08.12</td>
+      <td>Понеділок</td>
+      <td class="subject">Вища математика</td>
+      <td class="subject">Програмування</td>
+      <td class="subject">Фізика</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>09.12</td>
+      <td>Вівторок</td>
+      <td class="subject">Англійська мова</td>
+      <td class="subject">Бази даних</td>
+      <td></td>
+      <td class="subject">Фізичне виховання</td>
+    </tr>
+    <tr>
+      <td>10.12</td>
+      <td>Середа</td>
+      <td class="subject">Комп'ютерні мережі</td>
+      <td class="subject">Програмування</td>
+      <td class="subject">Веб-технології</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td>11.12</td>
+      <td>Четвер</td>
+      <td class="subject">Вища математика</td>
+      <td class="subject">Бази даних</td>
+      <td></td>
+      <td class="subject">Фізика</td>
+    </tr>
+    <tr>
+      <td>12.12</td>
+      <td>П’ятниця</td>
+      <td class="subject">Англійська мова</td>
+      <td class="subject">Веб-технології</td>
+      <td class="subject">Фізичне виховання</td>
+      <td></td>
+    </tr>
+  </table>
 </body>
 </html>
