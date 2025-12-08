@@ -4,10 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>ЛР6 — Dragonite Animation</title>
-
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
     body {
       height: 100vh;
       overflow: hidden;
@@ -16,15 +14,11 @@
       animation: sky 15s infinite ease-in-out;
       font-family: Arial, sans-serif;
     }
-
-    /* Анімація неба */
     @keyframes sky {
-      0%   { background-position: 0 0%; }
-      50%  { background-position: 0 100%; }
+      0% { background-position: 0 0%; }
+      50% { background-position: 0 100%; }
       100% { background-position: 0 0%; }
     }
-
-    /* Сонце */
     .sun {
       position: absolute;
       width: 100px;
@@ -36,25 +30,21 @@
       box-shadow: 0 0 30px #FFD700;
       animation: sunMove 20s linear infinite;
     }
-
     @keyframes sunMove {
-      0%   { left: 10%; }
+      0% { left: 10%; }
       100% { left: 90%; }
     }
-
-    /* Хмари */
     .clouds {
+      {
       position: absolute;
       top: 10%;
       width: 300%;
       animation: clouds 50s linear infinite;
     }
-
     @keyframes clouds {
-      0%   { transform: translateX(0); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-66.6%); }
     }
-
     .cloud {
       display: inline-block;
       width: 150px;
@@ -78,8 +68,6 @@
       width: 70px; height: 70px;
       top: -20px; right: 5px;
     }
-
-    /* Земля */
     .ground {
       position: absolute;
       bottom: 0;
@@ -89,29 +77,25 @@
       overflow: hidden;
       z-index: 5;
     }
-
-    /* Трава */
+    /* Трава — робоче зображення */
     .grass {
       position: absolute;
       bottom: 0;
       width: 300%;
       height: 140px;
-      background: url("https://i.imgur.com/3bYQ2vD.png") repeat-x;
-      background-size: 600px 140px;
+      background: url('https://i.imgur.com/8eJqY8u.png') repeat-x bottom;
+      background-size: 800px 140px;
       animation: grassSlow 5s linear infinite;
+      z-index: 6;
     }
-
     @keyframes grassSlow {
-      0%   { transform: translateX(0); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-33%); }
     }
-
     @keyframes grassFast {
-      0%   { transform: translateX(0); }
+      0% { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
-
-    /* --- Dragonite --- */
     .dragon {
       position: absolute;
       width: 120px;
@@ -121,73 +105,54 @@
       transform: translateX(-50%);
       z-index: 10;
       image-rendering: pixelated;
-
       background: url("https://img.pokemondb.net/sprites/black-white/anim/shiny/dragonite.gif")
                   no-repeat center/contain;
     }
-
-    /* Дзеркальне відображення */
-    .left {
-      transform: translateX(-50%) scaleX(-1);
-    }
-    .right {
-      transform: translateX(-50%) scaleX(1);
-    }
-
-    /* Стрибок */
+    .left  { transform: translateX(-50%) scaleX(-1); }
+    .right { transform: translateX(-50%) scaleX(1); }
     .jump {
       animation: jump 0.6s ease-out;
     }
-
     @keyframes jump {
-      0%   { transform: translateX(-50%) translateY(0); }
-      50%  { transform: translateX(-50%) translateY(-160px); }
-      100% { transform: translateX(-50%) translateY(0); }
+      0%,100% { transform: translateX(-50%) translateY(0); }
+      50%     { transform: translateX(-50%) translateY(-160px); }
     }
   </style>
 </head>
-
 <body>
-
   <div class="sun"></div>
-
   <div class="clouds">
     <div class="cloud"></div>
     <div class="cloud"></div>
     <div class="cloud"></div>
     <div class="cloud"></div>
   </div>
-
   <div class="ground">
     <div class="grass" id="grass"></div>
   </div>
-
   <div class="dragon right" id="dragon"></div>
 
   <script>
     const dragon = document.getElementById("dragon");
     const grass = document.getElementById("grass");
-
     let x = window.innerWidth / 2;
     const speed = 10;
 
     document.addEventListener("keydown", (e) => {
       dragon.classList.remove("jump");
-      
+
       if (e.code === "ArrowLeft") {
         x -= speed;
         dragon.classList.add("left");
         dragon.classList.remove("right");
         grass.style.animation = "grassFast 1s linear infinite";
       }
-
       if (e.code === "ArrowRight") {
         x += speed;
         dragon.classList.add("right");
         dragon.classList.remove("left");
         grass.style.animation = "grassFast 1s linear infinite";
       }
-
       if (e.code === "Space") {
         e.preventDefault();
         if (!dragon.classList.contains("jump")) {
@@ -195,10 +160,7 @@
           setTimeout(() => dragon.classList.remove("jump"), 600);
         }
       }
-
-      // межі
       x = Math.max(0, Math.min(x, window.innerWidth - 120));
-
       dragon.style.left = x + "px";
     });
 
@@ -206,6 +168,5 @@
       grass.style.animation = "grassSlow 5s linear infinite";
     });
   </script>
-
 </body>
 </html>
