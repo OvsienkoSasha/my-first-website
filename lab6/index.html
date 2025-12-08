@@ -49,6 +49,46 @@
         image-rendering: pixelated;
         transition: transform 0.1s;
     }
+  /* Clouds animation */
+  .clouds {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    background: url('https://i.imgur.com/5lQK2.png') repeat-x;
+    animation: cloudsMove 25s linear infinite;
+    pointer-events: none;
+  }
+  @keyframes cloudsMove {
+    from { background-position: 0 0; }
+    to { background-position: -1000px 0; }
+  }
+
+  /* Grass animation */
+  .grass {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 90px;
+    background: url('https://i.imgur.com/DPQG3.png') repeat-x;
+    animation: grassMove 4s linear infinite;
+  }
+  .running .grass { animation-duration: 1.2s; }
+  @keyframes grassMove {
+    from { background-position: 0 0; }
+    to { background-position: -500px 0; }
+  }
+
+  /* Jump animation */
+  .jumping {
+    animation: jump 0.6s ease-out;
+  }
+  @keyframes jump {
+    0% { transform: translateY(0); }
+    40% { transform: translateY(-110px); }
+    100% { transform: translateY(0); }
+  }
 </style>
 </head>
 <body>
