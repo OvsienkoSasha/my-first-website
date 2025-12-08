@@ -1,135 +1,314 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Лабораторна №6 — Pokémon Sprite Animation</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>ЛР6 — Pokémon CSS Animation (керування)</title>
 <style>
-  body {
-    margin: 0;
-    overflow: hidden;
-    height: 100vh;
-    background: linear-gradient(#6ec6ff, #bde6ff);
-    animation: sky 10s linear infinite alternate;
+  :root{
+    --sky1:#8fd3ff;
+    --sky2:#cfefff;
+    --ground:#6dbf48;
+    --platform:#8b5a2b;
+    --accent:#ffcb05;
   }
 
-  /* Анімація неба */
-  @keyframes sky {
-    0% { background: linear-gradient(#6ec6ff, #bde6ff); }
-    100% { background: linear-gradient(#4fa8ff, #8ad4ff); }
+  html,body { height:100%; margin:0; }
+  body{
+    overflow:hidden;
+    font-family: Inter, system-ui, Arial, sans-serif;
+    background: linear-gradient(180deg,var(--sky1),var(--sky2));
+    animation: skyColor 12s linear infinite alternate;
   }
 
-  /* Хмари */
-  .cloud {
+  @keyframes skyColor{
+    0%{ background: linear-gradient(180deg,var(--sky1),var(--sky2)); }
+    100%{ background: linear-gradient(180deg,#6ec6ff,#d8f2ff); }
+  }
+
+  /* moving clouds */
+  .cloud{
     position: absolute;
-    width: 200px;
+    top: 40px;
+    left: -350px;
+    width: 260px;
     height: 80px;
-    background: rgba(255,255,255,0.9);
-    border-radius: 50px;
-    filter: blur(2px);
-    animation: cloudMove 40s linear infinite;
+    background: rgba(255,255,255,0.95);
+    border-radius: 80px;
+    filter: blur(1px);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.06);
+    animation: cloudMove 45s linear infinite;
+  }
+  .cloud.c2{ top:120px; left:-600px; width:320px; height:96px; animation-duration:60s; }
+  .cloud.c3{ top:200px; left:-420px; width:200px; height:64px; animation-duration:50s; }
+
+  @keyframes cloudMove{
+    0%{ transform: translateX(0); }
+    100%{ transform: translateX(2200px); }
   }
 
-  .cloud:nth-child(1) { top: 50px; left: -300px; }
-  .cloud:nth-child(2) { top: 150px; left: -500px; animation-duration: 55s; }
-  .cloud:nth-child(3) { top: 250px; left: -400px; animation-duration: 70s; }
-
-  @keyframes cloudMove {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(2000px); }
-  }
-
-  /* Земля */
-  .ground {
+  /* ground */
+  .ground{
     position: absolute;
     bottom: 0;
-    width: 100%;
-    height: 180px;
-    background: #6dbf48;
-    border-top: 6px solid #3a7d22;
+    left:0;
+    right:0;
+    height:160px;
+    background: linear-gradient(180deg,var(--ground),#3a7d22);
+    border-top: 6px solid rgba(0,0,0,0.12);
   }
 
-  /* Платформа */
-  .platform {
+  /* platform (center) */
+  .platform{
     position: absolute;
-    bottom: 160px;
-    left: 50%;
+    left:50%;
+    bottom:160px;
     transform: translateX(-50%);
-    width: 700px;
-    height: 40px;
-    background: #8b5a2b;
-    border-radius: 10px;
-    box-shadow: inset 0 -10px 0 rgba(0,0,0,0.2);
+    width:760px;
+    height:48px;
+    background: var(--platform);
+    border-radius:12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.12);
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:white;
+    font-weight:600;
   }
 
-  /* Покемон */
-  #pokemon {
+  /* Stage wrapper to constrain pokemon movement */
+  .stage{
     position: absolute;
-    bottom: 200px;
-    left: 300px;
-    width: 64px;
-    height: 64px;
-    background-image: url('https://img.pokemondb.net/sprites/x-y/anim/normal/pikachu.gif');
-    background-size: cover;
+    left:50%;
+    transform: translateX(-50%);
+    width:1000px;
+    height:100%;
+    pointer-events:none; /* allow clicks through */
+  }
+
+  /* Pokemon element */
+  #pokemon{
+    position: absolute;
+    bottom: 200px; /* base Y */
+    left: 350px;   /* initial X */
+    width: 96px;
+    height: 96px;
+    /* we use animated GIF from PokemonDB (acceptable for demo) */
+    background-image: url("https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif");
+    background-size: contain;
+    background-repeat: no-repeat;
     image-rendering: pixelated;
-    transition: transform 0.05s linear;
+    transform-origin: center bottom;
+    transition: transform 0.08s linear;
+    pointer-events: auto;
+    z-index: 60;
   }
 
-  /* Поворот при русі вліво */
-  .flip {
-    transform: scaleX(-1);
+  /* small shadow under pokemon to show jump */
+  #shadow{
+    position:absolute;
+    width: 70px;
+    height: 12px;
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0.35), rgba(0,0,0,0.05));
+    bottom: 188px;
+    left: 374px;
+    border-radius: 50%;
+    transition: transform 0.12s ease, opacity 0.12s ease;
+    z-index:50;
+    filter: blur(1px);
+    opacity: 1;
   }
 
-  /* Стрибок */
-  @keyframes jump {
-    0% { bottom: 200px; }
-    50% { bottom: 300px; }
-    100% { bottom: 200px; }
+  /* flip horizontally */
+  .flip { transform: scaleX(-1); }
+
+  /* jump animation (we'll animate via JS toggling class for smoother control) */
+  .jump {
+    animation: jumpAnim 600ms cubic-bezier(.2,.9,.3,1);
   }
+  @keyframes jumpAnim{
+    0%{ transform: translateY(0) scale(1); }
+    40%{ transform: translateY(-120px) scale(1.02); }
+    60%{ transform: translateY(-80px) scale(1.01); }
+    100%{ transform: translateY(0) scale(1); }
+  }
+
+  /* HUD instructions */
+  .hud{
+    position: fixed;
+    left: 20px;
+    bottom: 20px;
+    background: rgba(255,255,255,0.9);
+    padding: 10px 12px;
+    border-radius:10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    font-size:13px;
+    z-index:100;
+  }
+
+  .controls { font-weight:600; color: #222; margin-top:6px; }
+
+  /* responsive */
+  @media (max-width:1100px){
+    .stage{ width:90vw; left:50%; transform:translateX(-50%); }
+    #pokemon{ left: calc(50% - 48px); }
+    #shadow{ left: calc(50% - 35px); }
+  }
+
 </style>
 </head>
 <body>
 
-<div class="cloud"></div>
-<div class="cloud"></div>
-<div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud c2"></div>
+  <div class="cloud c3"></div>
 
-<div class="ground"></div>
-<div class="platform"></div>
+  <div class="ground"></div>
+  <div class="platform">Платформа — ЛР6</div>
 
-<div id="pokemon"></div>
+  <div class="stage" id="stage">
+    <div id="pokemon" aria-hidden="true"></div>
+    <div id="shadow" aria-hidden="true"></div>
+  </div>
+
+  <div class="hud">
+    <div>ЛР6 — Анімація спрайтів (Pikachu)</div>
+    <div class="controls">Ліво / Право — ← → або A / D &nbsp; • &nbsp; Стрибок — ПРОБІЛ</div>
+  </div>
 
 <script>
-const pokemon = document.getElementById("pokemon");
-let x = 300;
-let speed = 10;
-let jumping = false;
+/*
+  Контроль руху: плавне утримання клавіш через requestAnimationFrame.
+  Стрибок: одна дія (без подвійного стрибка). Підтримка як Arrow та WASD.
+  Ми використовуємо анімований GIF зі PokemonDB — показано як sprite/анімований спрайт.
+*/
 
-window.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowRight") {
-    x += speed;
-    pokemon.style.left = x + "px";
-    pokemon.classList.remove("flip");
-  }
+const pokemon = document.getElementById('pokemon');
+const shadow = document.getElementById('shadow');
+const stage = document.getElementById('stage');
 
-  if (e.key === "ArrowLeft") {
-    x -= speed;
-    pokemon.style.left = x + "px";
-    pokemon.classList.add("flip");
-  }
+// початкові координати (відносно stage)
+let posX = 350;             // px
+let velocity = 0;           // horizontal velocity px/frame
+const speed = 3.6;          // pixels per frame (tюнінг)
+let moveLeft = false;
+let moveRight = false;
 
-  if (e.key === " ") { // Пробіл — стрибок
-    if (!jumping) {
-      jumping = true;
-      pokemon.style.animation = "jump 0.6s ease";
-      setTimeout(() => {
-        pokemon.style.animation = "none";
-        jumping = false;
-      }, 600);
-    }
+let isJumping = false;
+let vy = 0;                 // vertical velocity for jump physics
+const gravity = 0.9;
+const jumpImpulse = 15;     // tюнінг висоти стрибка
+
+// stage bounds (so pokemon doesn't leave platform area)
+function getBounds(){
+  const rect = stage.getBoundingClientRect();
+  const leftBound = 20; // padding
+  const rightBound = rect.width - 96 - 20; // pokemon width = 96
+  return { leftBound, rightBound, stageLeft: rect.left };
+}
+
+// keyboard handlers
+const keys = new Set();
+window.addEventListener('keydown', (e) => {
+  if (e.repeat) return; // ignore auto-repeat for initial press handling here
+  keys.add(e.key);
+  if (['ArrowLeft','a','A'].includes(e.key)) moveLeft = true;
+  if (['ArrowRight','d','D'].includes(e.key)) moveRight = true;
+  if (e.code === 'Space' || e.key === ' ') {
+    startJump();
+    e.preventDefault();
   }
 });
-</script>
 
+window.addEventListener('keyup', (e)=>{
+  keys.delete(e.key);
+  if (['ArrowLeft','a','A'].includes(e.key)) moveLeft = false;
+  if (['ArrowRight','d','D'].includes(e.key)) moveRight = false;
+});
+
+// jump logic (single jump)
+function startJump(){
+  if (isJumping) return;
+  isJumping = true;
+  vy = jumpImpulse;
+  // small squash and stretch via class
+  pokemon.classList.add('jump');
+  setTimeout(()=> pokemon.classList.remove('jump'), 600);
+}
+
+// main loop using requestAnimationFrame
+function frame(){
+  // horizontal movement
+  velocity = 0;
+  if (moveLeft) velocity -= speed;
+  if (moveRight) velocity += speed;
+
+  // apply velocity to posX but clamp to bounds
+  const b = getBounds();
+  posX += velocity;
+  if (posX < b.leftBound) posX = b.leftBound;
+  if (posX > b.rightBound) posX = b.rightBound;
+
+  // flip sprite based on direction (only when moving)
+  if (velocity < 0) pokemon.classList.add('flip');
+  else if (velocity > 0) pokemon.classList.remove('flip');
+
+  // vertical physics (simple)
+  if (isJumping){
+    vy -= gravity;            // gravity reduces upward velocity
+    const newBottom = parseFloat(getComputedStyle(pokemon).bottom) + (vy);
+    // bottom is handled via style; we will compute based on vy
+    // we will set inline bottom property
+    let currentBottom = parseFloat(pokemon.style.bottom || '200');
+    currentBottom += vy;
+    // ground level we consider 200px bottom as baseline
+    if (currentBottom <= 200){
+      // landed
+      currentBottom = 200;
+      isJumping = false;
+      vy = 0;
+    }
+    pokemon.style.bottom = currentBottom + 'px';
+
+    // adjust shadow to look smaller when higher
+    const heightAbove = currentBottom - 200; // negative when up
+    const scale = 1 + Math.min(0.9, Math.abs(heightAbove)/220);
+    shadow.style.transform = `scale(${1/scale}, ${1/scale}) translateY(${Math.min(30, Math.abs(heightAbove))}px)`;
+    shadow.style.opacity = `${Math.max(0.25, 1 - Math.abs(heightAbove)/220)}`;
+    // keep shadow X aligned to pokemon
+    shadow.style.left = (posX + 26) + 'px';
+    shadow.style.bottom = (200 - 12) + 'px';
+  } else {
+    // ensure cookie-bottom baseline when not jumping
+    if (pokemon.style.bottom) pokemon.style.bottom = '200px';
+    shadow.style.transform = 'scale(1) translateY(0)';
+    shadow.style.opacity = '1';
+    shadow.style.left = (posX + 26) + 'px';
+    shadow.style.bottom = (200 - 12) + 'px';
+  }
+
+  // update left position
+  pokemon.style.left = posX + 'px';
+
+  requestAnimationFrame(frame);
+}
+
+// initialize rocket/positioning on load
+function init(){
+  const rect = stage.getBoundingClientRect();
+  // ensure bounds fit in smaller screens: center pokemon if width small
+  const b = getBounds();
+  if (posX > b.rightBound) posX = Math.max(b.leftBound, Math.floor(b.rightBound/2));
+  pokemon.style.left = posX + 'px';
+  // set initial shadow
+  shadow.style.left = (posX + 26) + 'px';
+  shadow.style.bottom = (200 - 12) + 'px';
+  requestAnimationFrame(frame);
+}
+
+// start
+window.addEventListener('load', init);
+
+</script>
 </body>
 </html>
