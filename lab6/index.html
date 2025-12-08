@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Лабораторна №6 — Анімація Пікачу</title>
+  <title>Лабораторна №6 — Бігучий Пікачу</title>
   <style>
     * {
       margin: 0;
@@ -19,7 +19,7 @@
       font-family: 'Segoe UI', sans-serif;
     }
 
-    /* Анімація фону: повільне затемнення/освітлення + паралакс */
+    /* Анімація фону: сонце + градієнт */
     @keyframes skyCycle {
       0% { background-position: 0 0%; }
       50% { background-position: 0 100%; }
@@ -30,18 +30,38 @@
       animation: skyCycle 15s infinite ease-in-out;
     }
 
-    /* Хмари */
+    /* Сонце */
+    .sun {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #FFD700, #FFA500);
+      border-radius: 50%;
+      box-shadow: 0 0 30px #FFD700;
+      top: 20%;
+      left: 10%;
+      animation: sunMove 20s linear infinite;
+      z-index: 0;
+    }
+
+    @keyframes sunMove {
+      0% { left: 10%; }
+      100% { left: 90%; }
+    }
+
+    /* Хмари — безкінечний цикл */
     .clouds {
       position: absolute;
       top: 20%;
-      width: 100%;
+      width: 300%;
       white-space: nowrap;
-      animation: cloudsMove 40s linear infinite;
+      animation: cloudsMove 60s linear infinite;
+      z-index: 1;
     }
 
     @keyframes cloudsMove {
       0% { transform: translateX(0); }
-      100% { transform: translateX(-200%); }
+      100% { transform: translateX(-66.666%); }
     }
 
     .cloud {
@@ -90,7 +110,7 @@
       width: 100%;
       height: 100px;
       background: linear-gradient(to top, #2E7D32, #4CAF50);
-      z-index: 1;
+      z-index: 2;
     }
 
     /* Пікачу — спрайт з https://pokemondb.net/sprites */
@@ -103,7 +123,7 @@
       transform: translateX(-50%);
       background: url('https://img.pokemondb.net/sprites/scarlet-violet/anim/icon/pikachu.png') no-repeat;
       background-size: 64px 64px;
-      z-index: 2;
+      z-index: 3;
       image-rendering: pixelated;
     }
 
@@ -155,13 +175,22 @@
 </head>
 <body>
 
+  <!-- Сонце -->
+  <div class="sun"></div>
+
+  <!-- Безкінечні хмари -->
   <div class="clouds">
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
     <div class="cloud"></div>
     <div class="cloud"></div>
     <div class="cloud"></div>
     <div class="cloud"></div>
   </div>
 
+  <!-- Сцена -->
   <div class="scene">
     <div class="ground"></div>
     <div class="pikachu" id="pikachu"></div>
