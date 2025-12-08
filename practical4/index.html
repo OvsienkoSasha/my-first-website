@@ -6,13 +6,12 @@
     <title>Keyboard Layout</title>
     <style>
         :root {
-            /* ОНОВЛЕНІ КОЛЬОРИ */
             --key-base: 40px; 
             --gap: 6px;
             --radius: 5px;
-            --bg-color: #2c2f33;      /* Темний графітовий корпус */
-            --key-color: #f7f7f7;     /* Світло-сірі/білі клавіші */
-            --key-shadow: #7f7f7f;    /* Середня тінь */
+            --bg-color: #2c2f33;      
+            --key-color: #f7f7f7;     
+            --key-shadow: #7f7f7f;    
             --text-color: #333;
         }
 
@@ -27,9 +26,8 @@
             font-size: 12px;
         }
 
-        /* ОНОВЛЕНИЙ ГРАДІЄНТ КОРПУСУ */
         .keyboard-case {
-            background: linear-gradient(180deg, #3a3d42 0%, #222428 100%); /* Темний градієнт */
+            background: linear-gradient(180deg, #3a3d42 0%, #222428 100%);
             padding: 15px;
             border-radius: 12px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
@@ -47,7 +45,6 @@
             margin-bottom: 0;
         }
 
-        /* ОНОВЛЕНА ТІНЬ КЛАВІШІ */
         .k {
             width: var(--key-base);
             height: var(--key-base);
@@ -61,7 +58,7 @@
             user-select: none;
             transition: all 0.1s ease;
             position: relative;
-            color: var(--text-color); /* Забезпечуємо читабельність тексту */
+            color: var(--text-color);
         }
 
         .k:active {
@@ -78,7 +75,6 @@
         .w-space { width: calc(var(--key-base) * 6.25 + var(--gap) * 5.25); }
         .h-2 { height: calc(var(--key-base) * 2 + var(--gap)); } 
 
-        /* ОНОВЛЕНІ СПЕЦІАЛЬНІ КОЛЬОРИ */
         .pink { background-color: #ff99aa; box-shadow: 0 2px 0 #cc7a88, 0 2px 4px rgba(0,0,0,0.15); }
         .blue { background-color: #66ccff; box-shadow: 0 2px 0 #4d99cc, 0 2px 4px rgba(0,0,0,0.15); }
 
