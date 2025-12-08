@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>З Новим 2026 Роком! — Овсієнко О.В.</title>
   <style>
-    /* === Змінні (як у SCSS) === */
     :root {
       --primary: #c41e3a;
       --gold: #ffd700;
@@ -14,11 +13,13 @@
       --light-green: #1e8b63;
       --page-max-width: 1000px;
     }
+
     *, *::before, *::after {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
     }
+
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
@@ -26,6 +27,7 @@
       color: white;
       overflow: hidden;
     }
+
     .page {
       position: relative;
       min-height: 100vh;
@@ -33,7 +35,8 @@
       margin: 0 auto;
       padding: 40px 20px;
     }
-    /* === Падаючий сніг === */
+
+    /* Сніг */
     .snow {
       position: fixed;
       inset: 0;
@@ -45,7 +48,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background-image:
+      background-image: 
         radial-gradient(circle at 10px 10px, #fff 2px, transparent 2px),
         radial-gradient(circle at 40px 50px, #fff 3px, transparent 3px),
         radial-gradient(circle at 80px 20px, #fff 2.5px, transparent 2.5px),
@@ -61,9 +64,10 @@
     }
     @keyframes snowfall {
       from { transform: translateY(-100vh); }
-      to { transform: translateY(100vh); }
+      to   { transform: translateY(100vh); }
     }
-    /* === Красивий контур листівки === */
+
+    /* Листівка */
     .card {
       position: absolute;
       top: 50%;
@@ -73,36 +77,13 @@
       max-width: 720px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(15px);
-      border-radius: 28px;
-      padding: 60px 40px;
+      border-radius: 24px;
+      padding: 50px 30px;
       text-align: center;
-      box-shadow: 
-        0 25px 70px rgba(0,0,0,0.6),
-        inset 0 0 40px rgba(255,255,255,0.05);
-      border: 2px solid transparent;
-      background-clip: padding-box;
-      /* Градієнтний контур з блиском */
-      background: linear-gradient(white, white) padding-box,
-                  linear-gradient(45deg, var(--gold), transparent, var(--silver)) border-box;
-      position: relative;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.2);
     }
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: 28px;
-      padding: 2px;
-      background: linear-gradient(45deg, var(--gold), #fff, var(--silver), var(--gold));
-      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-      mask-composite: xor;
-      animation: borderShine 4s linear infinite;
-      z-index: -1;
-    }
-    @keyframes borderShine {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
+
     .card__title {
       font-size: 3.8rem;
       margin-bottom: 30px;
@@ -110,146 +91,91 @@
       text-shadow: 0 0 20px rgba(255,215,0,0.6);
       animation: glow 2s ease-in-out infinite alternate;
     }
+
     @keyframes glow {
       from { text-shadow: 0 0 20px rgba(255,215,0,0.6); }
-      to { text-shadow: 0 0 35px rgba(255,215,0,0.9); }
+      to   { text-shadow: 0 0 35px rgba(255,215,0,0.9); }
     }
-    /* === Ялинка з твого посилання (SVG на основі зображення) === */
-    .card__tree {
-      position: relative;
-      height: 350px;
-      margin: 40px auto;
-    }
-    .christmas-tree-img {
-      width: 280px;
-      height: 350px;
-      display: block;
+
+    /* Нова ялинка */
+    .card__tree img {
+      width: 260px;
+      max-width: 100%;
       margin: 0 auto;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0,255,0,0.3);
-      animation: treeGlow 3s ease-in-out infinite alternate;
+      display: block;
+      animation: float 4s ease-in-out infinite;
     }
-    @keyframes treeGlow {
-      from { box-shadow: 0 10px 30px rgba(0,255,0,0.3); }
-      to { box-shadow: 0 10px 50px rgba(255,215,0,0.5); }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-15px); }
     }
-    /* === Подарунки === */
+
+    /* Нові подарунки */
     .card__gifts {
       display: flex;
       justify-content: center;
-      gap: 35px;
-      margin: 50px 0;
+      gap: 20px;
       flex-wrap: wrap;
+      margin: 40px 0;
     }
-    .gift {
-      width: 90px;
-      height: 90px;
-      position: relative;
+
+    .card__gifts img {
+      width: 110px;
+      height: auto;
       animation: float 4s ease-in-out infinite;
     }
-    .gift--red { background: #c41e3a; animation-delay: 0s; }
-    .gift--blue { background: #1e88e5; animation-delay: 1.2s; }
-    .gift--gold { background: #ffa000; animation-delay: 2.4s; }
-    .gift::before,
-    .gift::after {
-      content: '';
-      position: absolute;
-      background: var(--gold);
-    }
-    .gift::before {
-      width: 24px;
-      height: 120px;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-    .gift::after {
-      width: 110px;
-      height: 24px;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-    }
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-25px); }
-    }
+
     .card__text {
       font-size: 1.5rem;
       line-height: 1.8;
       margin: 30px 0;
       color: #fff;
     }
+
     .card__signature {
       margin-top: 50px;
       font-size: 1.4rem;
       color: var(--gold);
       font-style: italic;
     }
-    /* Адаптив */
+
     @media (max-width: 600px) {
       .card__title { font-size: 2.8rem; }
       .card__text { font-size: 1.3rem; }
       .card { padding: 40px 20px; }
-      .christmas-tree-img { width: 240px; height: 300px; }
+      .card__gifts img { width: 90px; }
     }
   </style>
 </head>
 <body>
+
   <div class="page">
-    <!-- Сніг -->
     <div class="snow"></div>
-    <!-- Листівка -->
+
     <main class="card">
       <h1 class="card__title">З Новим 2026 Роком!</h1>
+
       <div class="card__tree">
-        <!-- Ялинка з твого посилання (оптимізована SVG на основі зображення) -->
-        <svg class="christmas-tree-img" viewBox="0 0 300 350" xmlns="http://www.w3.org/2000/svg">
-          <!-- Головний стовбур ялинки (трикутники гілок) -->
-          <path fill="#2e7d32" d="M150 350 L50 150 L250 150 Z M150 200 L80 80 L220 80 Z M150 120 L100 40 L200 40 Z"/>
-          <!-- Ствол -->
-          <rect fill="#8B4513" x="145" y="250" width="10" height="100" rx="5"/>
-          <!-- Зірка зверху -->
-          <polygon fill="#FFD700" points="150,10 160,40 190,40 170,60 180,90 150,75 120,90 130,60 110,40 140,40" stroke="#FFD700" stroke-width="2"/>
-          <!-- Вогники (анімовані) -->
-          <circle cx="120" cy="120" r="4" fill="#FFD700">
-            <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="180" cy="120" r="4" fill="#FF4500">
-            <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="150" cy="200" r="3" fill="#00FFFF">
-            <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="90" cy="180" r="3" fill="#FF00FF">
-            <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
-          </circle>
-          <circle cx="210" cy="180" r="3" fill="#FFD700">
-            <animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/>
-          </circle>
-          <!-- Сніг на гілках -->
-          <circle fill="#fff" cx="80" cy="160" r="2" opacity="0.8"/>
-          <circle fill="#fff" cx="220" cy="160" r="2" opacity="0.8"/>
-          <circle fill="#fff" cx="100" cy="100" r="1.5" opacity="0.7"/>
-          <circle fill="#fff" cx="200" cy="100" r="1.5" opacity="0.7"/>
-          <circle fill="#fff" cx="150" cy="250" r="1" opacity="0.6"/>
-        </svg>
+        <img src="https://share.google/images/97NZpVTziF8jjq0er" alt="Ялинка">
       </div>
+
       <div class="card__gifts">
-        <div class="gift gift--red"></div>
-        <div class="gift gift--blue"></div>
-        <div class="gift gift--gold"></div>
+        <img src="https://share.google/images/nzlWzCeFlkXAfajI8" alt="Подарунки">
       </div>
+
       <p class="card__text">
         Нехай 2026 рік принесе тобі море радості,<br>
-        міцне здоров'я, успіхи в навчанні<br>
+        міцне здоров’я, успіхи в навчанні<br>
         та здійснення всіх мрій!
       </p>
+
       <p class="card__signature">
         З найкращими побажаннями,<br>
         <strong>Овсієнко Олександр</strong> (група ТЦР-22)
       </p>
     </main>
   </div>
+
 </body>
 </html>
