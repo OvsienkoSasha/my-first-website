@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>З Новим 2026 Роком! — Овсієнко О.В.</title>
+  <style>
+    /* === Змінні (як у SCSS) === */
+    :root {
+      --primary: #c41e3a;
+      --gold: #ffd700;
+      --silver: #e8e8e8;
+      --dark-green: #0d4f3a;
+      --light-green: #1e8b63;
+      --page-max-width: 1000px;
+    }
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      color: white;
+      overflow: hidden;
+    }
+
+    .page {
+      position: relative;
+      min-height: 100vh;
+      max-width: var(--page-max-width);
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    /* === Падаючий сніг === */
+    .snow {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 10;
+    }
+    .snow::before,
+    .snow::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 10px 10px, #fff 2px, transparent 2px),
+        radial-gradient(circle at 40px 50px, #fff 3px, transparent 3px),
+        radial-gradient(circle at 80px 20px, #fff 2.5px, transparent 2.5px),
+        radial-gradient(circle at 90px 80px, #fff 2px, transparent 2px);
+      background-size: 100px 100px;
+      animation: snowfall 12s linear infinite;
+      opacity: 0.8;
+    }
+    .snow::after {
+      animation-duration: 18s;
+      animation-delay: -6s;
+      opacity: 0.6;
+    }
+    @keyframes snowfall {
+      from { transform: translateY(-100vh); }
+      to   { transform: translateY(100vh); }
+    }
+
+    /* === Листівка === */
+    .card {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90%;
+      max-width: 720px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(15px);
+      border-radius: 24px;
+      padding: 50px 30px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .card__title {
+      font-size: 3.8rem;
+      margin-bottom: 30px;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(255,215,0,0.6);
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { text-shadow: 0 0 20px rgba(255,215,0,0.6); }
+      to   { text-shadow: 0 0 35px rgba(255,215,0,0.9); }
+    }
+
+    /* === Ялинка === */
+    .card__tree {
+      position: relative;
+      height: 300px;
+      margin: 40px auto;
+    }
+
+    .tree {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+      border-left: 90px solid transparent;
+      border-right: 90px solid transparent;
+      border-bottom: 140px solid var(--dark-green);
+    }
+    .tree--big    { bottom: 0; border-left-width: 120px; border-right-width: 120px; border-bottom-width: 200px; }
+    .tree--medium { bottom: 80px; border-left-width: 90px; border-right-width: 90px; border-bottom-width: 150px; }
+    .tree--small  { bottom: 160px; border-left-width: 70px; border-right-width: 70px; border-bottom-width: 110px; }
+
+    .tree__star {
+      position: absolute;
+      top: -30px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 70px;
+      height: 70px;
+      background: var(--gold);
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      animation: shine 3s infinite;
+    }
+    @keyframes shine {
+      0%, 100% { transform: translateX(-50%) scale(1); }
+      50% { transform: translateX(-50%) scale(1.2); }
+    }
+
+    /* === Подарунки === */
+    .card__gifts {
+      display: flex;
+      justify-content: center;
+      gap: 35px;
+      margin: 50px 0;
+      flex-wrap: wrap;
+    }
+    .gift {
+      width: 90px;
+      height: 90px;
+      position: relative;
+      animation: float 4s ease-in-out infinite;
+    }
+    .gift--red   { background: #c41e3a; animation-delay: 0s; }
+    .gift--blue  { background: #1e88e5; animation-delay: 1.2s; }
+    .gift--gold  { background: #ffa000; animation-delay: 2.4s; }
+
+    .gift::before,
+    .gift::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+    }
+    .gift::before {
+      width: 24px;
+      height: 120px;
+      top: -15px;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .gift::after {
+      width: 110px;
+      height: 24px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
+    }
+
+    .card__text {
+      font-size: 1.5rem;
+      line-height: 1.8;
+      margin: 30px 0;
+      color: #fff;
+    }
+
+    .card__signature {
+      margin-top: 50px;
+      font-size: 1.4rem;
+      color: var(--gold);
+      font-style: italic;
+    }
+
+    /* Адаптив */
+    @media (max-width: 600px) {
+      .card__title { font-size: 2.8rem; }
+      .card__text { font-size: 1.3rem; }
+      .card { padding: 40px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page">
+    <!-- Сніг -->
+    <div class="snow"></div>
+
+    <!-- Листівка -->
+    <main class="card">
+      <h1 class="card__title">З Новим 2026 Роком!</h1>
+
+      <div class="card__tree">
+        <div class="tree tree--big"></div>
+        <div class="tree tree--medium"></div>
+        <div class="tree tree--small"></div>
+        <div class="tree__star"></div>
+      </div>
+
+      <div class="card__gifts">
+        <div class="gift gift--red"></div>
+        <div class="gift gift--blue"></div>
+        <div class="gift gift--gold"></div>
+      </div>
+
+      <p class="card__text">
+        Нехай 2026 рік принесе тобі море радості,<br>
+        міцне здоров’я, успіхи в навчанні<br>
+        та здійснення всіх мрій!
+      </p>
+
+      <p class="card__signature">
+        З найкращими побажаннями,<br>
+        <strong>Овсієнко Олександр</strong> (група ТЦР-22)
+      </p>
+    </main>
+  </div>
+
+</body>
+</html>
