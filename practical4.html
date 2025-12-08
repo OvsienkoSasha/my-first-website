@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Практична робота №4 - Клавіатура (CSS Grid)</title>
+    <title>Практична робота №4 - Клавіатура (Вирівняний Grid)</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;600&display=swap" rel="stylesheet">
     
     <style>
-        /* ОСНОВНІ СТИЛІ */
+        /* ОСНОВНІ ЗМІННІ */
         :root {
             --key-bg: #f0f0f0;
             --key-shadow: #a0a0a0;
@@ -17,12 +17,15 @@
             --key-height: 50px;
             --gap: 8px;
             --radius: 8px;
+            
+            /* Єдина кількість колонок для всієї клавіатури, що забезпечує вирівнювання */
+            --total-columns: 28; 
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
         body {
-            font-family: 'Roboto Mono', monospace; /* Кастомний шрифт (Вимога 2) */
+            font-family: 'Roboto Mono', monospace; 
             display: flex;
             justify-content: center;
             align-items: center;
@@ -30,23 +33,26 @@
             background-color: #f5f5f5;
         }
 
-        /* КОНТЕЙНЕР КЛАВІАТУРИ (Вимога 1 - Grid) */
+        /* ГОЛОВНИЙ КОНТЕЙНЕР */
         .keyboard-container {
             display: grid;
-            /* Розміщення трьох основних блоків: функціональні/основні клавіші, навігація, нампад */
-            grid-template-columns: 8fr 1fr 2fr; 
-            gap: 15px;
+            /* Створюємо єдину сітку з 28 рівних колонок для точного позиціонування */
+            grid-template-columns: repeat(var(--total-columns), 1fr); 
+            gap: var(--gap);
+            grid-auto-rows: var(--key-height); /* Висота всіх рядків */
+            
             padding: 20px;
             background-color: var(--keyboard-bg); 
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            max-width: 1200px;
+            max-width: 1250px; /* Збільшена ширина для вміщення всіх блоків */
             width: 95%;
         }
 
-        /* ЗАГАЛЬНІ СТИЛІ КЛАВІШІ (Вимога 3 - Тіні) */
-        .key, .key-container {
+        /* ЗАГАЛЬНІ СТИЛІ КЛАВІШІ */
+        .key {
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
             background-color: var(--key-bg);
@@ -55,17 +61,18 @@
             font-weight: 600;
             color: var(--key-text);
             text-align: center;
-            line-height: 1.1;
-            padding: 5px; /* Для клавіш з кількома символами */
+            line-height: 1;
+            padding: 5px; 
             cursor: pointer;
             transition: all 0.1s ease-in-out;
-            /* Ефект піднятої клавіші (Вимога 3: Тіні) */
+            
+            /* Тіні для 3D ефекту */
             box-shadow: 0 4px 0 0 var(--key-shadow), 
                         0 0 5px rgba(0, 0, 0, 0.1); 
-            height: var(--key-height);
+            height: 100%; /* Займає всю висоту свого grid-cell */
         }
         
-        /* СТИЛІ СТАНУ (Вимога 4) */
+        /* СТИЛІ СТАНУ (HOVER/ACTIVE) */
         .key:hover {
             background-color: #ffffff;
             box-shadow: 0 6px 0 0 var(--key-shadow),
@@ -79,246 +86,238 @@
             transform: translateY(4px); 
         }
 
-        /* 1. СЕКЦІЯ ФУНКЦІОНАЛЬНИХ КЛАВІШ (ESC, F1-F12) */
-        .function-keys {
-            grid-column: 1 / span 3; /* Розтягуємо на всю ширину клавіатури */
-            display: flex;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .esc-key { margin-right: 20px; }
-        .f-group { display: flex; gap: 8px; margin-right: 20px; }
-        .utility-group { display: flex; gap: 8px; margin-left: auto; }
+        /* Спеціальні стилі для вмісту клавіш */
+        .key .top { font-size: 0.7rem; margin-bottom: 2px; }
+        .key .bottom { font-size: 1.1rem; }
+        .key.num-key small { display: block; font-size: 0.6rem; font-weight: 400; margin-top: 2px; }
+
+        /* === GRID-РОЗТАШУВАННЯ КЛАВІШ === */
+
+        /* Рядок 0: F-Клавіші */
+        .esc-key { grid-column: 1 / span 2; }
+        .f-key-group1 { grid-column: 4 / span 5; display: contents; }
+        .f-key-group2 { grid-column: 10 / span 5; display: contents; }
+        .f-key-group3 { grid-column: 16 / span 5; display: contents; }
+        .util-group { grid-column: 22 / span 5; display: contents; }
+
+        /* Рядок 1: Цифри */
+        .backspace-key { grid-column: 14 / span 3; }
         
-        /* 2. ОСНОВНІ КЛАВІШІ */
-        .main-keys {
-            grid-column: 1 / span 1; 
-            display: grid;
-            grid-template-columns: repeat(14, 1fr); 
-            gap: var(--gap);
-            grid-auto-rows: var(--key-height);
-        }
+        /* Рядок 2: QWERTY */
+        .tab-key { grid-column: 1 / span 3; }
+        .enter-main { grid-column: 20 / span 3; grid-row: span 2; height: 100%; } /* Розтягуємо на 2 рядки */
 
-        /* Спеціальні клавіші, що займають більше 1fr */
-        .tab-key { grid-column: span 1.5; } 
-        .backspace-key { grid-column: span 2; }
-        .caps-key { grid-column: span 1.75; }
-        .enter-key { grid-column: span 2.25; grid-row: span 2; height: auto; } /* Вертикальний Enter */
-        .shift-left { grid-column: span 2.25; } 
-        .shift-right { grid-column: span 2.75; }
-        .ctrl-key, .alt-key { grid-column: span 1.5; }
-        .space-bar { grid-column: span 5.5; } 
+        /* Рядок 3: ASDFG */
+        .caps-key { grid-column: 1 / span 4; }
+        
+        /* Рядок 4: ZXCVB */
+        .shift-left { grid-column: 1 / span 5; }
+        .shift-right { grid-column: 21 / span 5; }
 
-        /* Секція Ins/Home/Arrows */
-        .navigation-keys {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--gap);
-            grid-auto-rows: var(--key-height);
-            align-self: start;
-            margin-top: calc(var(--key-height) + var(--gap)); /* Зміщення для відповідності основній секції */
-        }
-        /* Стрілки розташовані окремим блоком */
-        .arrow-keys {
-            grid-column: 1 / span 3;
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: var(--gap);
-            margin-top: var(--gap);
-        }
-        .arrow-left { grid-column: 1 / span 1; }
-        .arrow-down { grid-column: 2 / span 1; }
-        .arrow-right { grid-column: 3 / span 1; }
-        .arrow-up-dummy { grid-column: 2 / span 1; } /* Пустий простір над стрілкою вниз */
+        /* Рядок 5: Ctrl Alt Space */
+        .ctrl-key-l { grid-column: 1 / span 3; }
+        .alt-key-l { grid-column: 4 / span 3; }
+        .space-bar { grid-column: 7 / span 11; } 
+        .alt-gr { grid-column: 18 / span 2; } 
+        .ctrl-key-r { grid-column: 21 / span 2; }
+        .win-key { grid-column: 23 / span 2; } /* Замість другої Alt */
+        .ctrl-key-final { grid-column: 26 / span 2; } /* Замість другої Ctrl */
 
+
+        /* СЕКЦІЯ НАВІГАЦІЇ (Ins/Home/Arrows) */
+        .navigation-keys { grid-column: 22 / span 7; display: contents; }
+        
+        /* Ins/Home/End */
+        .nav-key-row1 { grid-row: 1; display: contents; } /* F-Клавіші */
+        .nav-key-row2 { grid-row: 2; display: contents; }
+        .nav-key-row3 { grid-row: 3; display: contents; }
+        
+        .ins-key { grid-column: 22 / span 1; }
+        .canc-key { grid-column: 23 / span 1; }
+        .home-key { grid-column: 24 / span 1; }
+        .pagup-key { grid-column: 25 / span 1; }
+        .pagdn-key { grid-column: 26 / span 1; }
+        .end-key { grid-column: 27 / span 1; } 
+
+        /* Стрілки */
+        .arrow-keys { grid-row: 5; display: contents; }
+        .arrow-up { grid-column: 25 / span 1; }
+        .arrow-left { grid-column: 24 / span 1; }
+        .arrow-down { grid-column: 25 / span 1; grid-row: 6; } /* У рядку 6, але в тій же колонці */
+        .arrow-right { grid-column: 26 / span 1; }
 
         /* NUMPAD */
-        .numpad-keys {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: var(--gap);
-            grid-auto-rows: var(--key-height);
-            align-self: start;
-        }
-        .num-enter { grid-row: span 2; height: auto; }
-        .num-plus { grid-row: span 2; height: auto; }
-        .num-0 { grid-column: span 2; }
-        
-        /* Спеціальний стиль для ключа з двома символами */
-        .key-stacked span {
-            display: block;
-            line-height: 1;
-        }
-        .key-stacked .top { font-size: 0.75rem; }
-        .key-stacked .bottom { font-size: 1.1rem; }
+        .numpad-keys { grid-column: 29 / span 4; display: contents; } /* Зміщення NumPad */
 
-        /* Стилі для NumLock, CapsLock, ScrollLock індикаторів */
+        /* NumPad Клавіші */
+        .num-pad-row1 { grid-row: 2; display: contents; }
+        .num-pad-row2 { grid-row: 3; display: contents; }
+        .num-pad-row3 { grid-row: 4; display: contents; }
+        .num-pad-row4 { grid-row: 5; display: contents; }
+        .num-pad-row5 { grid-row: 6; display: contents; }
+
+        .num-lock { grid-column: 29 / span 1; }
+        .num-div { grid-column: 30 / span 1; }
+        .num-mult { grid-column: 31 / span 1; }
+        .num-minus { grid-column: 32 / span 1; }
+
+        .num-plus { grid-column: 32 / span 1; grid-row: 3 / span 2; height: 100%; } /* + на 2 рядки */
+        .num-enter { grid-column: 32 / span 1; grid-row: 5 / span 2; height: 100%; } /* Enter на 2 рядки */
+        .num-zero { grid-column: 29 / span 2; } /* 0 на 2 колонки */
+
+        /* Індикатори */
         .indicator-lights {
+            grid-column: 29 / span 4;
+            grid-row: 1;
             display: flex;
             align-items: center;
+            justify-content: flex-end;
             gap: 5px;
-            margin-left: 20px;
         }
         .light {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            border: 1px solid #aaa;
-            background-color: #f0f0f0;
+            width: 8px; height: 8px; border-radius: 50%; border: 1px solid #aaa; background-color: #f0f0f0;
         }
-        .light.active {
-            background-color: #ffc400; /* Жовтий активний колір */
-        }
-
+        .light.active { background-color: #ffc400; }
+        
     </style>
 </head>
 <body>
 
 <div class="keyboard-container">
     
-    <div class="function-keys">
-        <div class="key esc-key">Esc</div>
-        
-        <div class="f-group">
-            <div class="key f-key">F1</div>
-            <div class="key f-key">F2</div>
-            <div class="key f-key">F3</div>
-            <div class="key f-key">F4</div>
-        </div>
-        <div class="f-group">
-            <div class="key f-key">F5</div>
-            <div class="key f-key">F6</div>
-            <div class="key f-key">F7</div>
-            <div class="key f-key">F8</div>
-        </div>
-        <div class="f-group">
-            <div class="key f-key">F9</div>
-            <div class="key f-key">F10</div>
-            <div class="key f-key">F11</div>
-            <div class="key f-key">F12</div>
-        </div>
-        
-        <div class="utility-group">
-            <div class="key">Stamp R Sist</div>
-            <div class="key">Bloc Scorr</div>
-            <div class="key">Pausa Interr</div>
-        </div>
+    <div class="indicator-lights">
+        <div class="light active" title="Num Lock"></div>
+        <div class="light" title="Caps Lock"></div>
+        <div class="light" title="Scroll Lock"></div>
+    </div>
 
-        <div class="indicator-lights">
-            <div class="light active" title="Num Lock"></div>
-            <div class="light" title="Caps Lock"></div>
-            <div class="light" title="Scroll Lock"></div>
-        </div>
+    <div class="key esc-key">Esc</div>
+    
+    <div class="f-key-group1">
+        <div class="key">F1</div>
+        <div class="key">F2</div>
+        <div class="key">F3</div>
+        <div class="key">F4</div>
+    </div>
+    <div class="f-key-group2">
+        <div class="key">F5</div>
+        <div class="key">F6</div>
+        <div class="key">F7</div>
+        <div class="key">F8</div>
+    </div>
+    <div class="f-key-group3">
+        <div class="key">F9</div>
+        <div class="key">F10</div>
+        <div class="key">F11</div>
+        <div class="key">F12</div>
     </div>
     
-    <div class="main-keys">
-        <div class="key key-stacked"><span class="top">|</span><span class="bottom">\</span></div>
-        <div class="key key-stacked"><span class="top">!</span><span class="bottom">1</span></div>
-        <div class="key key-stacked"><span class="top">"</span><span class="bottom">2</span></div>
-        <div class="key key-stacked"><span class="top">£</span><span class="bottom">3</span></div>
-        <div class="key key-stacked"><span class="top">$</span><span class="bottom">4</span></div>
-        <div class="key key-stacked"><span class="top">%</span><span class="bottom">5</span></div>
-        <div class="key key-stacked"><span class="top">&</span><span class="bottom">6</span></div>
-        <div class="key key-stacked"><span class="top">/</span><span class="bottom">7</span></div>
-        <div class="key key-stacked"><span class="top">(</span><span class="bottom">8</span></div>
-        <div class="key key-stacked"><span class="top">)</span><span class="bottom">9</span></div>
-        <div class="key key-stacked"><span class="top">=</span><span class="bottom">0</span></div>
-        <div class="key key-stacked"><span class="top">?</span><span class="bottom">i</span></div>
-        <div class="key key-stacked"><span class="top">^</span><span class="bottom">←</span></div>
-        <div class="key backspace-key">←</div>
-        
-        <div class="key tab-key">Tab</div>
-        <div class="key">Q</div>
-        <div class="key">W</div>
-        <div class="key">E</div>
-        <div class="key">R</div>
-        <div class="key">T</div>
-        <div class="key">Y</div>
-        <div class="key">U</div>
-        <div class="key">I</div>
-        <div class="key">O</div>
-        <div class="key">P</div>
-        <div class="key key-stacked"><span class="top">*</span><span class="bottom">é</span></div>
-        <div class="key key-stacked"><span class="top">+</span><span class="bottom">ù</span></div>
-        <div class="key enter-key">Invió</div>
-        
-        <div class="key caps-key">Caps Lock</div>
-        <div class="key">A</div>
-        <div class="key">S</div>
-        <div class="key">D</div>
-        <div class="key">F</div>
-        <div class="key">G</div>
-        <div class="key">H</div>
-        <div class="key">J</div>
-        <div class="key">K</div>
-        <div class="key">L</div>
-        <div class="key key-stacked"><span class="top">@</span><span class="bottom">ç</span></div>
-        <div class="key key-stacked"><span class="top">à</span><span class="bottom">#</span></div>
-        <div class="key key-stacked"><span class="top">ù</span><span class="bottom">§</span></div>
-        
-        <div class="key shift-left">↑</div>
-        <div class="key key-stacked"><span class="top">></span><span class="bottom"><</span></div>
-        <div class="key">Z</div>
-        <div class="key">X</div>
-        <div class="key">C</div>
-        <div class="key">V</div>
-        <div class="key">B</div>
-        <div class="key">N</div>
-        <div class="key">M</div>
-        <div class="key">,</div>
-        <div class="key">.</div>
-        <div class="key key-stacked"><span class="top">-</span><span class="bottom">:</span></div>
-        <div class="key shift-right">↑</div>
-        
-        <div class="key ctrl-key">Ctrl</div>
-        <div class="key alt-key">Alt</div>
-        <div class="key"></div>
-        <div class="key space-bar">Alt Gr</div>
-        <div class="key"></div>
-        <div class="key ctrl-key">Ctrl</div>
+    <div class="util-group">
+        <div class="key">Stamp R Sist</div>
+        <div class="key">Bloc Scorr</div>
+        <div class="key">Pausa Interr</div>
     </div>
+    
+    <div class="key" style="grid-column: 1 / span 1;"><span class="top">|</span><span class="bottom">\</span></div>
+    <div class="key" style="grid-column: 2 / span 1;"><span class="top">!</span><span class="bottom">1</span></div>
+    <div class="key" style="grid-column: 3 / span 1;"><span class="top">"</span><span class="bottom">2</span></div>
+    <div class="key" style="grid-column: 4 / span 1;"><span class="top">£</span><span class="bottom">3</span></div>
+    <div class="key" style="grid-column: 5 / span 1;"><span class="top">$</span><span class="bottom">4</span></div>
+    <div class="key" style="grid-column: 6 / span 1;"><span class="top">%</span><span class="bottom">5</span></div>
+    <div class="key" style="grid-column: 7 / span 1;"><span class="top">&amp;</span><span class="bottom">6</span></div>
+    <div class="key" style="grid-column: 8 / span 1;"><span class="top">/</span><span class="bottom">7</span></div>
+    <div class="key" style="grid-column: 9 / span 1;"><span class="top">(</span><span class="bottom">8</span></div>
+    <div class="key" style="grid-column: 10 / span 1;"><span class="top">)</span><span class="bottom">9</span></div>
+    <div class="key" style="grid-column: 11 / span 1;"><span class="top">=</span><span class="bottom">0</span></div>
+    <div class="key" style="grid-column: 12 / span 1;"><span class="top">?</span><span class="bottom">i</span></div>
+    <div class="key" style="grid-column: 13 / span 1;"><span class="top">^</span><span class="bottom">←</span></div>
+    <div class="key backspace-key">←</div>
+    
+    <div class="key tab-key">Tab</div>
+    <div class="key" style="grid-column: 4 / span 1;">Q</div>
+    <div class="key" style="grid-column: 5 / span 1;">W</div>
+    <div class="key" style="grid-column: 6 / span 1;">E</div>
+    <div class="key" style="grid-column: 7 / span 1;">R</div>
+    <div class="key" style="grid-column: 8 / span 1;">T</div>
+    <div class="key" style="grid-column: 9 / span 1;">Y</div>
+    <div class="key" style="grid-column: 10 / span 1;">U</div>
+    <div class="key" style="grid-column: 11 / span 1;">I</div>
+    <div class="key" style="grid-column: 12 / span 1;">O</div>
+    <div class="key" style="grid-column: 13 / span 1;">P</div>
+    <div class="key" style="grid-column: 14 / span 1;"><span class="top">*</span><span class="bottom">é</span></div>
+    <div class="key" style="grid-column: 15 / span 1;"><span class="top">+</span><span class="bottom">ù</span></div>
+    <div class="key enter-main">Invió</div>
+    
+    <div class="key caps-key">Caps Lock</div>
+    <div class="key" style="grid-column: 5 / span 1;">A</div>
+    <div class="key" style="grid-column: 6 / span 1;">S</div>
+    <div class="key" style="grid-column: 7 / span 1;">D</div>
+    <div class="key" style="grid-column: 8 / span 1;">F</div>
+    <div class="key" style="grid-column: 9 / span 1;">G</div>
+    <div class="key" style="grid-column: 10 / span 1;">H</div>
+    <div class="key" style="grid-column: 11 / span 1;">J</div>
+    <div class="key" style="grid-column: 12 / span 1;">K</div>
+    <div class="key" style="grid-column: 13 / span 1;">L</div>
+    <div class="key" style="grid-column: 14 / span 1;"><span class="top">@</span><span class="bottom">ç</span></div>
+    <div class="key" style="grid-column: 15 / span 1;"><span class="top">à</span><span class="bottom">#</span></div>
+    <div class="key" style="grid-column: 16 / span 1;"><span class="top">ù</span><span class="bottom">§</span></div>
+    
+    <div class="key shift-left">↑</div>
+    <div class="key" style="grid-column: 6 / span 1;"><span class="top">></span><span class="bottom"><</span></div>
+    <div class="key" style="grid-column: 7 / span 1;">Z</div>
+    <div class="key" style="grid-column: 8 / span 1;">X</div>
+    <div class="key" style="grid-column: 9 / span 1;">C</div>
+    <div class="key" style="grid-column: 10 / span 1;">V</div>
+    <div class="key" style="grid-column: 11 / span 1;">B</div>
+    <div class="key" style="grid-column: 12 / span 1;">N</div>
+    <div class="key" style="grid-column: 13 / span 1;">M</div>
+    <div class="key" style="grid-column: 14 / span 1;">,</div>
+    <div class="key" style="grid-column: 15 / span 1;">.</div>
+    <div class="key" style="grid-column: 16 / span 1;"><span class="top">-</span><span class="bottom">:</span></div>
+    <div class="key shift-right">↑</div>
+    
+    <div class="key ctrl-key-l">Ctrl</div>
+    <div class="key alt-key-l">Alt</div>
+    <div class="key space-bar"></div>
+    <div class="key alt-gr">Alt Gr</div>
+    <div class="key ctrl-key-r">Ctrl</div>
+    <div class="key win-key"></div>
+    <div class="key ctrl-key-final">Ctrl</div>
 
-    <div class="navigation-keys">
-        <div class="key">Ins</div>
-        <div class="key">Canc</div>
-        <div class="key">Fine</div>
-        <div class="key">Home</div>
-        <div class="key">Pag↑</div>
-        <div class="key">Pag↓</div>
-        
-        <div class="arrow-keys">
-            <div class="key arrow-up-dummy"></div> 
-            <div class="key">↑</div>
-            <div class="key arrow-up-dummy"></div>
-            <div class="key">←</div>
-            <div class="key">↓</div>
-            <div class="key">→</div>
-        </div>
-    </div>
+    <div class="key ins-key">Ins</div>
+    <div class="key canc-key">Canc</div>
+    <div class="key home-key">Home</div>
+    <div class="key pagup-key">Pag↑</div>
+    <div class="key pagdn-key">Pag↓</div>
+    <div class="key end-key">Fine</div>
 
-    <div class="numpad-keys">
-        <div class="key">Bloc Num</div>
-        <div class="key">/</div>
-        <div class="key">*</div>
-        <div class="key">-</div>
-        
-        <div class="key">7 <br><small>Home</small></div>
-        <div class="key">8 <br><small>↑</small></div>
-        <div class="key">9 <br><small>Pag↑</small></div>
-        <div class="key num-plus">+</div>
-        
-        <div class="key">4 <br><small>←</small></div>
-        <div class="key">5</div>
-        <div class="key">6 <br><small>→</small></div>
-        
-        <div class="key">1 <br><small>Fine</small></div>
-        <div class="key">2 <br><small>↓</small></div>
-        <div class="key">3 <br><small>Pag↓</small></div>
-        <div class="key num-enter">Invió</div>
-        
-        <div class="key num-0">0 <br><small>Ins</small></div>
-        <div class="key">. <br><small>Canc</small></div>
-    </div>
+    <div class="key" style="grid-column: 26 / span 1; grid-row: 5;">↑</div>
+    <div class="key" style="grid-column: 25 / span 1; grid-row: 6;">←</div>
+    <div class="key" style="grid-column: 26 / span 1; grid-row: 6;">↓</div>
+    <div class="key" style="grid-column: 27 / span 1; grid-row: 6;">→</div>
+
+
+    <div class="key num-lock" style="grid-row: 2;">Bloc Num</div>
+    <div class="key num-div" style="grid-row: 2;">/</div>
+    <div class="key num-mult" style="grid-row: 2;">*</div>
+    <div class="key num-minus" style="grid-row: 2;">-</div>
+    
+    <div class="key num-key" style="grid-column: 29 / span 1; grid-row: 3;">7 <small>Home</small></div>
+    <div class="key num-key" style="grid-column: 30 / span 1; grid-row: 3;">8 <small>↑</small></div>
+    <div class="key num-key" style="grid-column: 31 / span 1; grid-row: 3;">9 <small>Pag↑</small></div>
+    <div class="key num-plus"> + </div>
+    
+    <div class="key num-key" style="grid-column: 29 / span 1; grid-row: 4;">4 <small>←</small></div>
+    <div class="key num-key" style="grid-column: 30 / span 1; grid-row: 4;">5</div>
+    <div class="key num-key" style="grid-column: 31 / span 1; grid-row: 4;">6 <small>→</small></div>
+
+    <div class="key num-key" style="grid-column: 29 / span 1; grid-row: 5;">1 <small>Fine</small></div>
+    <div class="key num-key" style="grid-column: 30 / span 1; grid-row: 5;">2 <small>↓</small></div>
+    <div class="key num-key" style="grid-column: 31 / span 1; grid-row: 5;">3 <small>Pag↓</small></div>
+    <div class="key num-enter">Invió</div>
+    
+    <div class="key num-zero" style="grid-row: 6;">0 <small>Ins</small></div>
+    <div class="key num-key" style="grid-column: 31 / span 1; grid-row: 6;">. <small>Canc</small></div>
 
 </div>
 
