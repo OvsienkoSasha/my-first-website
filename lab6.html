@@ -2,7 +2,7 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8" />
-<title>Lab6 Pokemon</title>
+<title>Lab6 Pokemon Animation</title>
 <style>
   body {
     margin: 0;
@@ -54,7 +54,7 @@
     to   { transform: translateX(-50px); }
   }
 
-  /* ПІКАЧУ */
+  /* ПІКАЧУ (спрайт з pokemondb) */
   .pikachu {
     position: absolute;
     bottom: 18vh;
@@ -63,19 +63,22 @@
     height: 96px;
     background: url('https://i.imgur.com/dqQX1Qp.png'); /* sprite */
     image-rendering: pixelated;
-    animation: idle 0.8s steps(2) infinite;
+    animation: idle 0.7s steps(2) infinite;
   }
 
+  /* Idle анімація */
   @keyframes idle {
     from { background-position: 0 0; }
     to   { background-position: -192px 0; }
   }
 
+  /* Анімація бігу */
   @keyframes run {
     from { background-position: 0 -96px; }
     to   { background-position: -384px -96px; }
   }
 
+  /* Анімація стрибка */
   @keyframes jumpAnim {
     0% { bottom: 18vh; }
     40% { bottom: 32vh; }
@@ -93,7 +96,7 @@
 const pk = document.getElementById("pk");
 const grass = document.getElementById("grass");
 let x = 50;
-let speed = 6;
+let speed = 8;
 let isJumping = false;
 let isRunning = false;
 
@@ -101,7 +104,7 @@ function move() {
   pk.style.left = x + "px";
 }
 
-// КНОПКИ
+// КЕРУВАННЯ
 window.addEventListener("keydown", e => {
   if (e.code === "ArrowRight") {
     x += speed;
@@ -110,6 +113,7 @@ window.addEventListener("keydown", e => {
     grass.classList.add("run");
     isRunning = true;
   }
+
   if (e.code === "ArrowLeft") {
     x -= speed;
     pk.style.transform = "scaleX(-1)";
@@ -117,12 +121,14 @@ window.addEventListener("keydown", e => {
     grass.classList.add("run");
     isRunning = true;
   }
+
   if (e.code === "Space" && !isJumping) {
     isJumping = true;
-    pk.style.animation = "jumpAnim 0.6s ease, idle 0.8s steps(2) infinite 0.6s";
+    pk.style.animation = "jumpAnim 0.6s ease, idle 0.7s steps(2) infinite 0.6s";
+
     setTimeout(() => {
       isJumping = false;
-      pk.style.animation = isRunning ? "run 0.4s steps(4) infinite" : "idle 0.8s steps(2) infinite";
+      pk.style.animation = isRunning ? "run 0.4s steps(4) infinite" : "idle 0.7s steps(2) infinite";
     }, 600);
   }
   move();
@@ -132,7 +138,7 @@ window.addEventListener("keyup", e => {
   if (e.code === "ArrowRight" || e.code === "ArrowLeft") {
     isRunning = false;
     grass.classList.remove("run");
-    if (!isJumping) pk.style.animation = "idle 0.8s steps(2) infinite";
+    if (!isJumping) pk.style.animation = "idle 0.7s steps(2) infinite";
   }
 });
 </script>
