@@ -17,14 +17,12 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Анімація неба */
     @keyframes sky {
       0%   { background-position: 0 0%; }
       50%  { background-position: 0 100%; }
       100% { background-position: 0 0%; }
     }
-
-    /* Сонце */
+    
     .sun {
       position: absolute;
       width: 100px;
@@ -42,7 +40,6 @@
       100% { left: 90%; }
     }
 
-    /* Хмари */
     .clouds {
       position: absolute;
       top: 10%;
@@ -79,7 +76,6 @@
       top: -20px; right: 5px;
     }
 
-    /* Земля */
     .ground {
       position: absolute;
       bottom: 0;
@@ -90,16 +86,13 @@
       z-index: 5;
     }
 
-    /* Трава */
-    /* Трава */
-    /* Трава — без зовнішніх картинок, чистий CSS */
-.grass {
-  position: absolute;
-  bottom: 0;
-  width: 300%;
-  height: 140px;
-  background:
-    /* нерівні вертикальні леза трави */
+    .grass {   
+      position: absolute;
+      bottom: 0;
+      width: 300%;
+      height: 140px;
+      background:
+    
     repeating-linear-gradient(
       90deg,
       #2e7d32 0px,
@@ -107,7 +100,7 @@
       #31853a 6px,
       #31853a 12px
     ),
-    /* легкі тіні між лезами */
+    
     repeating-linear-gradient(
       90deg,
       rgba(0,0,0,0.06) 0px,
@@ -115,7 +108,7 @@
       transparent 3px,
       transparent 12px
     ),
-    /* м’який вертикальний градієнт кольору */
+   
     linear-gradient(to top, #1f5f28, #3fa64a);
   background-size: 200px 140px, 200px 140px, 100% 100%;
   background-repeat: repeat-x;
@@ -132,7 +125,6 @@
       100% { transform: translateX(-100%); }
     }
 
-    /* --- Dragonite --- */
     .dragon {
       position: absolute;
       width: 120px;
@@ -147,7 +139,6 @@
                   no-repeat center/contain;
     }
 
-    /* Дзеркальне відображення */
     .left {
       transform: translateX(-50%) scaleX(-1);
     }
@@ -155,7 +146,6 @@
       transform: translateX(-50%) scaleX(1);
     }
 
-    /* Стрибок */
     .jump {
       animation: jump 0.6s ease-out;
     }
@@ -217,7 +207,6 @@
         }
       }
 
-      // межі
       x = Math.max(0, Math.min(x, window.innerWidth - 120));
 
       dragon.style.left = x + "px";
