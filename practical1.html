@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Практична робота №1 – Розклад на місяць</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 16px;
+        }
+
+        th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background: #2a72d6;
+            color: white;
+        }
+
+        tr:nth-child(even) {
+            background: #f9f9f9;
+        }
+
+        /* --- Адаптивність --- */
+        @media (max-width: 600px) {
+            table {
+                font-size: 14px;
+            }
+
+            th, td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<h1>Практична робота №1<br>Розклад занять на місяць</h1>
+
+<div class="table-container">
+    <table>
+        <tr>
+            <th>Дата</th>
+            <th>Пара</th>
+            <th>Дисципліна</th>
+            <th>Викладач</th>
+            <th>Аудиторія</th>
+        </tr>
+
+        <!-- Приклад заповнення — ти підставиш свої пари -->
+        <tr>
+            <td>03.02</td>
+            <td>1 пара</td>
+            <td>Web-технології</td>
+            <td>Іваненко І.І.</td>
+            <td>305</td>
+        </tr>
+
+        <tr>
+            <td>03.02</td>
+            <td>2 пара</td>
+            <td>Програмування</td>
+            <td>Петров П.П.</td>
+            <td>410</td>
+        </tr>
+
+        <tr>
+            <td>05.02</td>
+            <td>3 пара</td>
+            <td>Англійська</td>
+            <td>Smith A.</td>
+            <td>212</td>
+        </tr>
+
+        <tr>
+            <td>06.02</td>
+            <td>1 пара</td>
+            <td>Вища математика</td>
+            <td>Гнатюк М.В.</td>
+            <td>115</td>
+        </tr>
+
+        <!-- додай скільки треба -->
+    </table>
+</div>
+
+</body>
+</html>
