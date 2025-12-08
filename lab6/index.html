@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Лабораторна №6 — Анімація Пікачу</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Segoe UI', sans-serif;
+    perspective: 1000px;
+  }
+
+  /* Анімований фон — небо + хмари + паралакс */
+  .scene {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #87CEEB 0%, #E0F7FA 100%);
+    overflow: hidden;
+    animation: sky 20s infinite alternate;
+  }
+
+  @keyframes sky {
+    0%   { background: linear-gradient(135deg, #87CEEB 0%, #E0F7FA 100%); }
+    50%  { background: linear-gradient(135deg, #FF9A8B 0%, #FFD1BA 100%); }
+    100% { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+  }
+
+  /* Хмаринки */
+  .cloud {
+    position: absolute;
+    background: white;
+    border-radius: 50px;
+    opacity: 0.8;
+    animation: drift linear infinite;
+  }
+  .cloud:nth-child(1) { width: 200px; height: 60px; top: 10%; left: -200px; animation-duration: 50s; }
+  .cloud:nth-child(2) { width: 150px; height: 50px; top: 25%; left: -150px; animation-duration: 70s; animation-delay: 15s; }
+  .cloud:nth-child(3) { width: 180px; height: 70px; top: 40%; left: -180px; animation-duration: 60s; animation-delay: 30s; }
+
+  @keyframes drift {
+    from { transform: translateX(-100%); }
+    to   { transform: translateX(200vw); }
+  }
+
+  /* Земля */
+  .ground {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to top, #228B22, #32CD32);
+    border-top: 10px solid #006400;
+  }
+
+  /* Пікачу — спрайт */
+  .pikachu {
+    position: absolute;
+    bottom: 180px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: url('https://img.pokemondb.net/sprites/black-white/anim/normal/pikachu.gif') no-repeat;
+    background-size: 400% 100%; /* 4 кадри в ряд */
+    animation: walk 0.8s steps(4) infinite, jump 3s infinite;
+    z-index: 10;
+  }
+
+  @keyframes walk {
+    0%   { background-position: 0 0; }
+    100% { background-position: -800px 0; } /* 4 × 200px */
+  }
+
+  @keyframes jump {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50%      { transform: translateX(-50%) translateY(-100px); }
+  }
+
+  /* Трава, що коливається */
+  .grass {
+    position: absolute;
+    bottom: 160px;
+    width: 100%;
+    height: 60px;
+    background: repeating-linear-gradient(
+      90deg,
+      #228B22 0px,
+      #228B22 20px,
+      #32CD32 20px,
+      #32CD32 40px
+    );
+    animation: wave 6s linear infinite;
+  }
+
+  @keyframes wave {
+    0%   { background-position: 0 0; }
+    100% { background-position: 100px 0; }
+  }
+
+  /* Кнопка старт/стоп */
+  button {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 24px;
+    font-size: 16px;
+    background: #ff6b00;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    z-index: 100;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+  }
+  button:hover { background: #e55a00; }
+
+  h1 {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 2.5rem;
+    text-shadow: 3px 3px 10px rgba(0,0,0,0.5);
+    z-index: 100;
+  }
+</style>
+</head>
+<body>
+
+<h1>Пікачу біжить!</h1>
+
+<button id="toggle">Пауза</button>
+
+<div class="scene" id="scene">
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+  <div class="cloud"></div>
+
+  <div class="grass"></div>
+  <div class="ground"></div>
+
+  <div class="pikachu"></div>
+</div>
+
+<script>
+  const scene = document.getElementById('scene');
+  const btn = document.getElementById('toggle');
+  let isPaused = false;
+
+  btn.onclick = () => {
+    isPaused = !isPaused;
+    if (isPaused) {
+      scene.style.animationPlayState = 'paused';
+      btn.textContent = 'Пуск';
+    } else {
+      scene.style.animationPlayState = 'running';
+      btn.textContent = 'Пауза';
+    }
+  };
+</script>
+
+</body>
+</html>
