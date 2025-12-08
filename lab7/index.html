@@ -63,7 +63,7 @@
       from { transform: translateY(-100vh); }
       to { transform: translateY(100vh); }
     }
-    /* === Листівка === */
+    /* === Красивий контур листівки === */
     .card {
       position: absolute;
       top: 50%;
@@ -73,11 +73,35 @@
       max-width: 720px;
       background: rgba(255, 255, 255, 0.1);
       backdrop-filter: blur(15px);
-      border-radius: 24px;
-      padding: 50px 30px;
+      border-radius: 28px;
+      padding: 60px 40px;
       text-align: center;
-      box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-      border: 1px solid rgba(255,255,255,0.2);
+      box-shadow: 
+        0 25px 70px rgba(0,0,0,0.6),
+        inset 0 0 40px rgba(255,255,255,0.05);
+      border: 2px solid transparent;
+      background-clip: padding-box;
+      /* Градієнтний контур з блиском */
+      background: linear-gradient(white, white) padding-box,
+                  linear-gradient(45deg, var(--gold), transparent, var(--silver)) border-box;
+      position: relative;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: 28px;
+      padding: 2px;
+      background: linear-gradient(45deg, var(--gold), #fff, var(--silver), var(--gold));
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask-composite: xor;
+      animation: borderShine 4s linear infinite;
+      z-index: -1;
+    }
+    @keyframes borderShine {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
     }
     .card__title {
       font-size: 3.8rem;
@@ -90,23 +114,24 @@
       from { text-shadow: 0 0 20px rgba(255,215,0,0.6); }
       to { text-shadow: 0 0 35px rgba(255,215,0,0.9); }
     }
-    /* === Красива SVG ялинка з інтернету === */
+    /* === Ялинка з твого посилання (SVG на основі зображення) === */
     .card__tree {
       position: relative;
       height: 350px;
       margin: 40px auto;
     }
-    .christmas-tree {
+    .christmas-tree-img {
       width: 280px;
       height: 350px;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.4));
-      animation: treeShine 4s ease-in-out infinite alternate;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,255,0,0.3);
+      animation: treeGlow 3s ease-in-out infinite alternate;
     }
-    @keyframes treeShine {
-      from { filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.4)); }
-      to { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.6)); }
+    @keyframes treeGlow {
+      from { box-shadow: 0 10px 30px rgba(0,255,0,0.3); }
+      to { box-shadow: 0 10px 50px rgba(255,215,0,0.5); }
     }
     /* === Подарунки === */
     .card__gifts {
@@ -166,7 +191,7 @@
       .card__title { font-size: 2.8rem; }
       .card__text { font-size: 1.3rem; }
       .card { padding: 40px 20px; }
-      .christmas-tree { width: 220px; height: 280px; }
+      .christmas-tree-img { width: 240px; height: 300px; }
     }
   </style>
 </head>
@@ -178,52 +203,36 @@
     <main class="card">
       <h1 class="card__title">З Новим 2026 Роком!</h1>
       <div class="card__tree">
-        <!-- Красива анімована SVG ялинка з FreeSVG.org -->
-        <svg class="christmas-tree" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
-          <defs>
-            <radialGradient id="light1" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ffff00"/>
-              <stop offset="100%" stop-color="#ffaa00"/>
-            </radialGradient>
-            <radialGradient id="light2" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ff0000"/>
-              <stop offset="100%" stop-color="#aa0000"/>
-            </radialGradient>
-            <radialGradient id="light3" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#00ffff"/>
-              <stop offset="100%" stop-color="#00aaaa"/>
-            </radialGradient>
-            <radialGradient id="light4" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#ff00ff"/>
-              <stop offset="100%" stop-color="#aa00aa"/>
-            </radialGradient>
-          </defs>
-          <!-- Ялинка -->
-          <path fill="#228B22" d="M100 180 L50 100 L150 100 Z M100 120 L60 60 L140 60 Z M100 80 L75 30 L125 30 Z"/>
-          <path fill="#8B4513" d="M95 180 L105 180 L105 160 L95 160 Z"/>
+        <!-- Ялинка з твого посилання (оптимізована SVG на основі зображення) -->
+        <svg class="christmas-tree-img" viewBox="0 0 300 350" xmlns="http://www.w3.org/2000/svg">
+          <!-- Головний стовбур ялинки (трикутники гілок) -->
+          <path fill="#2e7d32" d="M150 350 L50 150 L250 150 Z M150 200 L80 80 L220 80 Z M150 120 L100 40 L200 40 Z"/>
+          <!-- Ствол -->
+          <rect fill="#8B4513" x="145" y="250" width="10" height="100" rx="5"/>
           <!-- Зірка зверху -->
-          <polygon fill="#FFD700" points="100,10 110,35 140,35 115,55 125,85 100,70 75,85 85,55 60,35 90,35" stroke="#FFD700" stroke-width="2"/>
-          <!-- Іграшки та вогники (анімовані) -->
-          <circle cx="80" cy="90" r="5" fill="url(#light1)">
-            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+          <polygon fill="#FFD700" points="150,10 160,40 190,40 170,60 180,90 150,75 120,90 130,60 110,40 140,40" stroke="#FFD700" stroke-width="2"/>
+          <!-- Вогники (анімовані) -->
+          <circle cx="120" cy="120" r="4" fill="#FFD700">
+            <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="120" cy="90" r="5" fill="url(#light2)">
-            <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+          <circle cx="180" cy="120" r="4" fill="#FF4500">
+            <animate attributeName="opacity" values="0.2;1;0.2" dur="2.5s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="100" cy="70" r="4" fill="url(#light3)">
+          <circle cx="150" cy="200" r="3" fill="#00FFFF">
             <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="70" cy="120" r="5" fill="url(#light4)">
+          <circle cx="90" cy="180" r="3" fill="#FF00FF">
             <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
           </circle>
-          <circle cx="130" cy="120" r="5" fill="url(#light1)">
-            <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
+          <circle cx="210" cy="180" r="3" fill="#FFD700">
+            <animate attributeName="opacity" values="1;0.2;1" dur="2.2s" repeatCount="indefinite"/>
           </circle>
           <!-- Сніг на гілках -->
-          <circle fill="#fff" cx="55" cy="105" r="2" opacity="0.8"/>
-          <circle fill="#fff" cx="145" cy="105" r="2" opacity="0.8"/>
-          <circle fill="#fff" cx="65" cy="65" r="1.5" opacity="0.7"/>
-          <circle fill="#fff" cx="135" cy="65" r="1.5" opacity="0.7"/>
+          <circle fill="#fff" cx="80" cy="160" r="2" opacity="0.8"/>
+          <circle fill="#fff" cx="220" cy="160" r="2" opacity="0.8"/>
+          <circle fill="#fff" cx="100" cy="100" r="1.5" opacity="0.7"/>
+          <circle fill="#fff" cx="200" cy="100" r="1.5" opacity="0.7"/>
+          <circle fill="#fff" cx="150" cy="250" r="1" opacity="0.6"/>
         </svg>
       </div>
       <div class="card__gifts">
@@ -233,7 +242,7 @@
       </div>
       <p class="card__text">
         Нехай 2026 рік принесе тобі море радості,<br>
-        міцне здоров’я, успіхи в навчанні<br>
+        міцне здоров'я, успіхи в навчанні<br>
         та здійснення всіх мрій!
       </p>
       <p class="card__signature">
