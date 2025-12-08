@@ -1,96 +1,82 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Лабораторна №6 — Пікачу</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ЛР6 — Dragonite Animation</title>
 
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       height: 100vh;
       overflow: hidden;
-      font-family: 'Segoe UI', sans-serif;
       background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 100%);
-      animation: skyCycle 15s infinite ease-in-out;
       background-size: 100% 200%;
+      animation: sky 15s infinite ease-in-out;
+      font-family: Arial, sans-serif;
     }
 
     /* Анімація неба */
-    @keyframes skyCycle {
-      0% { background-position: 0 0%; }
-      50% { background-position: 0 100%; }
+    @keyframes sky {
+      0%   { background-position: 0 0%; }
+      50%  { background-position: 0 100%; }
       100% { background-position: 0 0%; }
     }
 
     /* Сонце */
     .sun {
       position: absolute;
-      width: 80px;
-      height: 80px;
+      width: 100px;
+      height: 100px;
       background: radial-gradient(circle, #FFD700, #FFA500);
       border-radius: 50%;
-      box-shadow: 0 0 30px #FFD700;
-      top: 15%;
+      top: 10%;
       left: 10%;
+      box-shadow: 0 0 30px #FFD700;
       animation: sunMove 20s linear infinite;
-      z-index: 1;
     }
 
     @keyframes sunMove {
-      0% { left: 5%; }
+      0%   { left: 10%; }
       100% { left: 90%; }
     }
 
     /* Хмари */
     .clouds {
       position: absolute;
-      top: 15%;
+      top: 10%;
       width: 300%;
-      animation: cloudsMove 60s linear infinite;
-      z-index: 2;
+      animation: clouds 50s linear infinite;
     }
 
-    @keyframes cloudsMove {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-66.666%); }
+    @keyframes clouds {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-66.6%); }
     }
 
     .cloud {
       display: inline-block;
-      width: 140px;
-      height: 45px;
-      background: white;
+      width: 150px;
+      height: 50px;
+      background: #fff;
       border-radius: 50px;
+      margin: 0 50px;
       position: relative;
-      margin: 0 60px;
     }
-
-    .cloud::before,
-    .cloud::after {
-      content: '';
+    .cloud::before, .cloud::after {
+      content: "";
       position: absolute;
-      background: white;
+      background: #fff;
       border-radius: 50%;
     }
-
     .cloud::before {
-      width: 70px;
-      height: 70px;
-      top: -25px;
-      left: 10px;
+      width: 80px; height: 80px;
+      top: -25px; left: 10px;
     }
-
     .cloud::after {
-      width: 60px;
-      height: 60px;
-      top: -15px;
-      right: 10px;
+      width: 70px; height: 70px;
+      top: -20px; right: 5px;
     }
 
     /* Земля */
@@ -98,77 +84,65 @@
       position: absolute;
       bottom: 0;
       width: 100%;
-      height: 120px;
+      height: 140px;
       background: linear-gradient(to top, #2E7D32, #4CAF50);
-      z-index: 3;
       overflow: hidden;
+      z-index: 5;
     }
 
-    /* Трава, яка рухається */
+    /* Трава */
     .grass {
       position: absolute;
       bottom: 0;
       width: 300%;
-      height: 120px;
-      background: url('https://i.imgur.com/UONwK5c.png');
-      background-size: 500px 120px;
-      animation: grassIdle 5s linear infinite;
-      z-index: 4;
+      height: 140px;
+      background: url("https://i.imgur.com/UONwK5c.png") repeat-x;
+      background-size: 600px 140px;
+      animation: grassSlow 5s linear infinite;
     }
 
-    @keyframes grassIdle {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-33.33%); }
+    @keyframes grassSlow {
+      0%   { transform: translateX(0); }
+      100% { transform: translateX(-33%); }
     }
 
-    @keyframes grassRun {
-      0% { transform: translateX(0); }
+    @keyframes grassFast {
+      0%   { transform: translateX(0); }
       100% { transform: translateX(-100%); }
     }
 
-    /* Пікачу */
-    .pikachu {
+    /* --- Dragonite --- */
+    .dragon {
       position: absolute;
-      width: 64px;
-      height: 64px;
-      bottom: 120px;
+      width: 120px;
+      height: 120px;
+      bottom: 140px;
       left: 50%;
       transform: translateX(-50%);
-      background: url('https://i.imgur.com/5V3hQFf.png') no-repeat;
-      background-size: 256px 64px;
       z-index: 10;
       image-rendering: pixelated;
+
+      background: url("https://img.pokemondb.net/sprites/black-white/anim/shiny/dragonite.gif")
+                  no-repeat center/contain;
     }
 
-    /* Біг */
-    .pikachu.walk-right,
-    .pikachu.walk-left {
-      animation: walk 0.6s steps(4) infinite;
+    /* Дзеркальне відображення */
+    .left {
+      transform: translateX(-50%) scaleX(-1);
     }
-
-    @keyframes walk {
-      0% { background-position: 0px 0; }
-      100% { background-position: -256px 0; }
-    }
-
-    /* Дзеркально для руху вліво */
-    .pikachu.walk-right {
+    .right {
       transform: translateX(-50%) scaleX(1);
     }
 
-    .pikachu.walk-left {
-      transform: translateX(-50%) scaleX(-1);
-    }
-
     /* Стрибок */
-    .pikachu.jump {
-      animation: jump 0.5s ease-out;
+    .jump {
+      animation: jump 0.6s ease-out;
     }
 
     @keyframes jump {
-      0%   { transform: translate(-50%, 0); }
-      50%  { transform: translate(-50%, -130px); }
-      100% { transform: translate(-50%, 0); }
+      0%   { transform: translateX(-50%) translateY(0); }
+      50%  { transform: translateX(-50%) translateY(-160px); }
+      100% { transform: translateX(-50%) translateY(0); }
     }
   </style>
 </head>
@@ -182,54 +156,54 @@
     <div class="cloud"></div>
     <div class="cloud"></div>
     <div class="cloud"></div>
-    <div class="cloud"></div>
   </div>
 
   <div class="ground">
     <div class="grass" id="grass"></div>
   </div>
 
-  <div class="pikachu" id="pikachu"></div>
+  <div class="dragon right" id="dragon"></div>
 
   <script>
-    const pikachu = document.getElementById("pikachu");
+    const dragon = document.getElementById("dragon");
     const grass = document.getElementById("grass");
 
-    let position = window.innerWidth / 2;
-    const speed = 7;
+    let x = window.innerWidth / 2;
+    const speed = 10;
 
     document.addEventListener("keydown", (e) => {
-      pikachu.className = "pikachu";
-
+      dragon.classList.remove("jump");
+      
       if (e.code === "ArrowLeft") {
-        position -= speed;
-        pikachu.classList.add("walk-left");
-        grass.style.animation = "grassRun 1s linear infinite";
+        x -= speed;
+        dragon.classList.add("left");
+        dragon.classList.remove("right");
+        grass.style.animation = "grassFast 1s linear infinite";
       }
 
       if (e.code === "ArrowRight") {
-        position += speed;
-        pikachu.classList.add("walk-right");
-        grass.style.animation = "grassRun 1s linear infinite";
+        x += speed;
+        dragon.classList.add("right");
+        dragon.classList.remove("left");
+        grass.style.animation = "grassFast 1s linear infinite";
       }
 
       if (e.code === "Space") {
         e.preventDefault();
-        if (!pikachu.classList.contains("jump")) {
-          pikachu.classList.add("jump");
-          setTimeout(() => pikachu.classList.remove("jump"), 500);
+        if (!dragon.classList.contains("jump")) {
+          dragon.classList.add("jump");
+          setTimeout(() => dragon.classList.remove("jump"), 600);
         }
       }
 
-      const maxX = window.innerWidth - 64;
-      position = Math.max(0, Math.min(position, maxX));
+      // межі
+      x = Math.max(0, Math.min(x, window.innerWidth - 120));
 
-      pikachu.style.left = position + "px";
+      dragon.style.left = x + "px";
     });
 
-    /* Відпустив клавішу → трава знову повільно рухається */
     document.addEventListener("keyup", () => {
-      grass.style.animation = "grassIdle 5s linear infinite";
+      grass.style.animation = "grassSlow 5s linear infinite";
     });
   </script>
 
