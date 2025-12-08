@@ -1,142 +1,191 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Практична №4 — Fullsize Клавіатура</title>
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --key-size: 60px;
-      --gap: 6px;
-      --bg: #1e1e2f;
-      --key-bg: #2c2c3c;
-      --key-hover: #3a3a4a;
-      --key-active: #ff4081;
-      --key-text: #e0e0f0;
-      --font: 'Orbitron', sans-serif;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keyboard Layout</title>
+    <style>
+        :root {
+            /* ОНОВЛЕНІ КОЛЬОРИ */
+            --key-base: 40px; 
+            --gap: 6px;
+            --radius: 5px;
+            --bg-color: #2c2f33;      /* Темний графітовий корпус */
+            --key-color: #f7f7f7;     /* Світло-сірі/білі клавіші */
+            --key-shadow: #7f7f7f;    /* Середня тінь */
+            --text-color: #333;
+        }
 
-    body {
-      margin: 0;
-      background: var(--bg);
-      font-family: var(--font);
-      display: flex;
-      justify-content: center;
-      padding: 40px;
-    }
+        body {
+            background-color: #f0f0f0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 12px;
+        }
 
-    .keyboard {
-      display: grid;
-      grid-template-columns: repeat(22, var(--key-size));
-      gap: var(--gap);
-      background: #12121a;
-      padding: 20px;
-      border-radius: 16px;
-      box-shadow: 0 12px 40px rgba(0,0,0,0.5);
-    }
+        /* ОНОВЛЕНИЙ ГРАДІЄНТ КОРПУСУ */
+        .keyboard-case {
+            background: linear-gradient(180deg, #3a3d42 0%, #222428 100%); /* Темний градієнт */
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.2);
+            display: flex;
+            gap: 20px; 
+        }
 
-    .key {
-      background: var(--key-bg);
-      color: var(--key-text);
-      height: var(--key-size);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      border-radius: 8px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.3);
-      cursor: pointer;
-      user-select: none;
-      transition: 0.2s;
-    }
+        .row {
+            display: flex;
+            gap: var(--gap);
+            margin-bottom: var(--gap);
+        }
+        
+        .row:last-child {
+            margin-bottom: 0;
+        }
 
-    .key:hover {
-      background: var(--key-hover);
-      box-shadow: 0 0 0 2px rgba(255,255,255,0.2);
-    }
+        /* ОНОВЛЕНА ТІНЬ КЛАВІШІ */
+        .k {
+            width: var(--key-base);
+            height: var(--key-base);
+            background-color: var(--key-color);
+            border-radius: var(--radius);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 2px 0 var(--key-shadow), 0 2px 4px rgba(0,0,0,0.25);
+            cursor: pointer;
+            user-select: none;
+            transition: all 0.1s ease;
+            position: relative;
+            color: var(--text-color); /* Забезпечуємо читабельність тексту */
+        }
 
-    .key:active {
-      background: var(--key-active);
-      color: #fff;
-      box-shadow: inset 0 2px 4px rgba(0,0,0,0.6);
-    }
+        .k:active {
+            transform: translateY(2px);
+            box-shadow: 0 0 0 var(--key-shadow), inset 0 2px 4px rgba(0,0,0,0.1);
+        }
 
-    .key:focus {
-      outline: 2px solid #66ccff;
-    }
+        
+        .w-1-5 { width: calc(var(--key-base) * 1.5 + var(--gap) * 0.5); }
+        .w-1-75 { width: calc(var(--key-base) * 1.75 + var(--gap) * 0.75); }
+        .w-2 { width: calc(var(--key-base) * 2 + var(--gap)); }
+        .w-2-25 { width: calc(var(--key-base) * 2.25 + var(--gap) * 1.25); }
+        .w-2-75 { width: calc(var(--key-base) * 2.75 + var(--gap) * 1.75); }
+        .w-space { width: calc(var(--key-base) * 6.25 + var(--gap) * 5.25); }
+        .h-2 { height: calc(var(--key-base) * 2 + var(--gap)); } 
 
-    /* Ширини */
-    .w1      { grid-column: span 1; }
-    .w2      { grid-column: span 2; }
-    .w3      { grid-column: span 3; }
-    .w4      { grid-column: span 4; }
-    .w5      { grid-column: span 5; }
-    .w6      { grid-column: span 6; }
-    .w7      { grid-column: span 7; }
-    .w8      { grid-column: span 8; }
-    .w9      { grid-column: span 9; }
-    .w10     { grid-column: span 10; }
+        /* ОНОВЛЕНІ СПЕЦІАЛЬНІ КОЛЬОРИ */
+        .pink { background-color: #ff99aa; box-shadow: 0 2px 0 #cc7a88, 0 2px 4px rgba(0,0,0,0.15); }
+        .blue { background-color: #66ccff; box-shadow: 0 2px 0 #4d99cc, 0 2px 4px rgba(0,0,0,0.15); }
 
-    .row { display: contents; }
-  </style>
+        
+        .main-block { display: flex; flex-direction: column; }
+        .nav-block { display: flex; flex-direction: column; justify-content: space-between; }
+        .numpad-block { display: flex; flex-direction: column; }
+        
+        
+        .f-keys { margin-bottom: calc(var(--gap) * 3); }
+        .spacer { width: calc(var(--key-base) * 0.5); }
+
+        .nav-top { margin-bottom: auto; } 
+        .arrows { display: flex; flex-direction: column; align-items: center; gap: var(--gap); }
+    </style>
 </head>
 <body>
-  <div class="keyboard">
-    <!-- Верхній ряд -->
-    <div class="row">
-      <div class="key w1">Esc</div>
-      <div class="key w1">F1</div><div class="key w1">F2</div><div class="key w1">F3</div><div class="key w1">F4</div>
-      <div class="key w1">F5</div><div class="key w1">F6</div><div class="key w1">F7</div><div class="key w1">F8</div>
-      <div class="key w1">F9</div><div class="key w1">F10</div><div class="key w1">F11</div><div class="key w1">F12</div>
-      <div class="key w2">PrtSc</div><div class="key w2">Del</div>
+
+    <div class="keyboard-case">
+        
+        <div class="main-block">
+            <div class="row f-keys">
+                <div class="k pink">Esc</div>
+                <div class="spacer"></div>
+                <div class="k">F1</div><div class="k">F2</div><div class="k">F3</div><div class="k">F4</div>
+                <div class="spacer"></div>
+                <div class="k">F5</div><div class="k">F6</div><div class="k">F7</div><div class="k">F8</div>
+                <div class="spacer"></div>
+                <div class="k">F9</div><div class="k">F10</div><div class="k">F11</div><div class="k">F12</div>
+            </div>
+
+            <div class="row">
+                <div class="k">`</div><div class="k">1</div><div class="k">2</div><div class="k">3</div><div class="k">4</div><div class="k">5</div><div class="k">6</div><div class="k">7</div><div class="k">8</div><div class="k">9</div><div class="k">0</div><div class="k">-</div><div class="k">=</div><div class="k w-2">Bksp</div>
+            </div>
+
+            <div class="row">
+                <div class="k w-1-5">Tab</div><div class="k">Q</div><div class="k">W</div><div class="k">E</div><div class="k">R</div><div class="k">T</div><div class="k">Y</div><div class="k">U</div><div class="k">I</div><div class="k">O</div><div class="k">P</div><div class="k">[</div><div class="k">]</div><div class="k w-1-5">\</div>
+            </div>
+
+            <div class="row">
+                <div class="k w-1-75">Caps</div><div class="k">A</div><div class="k">S</div><div class="k">D</div><div class="k">F</div><div class="k">G</div><div class="k">H</div><div class="k">J</div><div class="k">K</div><div class="k">L</div><div class="k">;</div><div class="k">'</div><div class="k w-2-25 blue">Enter</div>
+            </div>
+
+            <div class="row">
+                <div class="k w-2-25">Shift</div><div class="k">Z</div><div class="k">X</div><div class="k">C</div><div class="k">V</div><div class="k">B</div><div class="k">N</div><div class="k">M</div><div class="k">,</div><div class="k">.</div><div class="k">/</div><div class="k w-2-75">Shift</div>
+            </div>
+
+            <div class="row">
+                <div class="k w-1-5">Ctrl</div><div class="k">Win</div><div class="k w-1-5">Alt</div>
+                <div class="k w-space"></div> <div class="k w-1-5">Alt</div><div class="k">Fn</div><div class="k">≡</div><div class="k w-1-5">Ctrl</div>
+            </div>
+        </div>
+
+        <div class="nav-block">
+            <div class="nav-top">
+                <div class="row">
+                    <div class="k">Prt</div><div class="k">Scr</div><div class="k">Pau</div>
+                </div>
+                <div class="row" style="margin-top: calc(var(--gap)*3);"> <div class="k">Ins</div><div class="k">Hom</div><div class="k">PgU</div>
+                </div>
+                <div class="row">
+                    <div class="k">Del</div><div class="k">End</div><div class="k">PgD</div>
+                </div>
+            </div>
+
+            <div class="arrows">
+                <div class="row">
+                    <div class="k">↑</div>
+                </div>
+                <div class="row">
+                    <div class="k">←</div><div class="k">↓</div><div class="k">→</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="numpad-block">
+            <div class="row f-keys" style="visibility: hidden;"> <div class="k"></div><div class="k"></div><div class="k"></div><div class="k"></div>
+            </div>
+            
+            <div class="row">
+                <div class="k">Num</div><div class="k">/</div><div class="k">*</div><div class="k">-</div>
+            </div>
+            <div class="row">
+                <div class="k">7</div><div class="k">8</div><div class="k">9</div><div class="k" style="height: calc(var(--key-base) * 2 + var(--gap)); display:flex; align-items:center;">+</div>
+            </div>
+            <div class="row" style="margin-top: calc(var(--key-base) * -1 - var(--gap)); margin-left: calc((var(--key-base) + var(--gap)) * 3);">
+                </div>
+
+            <div style="display: grid; grid-template-columns: repeat(4, var(--key-base)); gap: var(--gap);">
+                </div>
+            
+            <div style="display: flex; gap: var(--gap);">
+                <div style="display: flex; flex-direction: column; gap: var(--gap);">
+                     <div class="row" style="margin:0;"><div class="k">7</div><div class="k">8</div><div class="k">9</div></div>
+                     <div class="row" style="margin:0;"><div class="k">4</div><div class="k">5</div><div class="k">6</div></div>
+                     <div class="row" style="margin:0;"><div class="k">1</div><div class="k">2</div><div class="k">3</div></div>
+                     <div class="row" style="margin:0;"><div class="k w-2">0</div><div class="k">.</div></div>
+                </div>
+                <div style="display: flex; flex-direction: column; gap: var(--gap);">
+                    <div class="k h-2" style="display: flex; align-items: center;">+</div>
+                    <div class="k h-2" style="display: flex; align-items: center;">Ent</div>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 
-    <!-- Цифровий ряд -->
-    <div class="row">
-      <div class="key w1">~</div>
-      <div class="key w1">1</div><div class="key w1">2</div><div class="key w1">3</div><div class="key w1">4</div>
-      <div class="key w1">5</div><div class="key w1">6</div><div class="key w1">7</div><div class="key w1">8</div>
-      <div class="key w1">9</div><div class="key w1">0</div><div class="key w1">-</div><div class="key w1">=</div>
-      <div class="key w2">Backspace</div>
-    </div>
-
-    <!-- QWERTY -->
-    <div class="row">
-      <div class="key w2">Tab</div>
-      <div class="key w1">Q</div><div class="key w1">W</div><div class="key w1">E</div><div class="key w1">R</div>
-      <div class="key w1">T</div><div class="key w1">Y</div><div class="key w1">U</div><div class="key w1">I</div>
-      <div class="key w1">O</div><div class="key w1">P</div><div class="key w1">[</div><div class="key w1">]</div>
-      <div class="key w2">\</div>
-    </div>
-
-    <!-- ASDF -->
-    <div class="row">
-      <div class="key w2">Caps</div>
-      <div class="key w1">A</div><div class="key w1">S</div><div class="key w1">D</div><div class="key w1">F</div>
-      <div class="key w1">G</div><div class="key w1">H</div><div class="key w1">J</div><div class="key w1">K</div>
-      <div class="key w1">L</div><div class="key w1">;</div><div class="key w1">'</div>
-      <div class="key w3">Enter</div>
-    </div>
-
-    <!-- ZXCV -->
-    <div class="row">
-      <div class="key w3">Shift</div>
-      <div class="key w1">Z</div><div class="key w1">X</div><div class="key w1">C</div><div class="key w1">V</div>
-      <div class="key w1">B</div><div class="key w1">N</div><div class="key w1">M</div><div class="key w1">,</div>
-      <div class="key w1">.</div><div class="key w1">/</div>
-      <div class="key w3">Shift</div>
-    </div>
-
-    <!-- Нижній ряд -->
-    <div class="row">
-      <div class="key w2">Ctrl</div>
-      <div class="key w2">Win</div>
-      <div class="key w2">Alt</div>
-      <div class="key w8">Space</div>
-      <div class="key w2">Alt</div>
-      <div class="key w2">Menu</div>
-      <div class="key w2">Ctrl</div>
-    </div>
-  </div>
 </body>
 </html>
