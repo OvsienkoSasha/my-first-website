@@ -92,16 +92,35 @@
 
     /* Трава */
     /* Трава */
+    /* Трава — без зовнішніх картинок, чистий CSS */
 .grass {
   position: absolute;
   bottom: 0;
   width: 300%;
   height: 140px;
-  background: url("https://i.imgur.com/2R9Qw0y.png") repeat-x; /* робоча текстура трави */
-  background-size: 200px 140px;
+  background:
+    /* нерівні вертикальні леза трави */
+    repeating-linear-gradient(
+      90deg,
+      #2e7d32 0px,
+      #2e7d32 6px,
+      #31853a 6px,
+      #31853a 12px
+    ),
+    /* легкі тіні між лезами */
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.06) 0px,
+      rgba(0,0,0,0.06) 3px,
+      transparent 3px,
+      transparent 12px
+    ),
+    /* м’який вертикальний градієнт кольору */
+    linear-gradient(to top, #1f5f28, #3fa64a);
+  background-size: 200px 140px, 200px 140px, 100% 100%;
+  background-repeat: repeat-x;
   animation: grassSlow 5s linear infinite;
 }
-
 
     @keyframes grassSlow {
       0%   { transform: translateX(0); }
