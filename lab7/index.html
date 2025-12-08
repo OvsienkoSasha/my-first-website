@@ -6,31 +6,23 @@
     <title>❄️ Новорічна Листівка з Анімацією Снігу</title>
 
     <style>
-        /* =========================================================
-        1. CSS Variables (Змінні)
-        ========================================================= */
         :root {
             /* Кольори */
             --color-primary: #f0f0f0;         
             --color-secondary: #0a0a20;       
-            --color-accent: #c0392b;          /* Новорічний червоний */
+            --color-accent: #c0392b;          
             --color-accent-hover: #e74c3c;
-            --color-green: #27ae60;           /* Новорічний зелений */
-            --color-dark-blue: #1c2833;       /* Фон для снігу */
-            --color-snow: #ecf0f1;            /* Колір снігу */
+            --color-green: #27ae60;         
+            --color-dark-blue: #1c2833;       
+            --color-snow: #ecf0f1;           
             
-            /* Шрифти */
             --font-family-main: 'Arial', sans-serif;
             --font-family-header: 'Verdana', sans-serif; 
 
-            /* Розміри */
             --spacing-base: 1rem;
             --card-max-width: 450px;
         }
 
-        /* =========================================================
-        2. Global Styles (Базові та Скидання)
-        ========================================================= */
         * {
             box-sizing: border-box;
             margin: 0;
@@ -44,15 +36,14 @@
         body {
             font-family: var(--font-family-main);
             color: var(--color-secondary);
-            /* Фон для ефекту снігу */
             background-color: var(--color-dark-blue);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            justify-content: center; /* Центруємо по вертикалі */
+            justify-content: center; 
             align-items: center;
             padding: 2rem 1rem;
-            overflow: hidden; /* Щоб приховати сніг за межами екрану */
+            overflow: hidden; 
             position: relative;
         }
         
@@ -60,7 +51,6 @@
             text-decoration: none;
         }
         
-        /* СНІГ: Фон та анімація */
         body::before {
             content: "";
             position: fixed;
@@ -68,7 +58,6 @@
             left: 0;
             width: 100%;
             height: 100%;
-            /* Забезпечує ефект снігу */
             background-image: radial-gradient(white 1px, transparent 0);
             background-size: 50px 50px;
             pointer-events: none;
@@ -79,9 +68,6 @@
         }
 
 
-        /* =========================================================
-        3. Block Styles (BEM)
-        ========================================================= */
         .header {
             color: var(--color-snow);
             margin-bottom: 2rem;
@@ -93,7 +79,6 @@
             font-size: 2.5rem;
         }
 
-        /* --- CARD BLOCK (Основна Листівка) --- */
         .card {
             position: relative;
             max-width: var(--card-max-width);
@@ -108,7 +93,6 @@
             transition: transform 0.3s;
         }
         
-        /* Модифікатор */
         .card--snowy {
             border: 5px solid var(--color-green);
         }
@@ -134,7 +118,6 @@
         .card__decor-item {
             font-size: 3rem;
             line-height: 1;
-            /* Анімація для ялинки/подарунків */
             animation: pulse 2s infinite alternate; 
         }
 
@@ -144,7 +127,6 @@
             margin-bottom: 2rem;
         }
         
-        /* --- BUTTON BLOCK --- */
         .button {
             display: inline-flex;
             align-items: center;
@@ -170,7 +152,6 @@
             }
         }
 
-        /* --- FOOTER BLOCK --- */
         .footer {
             color: var(--color-snow);
             padding: var(--spacing-base) 0;
@@ -179,21 +160,15 @@
             z-index: 10;
         }
 
-        /* =========================================================
-        4. Keyframes (Анімації)
-        ========================================================= */
-        /* Анімація падіння снігу */
         @keyframes snow {
             0% {
                 background-position: 0 0;
             }
             100% {
-                /* Рухає фон вниз, імітуючи падіння */
                 background-position: 50px 1000px; 
             }
         }
 
-        /* Анімація дрейфу снігу (вітер) */
         @keyframes snow-drift {
             0% {
                 transform: translateX(0);
@@ -203,7 +178,6 @@
             }
         }
 
-        /* Анімація пульсації для декорацій */
         @keyframes pulse {
             0% {
                 transform: scale(1);
