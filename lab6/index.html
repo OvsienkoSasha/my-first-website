@@ -78,16 +78,17 @@
       z-index: 5;
     }
     /* Трава — робоче зображення */
-    .grass {
-      position: absolute;
-      bottom: 0;
-      width: 300%;
-      height: 140px;
-      background: url('https://i.imgur.com/8eJqY8u.png') repeat-x bottom;
-      background-size: 800px 140px;
-      animation: grassSlow 5s linear infinite;
-      z-index: 6;
-    }
+    /* Трава */
+.grass {
+  position: absolute;
+  bottom: 0;
+  width: 300%;
+  height: 140px;
+  background: url("https://i.imgur.com/wKQw7zU.png") repeat-x; /* робоче зображення трави */
+  background-size: 200px 140px;
+  animation: grassSlow 5s linear infinite;
+}
+
     @keyframes grassSlow {
       0% { transform: translateX(0); }
       100% { transform: translateX(-33%); }
