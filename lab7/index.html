@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>З Новим 2026 Роком! — Овсієнко О.В.</title>
   <style>
+    /* === Змінні (як у SCSS) === */
     :root {
       --primary: #c41e3a;
       --gold: #ffd700;
@@ -24,7 +25,6 @@
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       color: white;
       overflow: hidden;
-      position: relative;
     }
     .page {
       position: relative;
@@ -90,23 +90,23 @@
       from { text-shadow: 0 0 20px rgba(255,215,0,0.6); }
       to { text-shadow: 0 0 35px rgba(255,215,0,0.9); }
     }
-    /* === Красива ялинка з інтернету (SVG) === */
+    /* === Красива SVG ялинка з інтернету === */
     .card__tree {
       position: relative;
       height: 350px;
       margin: 40px auto;
     }
-    .christmas-tree-svg {
-      width: 300px;
+    .christmas-tree {
+      width: 280px;
       height: 350px;
       display: block;
       margin: 0 auto;
-      filter: drop-shadow(0 0 20px rgba(0,255,0,0.3));
-      animation: treeGlow 3s ease-in-out infinite alternate;
+      filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.4));
+      animation: treeShine 4s ease-in-out infinite alternate;
     }
-    @keyframes treeGlow {
-      from { filter: drop-shadow(0 0 20px rgba(0,255,0,0.3)); }
-      to { filter: drop-shadow(0 0 30px rgba(0,255,0,0.6)); }
+    @keyframes treeShine {
+      from { filter: drop-shadow(0 0 25px rgba(0, 255, 0, 0.4)); }
+      to { filter: drop-shadow(0 0 40px rgba(255, 215, 0, 0.6)); }
     }
     /* === Подарунки === */
     .card__gifts {
@@ -121,12 +121,10 @@
       height: 90px;
       position: relative;
       animation: float 4s ease-in-out infinite;
-      border-radius: 8px;
-      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
     }
-    .gift--red { background: linear-gradient(145deg, #c41e3a, #a0152a); animation-delay: 0s; }
-    .gift--blue { background: linear-gradient(145deg, #1e88e5, #1565c0); animation-delay: 1.2s; }
-    .gift--gold { background: linear-gradient(145deg, #ffa000, #ff8f00); animation-delay: 2.4s; }
+    .gift--red { background: #c41e3a; animation-delay: 0s; }
+    .gift--blue { background: #1e88e5; animation-delay: 1.2s; }
+    .gift--gold { background: #ffa000; animation-delay: 2.4s; }
     .gift::before,
     .gift::after {
       content: '';
@@ -139,7 +137,6 @@
       top: -15px;
       left: 50%;
       transform: translateX(-50%);
-      border-radius: 12px;
     }
     .gift::after {
       width: 110px;
@@ -147,11 +144,10 @@
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
-      border-radius: 12px;
     }
     @keyframes float {
-      0%, 100% { transform: translateY(0) rotate(2deg); }
-      50% { transform: translateY(-25px) rotate(-2deg); }
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-25px); }
     }
     .card__text {
       font-size: 1.5rem;
@@ -170,7 +166,7 @@
       .card__title { font-size: 2.8rem; }
       .card__text { font-size: 1.3rem; }
       .card { padding: 40px 20px; }
-      .christmas-tree-svg { width: 250px; height: 300px; }
+      .christmas-tree { width: 220px; height: 280px; }
     }
   </style>
 </head>
@@ -182,15 +178,52 @@
     <main class="card">
       <h1 class="card__title">З Новим 2026 Роком!</h1>
       <div class="card__tree">
-        <!-- Красива SVG ялинка з інтернету (Flaticon) -->
-        <svg class="christmas-tree-svg" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#2e7d32" d="M12 2L3 12h3v8h3v-4h6v4h3v-8h3L12 2z"/>
-          <path fill="#1b5e20" d="M12 2L6 10h2v8h2v-4h4v4h2V10h2L12 2z"/>
-          <circle fill="#ffd700" cx="12" cy="4" r="1"/>
-          <circle fill="#ff6f00" cx="10" cy="8" r="0.5"/>
-          <circle fill="#d32f2f" cx="14" cy="8" r="0.5"/>
-          <rect fill="#4a2c0b" x="11.5" y="12" width="1" height="6"/>
-          <circle fill="#ffd700" cx="12" cy="18" r="0.5"/>
+        <!-- Красива анімована SVG ялинка з FreeSVG.org -->
+        <svg class="christmas-tree" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 200 200">
+          <defs>
+            <radialGradient id="light1" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ffff00"/>
+              <stop offset="100%" stop-color="#ffaa00"/>
+            </radialGradient>
+            <radialGradient id="light2" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff0000"/>
+              <stop offset="100%" stop-color="#aa0000"/>
+            </radialGradient>
+            <radialGradient id="light3" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#00ffff"/>
+              <stop offset="100%" stop-color="#00aaaa"/>
+            </radialGradient>
+            <radialGradient id="light4" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#ff00ff"/>
+              <stop offset="100%" stop-color="#aa00aa"/>
+            </radialGradient>
+          </defs>
+          <!-- Ялинка -->
+          <path fill="#228B22" d="M100 180 L50 100 L150 100 Z M100 120 L60 60 L140 60 Z M100 80 L75 30 L125 30 Z"/>
+          <path fill="#8B4513" d="M95 180 L105 180 L105 160 L95 160 Z"/>
+          <!-- Зірка зверху -->
+          <polygon fill="#FFD700" points="100,10 110,35 140,35 115,55 125,85 100,70 75,85 85,55 60,35 90,35" stroke="#FFD700" stroke-width="2"/>
+          <!-- Іграшки та вогники (анімовані) -->
+          <circle cx="80" cy="90" r="5" fill="url(#light1)">
+            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="120" cy="90" r="5" fill="url(#light2)">
+            <animate attributeName="opacity" values="0.3;1;0.3" dur="2.5s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="100" cy="70" r="4" fill="url(#light3)">
+            <animate attributeName="opacity" values="1;0.5;1" dur="1.8s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="70" cy="120" r="5" fill="url(#light4)">
+            <animate attributeName="opacity" values="0.5;1;0.5" dur="3s" repeatCount="indefinite"/>
+          </circle>
+          <circle cx="130" cy="120" r="5" fill="url(#light1)">
+            <animate attributeName="opacity" values="1;0.3;1" dur="2.2s" repeatCount="indefinite"/>
+          </circle>
+          <!-- Сніг на гілках -->
+          <circle fill="#fff" cx="55" cy="105" r="2" opacity="0.8"/>
+          <circle fill="#fff" cx="145" cy="105" r="2" opacity="0.8"/>
+          <circle fill="#fff" cx="65" cy="65" r="1.5" opacity="0.7"/>
+          <circle fill="#fff" cx="135" cy="65" r="1.5" opacity="0.7"/>
         </svg>
       </div>
       <div class="card__gifts">
