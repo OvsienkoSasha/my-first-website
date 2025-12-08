@@ -2,261 +2,181 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Портфоліо — Овсієнко О.В.</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Особистий веб-сайт | Овсієнко О.В.</title>
   <style>
-    :root {
-      --bg: #ffffff;
-      --text: #0d0d0d;
-      --muted: #555;
-      --primary: #ff6b00;
-      --card: #f5f5f5;
-      --radius: 18px;
-      --max-width: 1100px;
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      font-family: "Segoe UI", sans-serif;
-      background: var(--bg);
-      color: var(--text);
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      line-height: 1.6;
+      color: #333;
+      background-color: #fafafa;
     }
 
-    /* Навігація */
     header {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 20px 40px;
-      position: sticky;
-      top: 0;
-      background: rgba(255,255,255,0.85);
-      backdrop-filter: blur(10px);
-      z-index: 10;
-      border-bottom: 1px solid #eee;
+      background-color: #1a1a1a;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
     }
 
     header h1 {
-      font-size: 1.3rem;
-      font-weight: 600;
+      font-size: 1.6rem;
+      margin-bottom: 0.5rem;
     }
 
     nav ul {
       list-style: none;
       display: flex;
-      gap: 25px;
+      justify-content: center;
+      gap: 1.2rem;
+      padding: 0.5rem 0;
+      flex-wrap: wrap;
     }
 
     nav a {
+      color: #64b5f6;
       text-decoration: none;
-      color: var(--text);
       font-weight: 500;
+      padding: 0.3rem 0.6rem;
+      border-radius: 4px;
     }
 
-    nav a:hover {
-      color: var(--primary);
+    nav a:hover, nav a:focus {
+      background-color: #333;
     }
 
     main {
-      max-width: var(--max-width);
+      padding: 2rem 1rem;
+      min-height: calc(100vh - 180px);
+    }
+
+    .page {
+      display: none;
+      max-width: 768px;
       margin: 0 auto;
-      padding: 40px 20px;
+      background: white;
+      padding: 1.5rem;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.07);
     }
 
-    /* Hero section */
-    .hero {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-bottom: 60px;
+    #home,
+    .page:target {
+      display: block;
     }
 
-    .hero-text {
-      max-width: 55%;
+    h2 {
+      margin-bottom: 1rem;
+      font-size: 1.4rem;
+      color: #1a1a1a;
     }
 
-    .hero-text h2 {
-      font-size: 2.4rem;
-      margin-bottom: 10px;
-      line-height: 1.2;
+    img {
+      max-width: 100%;
+      height: auto;
+      margin: 1rem 0;
+      border-radius: 6px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
 
-    .hero-text p {
-      color: var(--muted);
-      margin-bottom: 25px;
-      max-width: 90%;
+    ul {
+      padding-left: 1.5rem;
+      margin: 1rem 0;
     }
 
-    .btn {
-      background: var(--primary);
-      color: white;
-      padding: 12px 22px;
-      border-radius: var(--radius);
-      text-decoration: none;
-      font-weight: 600;
-      display: inline-block;
-    }
-
-    .hero img {
-      width: 230px;
-      height: 230px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 6px solid #eee;
-    }
-
-    /* Секції */
-    section h3 {
-      font-size: 1.5rem;
-      margin-bottom: 20px;
-      font-weight: 600;
-    }
-
-    .label {
-      font-size: 0.85rem;
-      color: var(--primary);
-      text-align: right;
-      margin-bottom: 5px;
-    }
-
-    .cards {
-      display: flex;
-      gap: 20px;
-      flex-wrap: wrap;
-    }
-
-    .card {
-      background: var(--card);
-      padding: 20px;
-      border-radius: var(--radius);
-      flex: 1 1 calc(33% - 20px);
-      min-width: 250px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.07);
-    }
-
-    .card h4 {
-      font-size: 1.1rem;
-      margin-bottom: 6px;
-    }
-
-    .card small {
-      color: var(--muted);
-      font-size: 0.85rem;
-    }
-
-    /* Практичні */
-    .pr-item {
-      background: var(--card);
-      padding: 15px;
-      display: flex;
-      gap: 15px;
-      border-radius: var(--radius);
-      margin-bottom: 20px;
-      box-shadow: 0 3px 8px rgba(0,0,0,0.07);
-    }
-
-    .pr-item img {
-      width: 120px;
-      height: 80px;
-      border-radius: 10px;
-      object-fit: cover;
+    li {
+      margin-bottom: 0.6rem;
     }
 
     footer {
+      background-color: #1a1a1a;
+      color: #aaa;
       text-align: center;
-      padding: 30px;
-      color: #777;
-      margin-top: 40px;
+      padding: 1.2rem 1rem;
+      margin-top: 2rem;
     }
 
+    footer a {
+      color: #64b5f6;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.4rem;
+      }
+      header h1 {
+        font-size: 1.3rem;
+      }
+    }
   </style>
 </head>
 <body>
 
-<header>
-  <h1>Овсієнко О.В.</h1>
-  <nav>
-    <ul>
-      <li><a href="#home">Головна</a></li>
-      <li><a href="#labs">Лабораторні</a></li>
-      <li><a href="#pract">Практичні</a></li>
-      <li><a href="#about">Про мене</a></li>
-    </ul>
-  </nav>
-</header>
+  <header>
+    <h1>Особистий веб-сайт Овсієнка О.В.</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Головна</a></li>
+        <li><a href="#about">Про мене</a></li>
+        <li><a href="#practical">Практичні роботи</a></li>
+        <li><a href="#lab">Лабораторні заняття</a></li>
+      </ul>
+    </nav>
+  </header>
 
-<main>
+  <main>
+    <!-- Головна -->
+    <section id="home" class="page">
+      <h2>Ласкаво просимо!</h2>
+      <p>Це мій особистий сайт, створений для курсу з веб-розробки.</p>
+      <p>Тут зібрані всі виконані мною практичні та лабораторні роботи.</p>
+    </section>
 
-  <!-- HERO -->
-  <section class="hero" id="home">
-    <div class="hero-text">
-      <h2>Hi, I am <br> <strong>Ovsienko Oleksandr</strong></h2>
-      <p>Студент групи ТЦР-22. На цьому сайті зібрані всі виконані мною лабораторні та практичні роботи.</p>
-      <a class="btn" href="resume.pdf">Download Resume</a>
-    </div>
-    <img src="photo.jpg" alt="Фото" />
-  </section>
+    <!-- Про мене -->
+    <section id="about" class="page">
+      <h2>Про мене</h2>
+      <img src="photo.jpg" alt="Фото Овсієнка Олександра">
+      <p>Я Овсієнко Олександр, студент групи ТЦР-22.</p>
+      <p><strong>Email:</strong> <a href="mailto:ovsyenkos@gmail.com">ovsyenkos@gmail.com</a></p>
+    </section>
 
-  <!-- Лабораторні -->
-  <section id="labs">
-    <div class="label">Переглянути всі</div>
-    <h3>Лабораторні роботи</h3>
-    <div class="cards">
-      <div class="card">
-        <h4>Лабораторна №1</h4>
-        <p>Форма реєстрації</p>
-        <small>2024</small>
-      </div>
+    <!-- Практичні роботи -->
+    <section id="practical" class="page">
+      <h2>Практичні роботи</h2>
+      <ul>
+        <li><a href="practical2/index.html">Практична робота №2 — Стилізація форми</a></li>
+        <li><a href="practical3/index.html">Практична робота №3 — Макет YouTube (Flexbox)</a></li>
+        <li><a href="practical4/index.html">Практична робота №4 — Keyboard (Flexbox)</a></li>
+      </ul>
+    </section>
 
-      <div class="card">
-        <h4>Лабораторна №2</h4>
-        <p>CSS селектори</p>
-        <small>2024</small>
-      </div>
-
-      <div class="card">
-        <h4>Лабораторна №3</h4>
-        <p>YouTube Clone</p>
-        <small>2024</small>
-      </div>
-    </div>
-  </section>
-
-  <!-- Практичні -->
-  <section id="pract" style="margin-top:50px;">
-    <h3>Практичні роботи</h3>
-
-    <div class="pr-item">
-      <img src="matrix.jpg">
-      <div>
-        <h4>Практична №1</h4>
-        <p>Основи HTML</p>
-      </div>
-    </div>
-
-    <div class="pr-item">
-      <img src="matrix.jpg">
-      <div>
-        <h4>Практична №4</h4>
-        <p>CSS компонування</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Про мене -->
-  <section id="about" style="margin-top:50px;">
-    <h3>Про мене</h3>
-    <p>Я Овсієнко Олександр, студент групи ТЦР-22.</p>
-    <p>Email: <a href="mailto:ovsyenkos@gmail.com">ovsyenkos@gmail.com</a></p>
-  </section>
-
-</main>
-
-<footer>
-  &copy; 2025 Овсієнко Олександр | GitHub
-</footer>
+    <!-- Лабораторні заняття -->
+    <section id="lab" class="page">
+      <h2>Лабораторні заняття</h2>
+      <ul>
+        <li><a href="lab1/index.html">Лабораторна робота №1 — Форма реєстрації</a></li>
+        <li><a href="lab2/index.html">Лабораторна робота №2 — CSS-селектори</a></li>
+        <li><a href="lab3/index.html">Лабораторна робота №3 — YouTube Clone (повний макет)</a></li>
+        <li><a href="lab4/index.html">Лабораторна робота №4 — Сторінка планера</a></li>
+      </ul>
+    </section>
+  </main>
+  <footer>
+    &copy; 2025 Овсієнко Олександр В’ячеславович | 
+    <a href="https://github.com/OvsienkoSasha" target="_blank">GitHub</a>
+  </footer>
 
 </body>
 </html>
