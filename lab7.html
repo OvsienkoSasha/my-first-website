@@ -1,180 +1,247 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>З Новим 2026 Роком!</title>
-  <link href="https://fonts.googleapis.com/css2.gstatic.com" rel="preconnect">
-  <link href="https://fonts.googleapis.com/css2?family=Mountains+of+Christmas:wght@700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎄 Новорічна Листівка (Лаб. №7) - Об'єднаний Код</title>
 
-    body {
-      min-height: 100vh;
-      background: radial-gradient(circle at top, #0b1d38 0%, #0a1526 70%);
-      font-family: 'Poppins', sans-serif;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-      position: relative;
-    }
+    <style>
+        /* =========================================================
+        1. CSS Variables (Змінні)
+        ========================================================= */
+        :root {
+            /* Кольори */
+            --color-primary: #f0f0f0;         
+            --color-secondary: #0a0a20;       
+            --color-accent: #c0392b;          /* Новорічний червоний */
+            --color-accent-hover: #e74c3c;
+            --color-green: #27ae60;           /* Новорічний зелений */
+            --color-snow: #ecf0f1;            /* Колір снігу */
 
-    /* Падаючий сніг */
-    .snow {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: transparent;
-    }
-    .snow::before {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 300%;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%23fff' opacity='0.9' cx='20' cy='20' r='1.5'/%3E%3Ccircle fill='%23fff' opacity='0.8' cx='80' cy='40' r='2'/%3E%3Ccircle fill='%23fff' opacity='0.7' cx='50' cy='70' r='1.8'/%3E%3C/svg%3E");
-      background-size: 80px 80px;
-      animation: snow 12s linear infinite;
-    }
-    .snow::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      left: 0;
-      width: 100%;
-      height: 300%;
-      background: inherit;
-      animation: snow 18s linear infinite;
-      animation-delay: -6s;
-      opacity: 0.6;
-    }
-    @keyframes snow { to { transform: translateY(100vh); } }
+            /* Шрифти */
+            --font-family-main: 'Arial', sans-serif;
+            --font-family-header: 'Verdana', sans-serif; 
 
-    /* Картка */
-    .card {
-      width: 420px;
-      background: rgba(15, 30, 60, 0.75);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      padding: 60px 40px;
-      text-align: center;
-      box-shadow: 
-        0 30px 60px rgba(0,0,0,0.6),
-        inset 0 0 40px rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      inset: inset 0;
-      border-radius: 30px;
-      background: linear-gradient(45deg, transparent, rgba(255,255,255,0.05), transparent);
-      animation: shine 6s infinite;
-    }
-    @keyframes shine { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+            /* Відступи/Розміри */
+            --spacing-base: 1rem;
+            --card-max-width: 450px;
+        }
 
-    /* Заголовок */
-    .title {
-      font-family: 'Mountains of Christmas', cursive;
-      font-size: 4.5rem;
-      color: #fff;
-      text-shadow: 0 0 30px rgba(255,255,255,0.5);
-      margin-bottom: 10px;
-    }
-    .year {
-      font-size: 5.5rem;
-      font-weight: bold;
-      background: linear-gradient(90deg, #ff3366, #ff66cc);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      text-shadow: 0 0 40px #ff3366;
-      animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%,100% { transform: scale(1); }
-      50% { transform: scale(1.05); }
-    }
+        /* =========================================================
+        2. Global Styles (Базові та Скидання)
+        ========================================================= */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
 
-    /* Ялинка */
-    .tree {
-      width: 140px;
-      margin: 50px auto;
-      filter: drop-shadow(0 0 30px #fff);
-      animation: treeGlow 3s infinite alternate;
-    }
-    @keyframes treeGlow {
-      from { filter: drop-shadow(0 0 30px #fff); }
-      to { filter: drop-shadow(0 0 50px #ffff99); }
-    }
+        html {
+            font-size: 16px;
+        }
 
-    /* Текст */
-    .text {
-      color: #e0e7ff;
-      font-size: 1.3rem;
-      line-height: 1.7;
-      margin: 40px 0;
-    }
+        body {
+            font-family: var(--font-family-main);
+            color: var(--color-secondary);
+            background-color: var(--color-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+        }
 
-    /* Кнопка */
-    .btn {
-      display: block;
-      margin: 50px auto 30px;
-      padding: 16px 40px;
-      background: linear-gradient(45deg, #ff3366, #ff6699);
-      color: white;
-      font-size: 1.4rem;
-      font-weight: 600;
-      text-decoration: none;
-      border-radius: 50px;
-      box-shadow: 0 10px 30px rgba(255,51,102,0.4);
-      transition: all 0.3s;
-      position: relative;
-      overflow: hidden;
-    }
-    .btn:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 15px 40px rgba(255,51,102,0.6);
-    }
-    .btn::after {
-      content: "Gift";
-      margin-left: 10px;
-    }
+        a {
+            text-decoration: none;
+            color: var(--color-accent);
+        }
+        
+        /* =========================================================
+        3. Block Styles (BEM)
+        ========================================================= */
 
-    /* Підпис */
-    .footer {
-      color: #8899aa;
-      font-size: 0.95rem;
-    }
-  </style>
+        /* --- HEADER BLOCK --- */
+        .header {
+            width: 100%;
+            text-align: center;
+            padding: var(--spacing-base) 0;
+            background-color: var(--color-green);
+            color: var(--color-snow);
+            border-radius: 5px;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .header__logo {
+            font-family: var(--font-family-header);
+            font-size: 1.8rem;
+        }
+
+        /* --- MAIN WRAPPER --- */
+        .main {
+            flex-grow: 1;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* --- CARD BLOCK --- */
+        .card {
+            position: relative;
+            max-width: var(--card-max-width);
+            width: 90%;
+            padding: 2rem;
+            background-color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            text-align: center;
+        }
+
+        .card__title {
+            color: var(--color-accent);
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-family: var(--font-family-header);
+        }
+
+        .card__image-container {
+            margin: 1rem 0 2rem;
+        }
+        
+        .card__snowflake {
+            font-size: 4rem;
+            line-height: 1;
+            color: var(--color-snow);
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+            /* Анімація float, див. Keyframes */
+            animation: float 5s ease-in-out infinite alternate; 
+        }
+
+        .card__message {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        /* Елемент декору */
+        .card__decor {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            background-color: var(--color-green);
+            border-radius: 50%;
+        }
+        
+        .card__decor--top-right {
+            top: 10px;
+          right: 10px;
+        }
+        .card__decor--bottom-left {
+            bottom: 10px;
+            left: 10px;
+        }
+        
+        /* Модифікатор блока */
+        .card--snowy {
+            background-color: var(--color-snow);
+            border: 4px solid var(--color-accent);
+        }
+
+        /* --- BUTTON BLOCK --- */
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .button__icon {
+            margin-right: 0.5rem;
+        }
+        
+        .button__text {
+            font-size: 1rem;
+        }
+
+        .button--primary {
+            background-color: var(--color-accent);
+            color: white;
+            
+            /* SCSS :hover перенесено безпосередньо */
+            &:hover {
+                background-color: var(--color-accent-hover);
+                transform: translateY(-2px);
+            }
+        }
+
+        /* --- FOOTER BLOCK --- */
+        .footer {
+            width: 100%;
+            text-align: center;
+            padding: var(--spacing-base) 0;
+            margin-top: 2rem;
+        }
+
+        .footer__text {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* =========================================================
+        4. Keyframes (Анімації)
+        ========================================================= */
+        @keyframes float {
+            0% {
+                transform: translateY(0);
+            }
+            100% {
+                transform: translateY(-10px);
+            }
+        }
+    </style>
 </head>
 <body>
 
-  <!-- Сніг -->
-  <div class="snow"></div>
+    <header class="header">
+        <div class="header__container">
+            <h1 class="header__logo">✨ Лабораторна №7 ✨</h1>
+        </div>
+    </header>
 
-  <!-- Картка -->
-  <div class="card">
-    <h1 class="title">Happy New Year</h1>
-    <div class="year">2026</div>
+    <main class="main">
+        <section class="card card--snowy">
+            <h2 class="card__title">З Новим Роком та Різдвом!</h2>
+            
+            <div class="card__image-container">
+                <div class="card__snowflake">❄️</div>
+            </div>
 
-    <img class="tree" src="https://i.ibb.co/9YZW9tQ/tree.png" alt="Ялинка">
+            <p class="card__message">
+                Нехай 2026 рік принесе світло, добро та справжнє диво. 
+                Бажаю успіхів у навчанні та здійснення всіх мрій!
+            </p>
 
-    <p class="text">
-      Нехай цей рік принесе нові досягнення, чистий код та<br>
-      найменше багів у житті!<br>
-      Бажаю успіхів у навчанні та реалізації всіх планів.
-    </p>
+            <a href="https://google.com" target="_blank" class="button button--primary card__cta">
+                <span class="button__icon">🎁</span>
+                <span class="button__text">Відкрити подарунок</span>
+            </a>
+            
+            <div class="card__decor card__decor--top-right"></div>
+            <div class="card__decor card__decor--bottom-left"></div>
+        </section>
+    </main>
 
-    <a href="#" class="btn">ОТРИМАТИ ПОДАРУНОК Gift</a>
-
-    <div class="footer">
-      Designed by Овсієнко Олександр, група ТЦР-22
-    </div>
-  </div>
+    <footer class="footer">
+        <p class="footer__text">
+            Розроблено з використанням BEM.
+        </p>
+    </footer>
 
 </body>
 </html>
