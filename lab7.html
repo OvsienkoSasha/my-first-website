@@ -1,29 +1,32 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>З Новим 2026 Роком! — Овсієнко О.В.</title>
   <style>
     :root {
-      --gold: #ffb400;
-      --red: #d32f2f;
-      --blue: #1565c0;
-      --green-dark: #1b5e20;
-      --green: #2e7d32;
-      --pink: #c2185b;
-      --purple: #7b1fa2;
+      --primary: #c41e3a;
+      --gold: #ffd700;
+      --silver: #e8e8e8;
+      --dark-green: #0b3d2e;
+      --light-green: #1fa873;
+      --page-max-width: 1000px;
     }
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      min-height: 100vh;
-      background: linear-gradient(135deg, #0c1445, #1e3c72, #2a5298);
-      font-family: 'Segoe UI', sans-serif;
-      overflow: hidden;
+      margin: 0;
+      background: radial-gradient(circle at top, #17415a, #0b1e2b 70%);
+      font-family: "Segoe UI", sans-serif;
       color: white;
+      overflow-x: hidden;
     }
 
+    .page {
+      max-width: var(--page-max-width);
+      margin: auto;
+      padding: 40px 20px;
+      position: relative;
     }
 
     /* Сніг */
@@ -31,237 +34,201 @@
       position: fixed;
       inset: 0;
       pointer-events: none;
-      z-index: 20;
+      background-image: url("https://i.imgur.com/7RzFhDT.png");
+      background-size: contain;
+      animation: snow 18s linear infinite;
     }
-    .snow::before, .snow::after {
-      content: '';
-      position: absolute;
-      top: -100%;
-      width: 100%;
-      height: 300%;
-      background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle fill='%23fff' cx='15' cy='15' r='2'/%3E%3Ccircle fill='%23fff' cx='50' cy='40' r='3'/%3E%3Ccircle fill='%23fff' cx='85' cy='25' r='2.5'/%3E%3C/svg%3E");
-      background-size: 90px 90px;
-      animation: snowfall 14s linear infinite;
-      opacity: 0.9;
+    @keyframes snow {
+      from { transform: translateY(-100px); }
+      to   { transform: translateY(100px); }
     }
-    .snow::after { animation-duration: 20s; animation-delay: -7s; opacity: 0.6; }
-    @keyframes snowfall { to { transform: translateY(100vh); } }
 
     /* Листівка */
     .card {
-      position: absolute;
-      top: 50%; left: 50%;
-      transform: translate(-50%, -50%);
-      width: 90%;
-      max-width: 800px;
-      background: rgba(10, 20, 50, 0.45);
-      backdrop-filter: blur(20px);
-      border-radius: 30px;
-      padding: 60px 40px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255,255,255,0.25);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+      border-radius: 25px;
+      padding: 50px 30px;
       text-align: center;
-      box-shadow: 0 30px 80px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.15);
+      margin-top: 40px;
     }
 
     .card__title {
-      font-size: 4.5rem;
-      font-weight: 900;
-      background: linear-gradient(90deg, #fff, var(--gold), #fff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      margin-bottom: 40px;
-      animation: titleGlow 4s infinite;
-    }
-    @keyframes titleGlow {
-      0%,100% { filter: drop-shadow(0 0 20px var(--gold));
-      50% { filter: drop-shadow(0 0 40px #fff); }
+      font-size: 3.5rem;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(255,215,0,0.7);
     }
 
-    /* === НОВА КРАСИВА ЯЛИНКА === */
+    /* НОВА КРАСИВА ЯЛИНКА */
     .tree-wrapper {
-      position: relative;
-      height: 380px;
+      width: 260px;
       margin: 50px auto;
+      position: relative;
     }
 
-    .tree {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0; height: 0;
-    }
-    .tree--1 { border-left: 150px solid transparent; border-right: 150px solid transparent; border-bottom: 240px solid var(--green-dark); }
-    .tree--2 { border-left: 120px solid transparent; border-right: 120px solid transparent; border-bottom: 200px solid var(--green); bottom: 100px; }
-    .tree--3 { border-left: 90px solid transparent; border-right: 90px solid transparent; border-bottom: 160px solid var(--green-dark); bottom: 200px; }
-
-    /* Ствол */
-    .trunk {
-      position: absolute;
-      bottom: 0;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 50px;
-      height: 80px;
-      background: #4a2c0b;
-      border-radius: 10px;
-    }
-
-    /* Гірлянда — кольорові лампочки */
-    .lights {
+    .tree-lights {
       position: absolute;
       inset: 0;
-      background:
-        radial-gradient(circle at 25% 65%, var(--red) 3px, transparent 4px),
-        radial-gradient(circle at 75% 55%, var(--blue) 3px, transparent 4px),
-        radial-gradient(circle at 50% 45%, var(--gold) 3px, transparent 4px),
-        radial-gradient(circle at 35% 80%, var(--purple) 3px, transparent 4px),
-        radial-gradient(circle at  at 65% 75%, var(--blue) 3px, transparent 4px),
-        radial-gradient(circle at 15% 50%, var(--pink) 3px, transparent 4px);
-      background-size: 320px 380px;
-      animation: twinkle 3s infinite;
-      pointer-events: none;
+      background: repeating-conic-gradient(
+        from 0deg,
+        #ff6b6b 0deg 10deg,
+        #ffd93d 10deg 20deg,
+        #4d96ff 20deg 30deg,
+        #6bcB77 30deg 40deg
+      );
+      mask: radial-gradient(circle at 50% 0%, transparent 45%, black 47%);
+      opacity: 0.22;
+      animation: rotate 12s linear infinite;
     }
-    @keyframes twinkle { 0%,100% { opacity: 0.8; } 50% { opacity: 1; } }
 
-    /* Зірка зверху */
+    @keyframes rotate {
+      to { transform: rotate(360deg); }
+    }
+
+    .tree-layer {
+      width: 0;
+      height: 0;
+      margin: 0 auto;
+      border-left: solid transparent;
+      border-right: solid transparent;
+      border-bottom: solid var(--dark-green);
+      filter: drop-shadow(0 0 8px rgba(0,0,0,0.6));
+      border-radius: 6px;
+    }
+
+    .l1 {
+      border-left-width: 120px;
+      border-right-width: 120px;
+      border-bottom-width: 160px;
+    }
+    .l2 {
+      margin-top: -70px;
+      border-left-width: 100px;
+      border-right-width: 100px;
+      border-bottom-width: 130px;
+    }
+    .l3 {
+      margin-top: -60px;
+      border-left-width: 75px;
+      border-right-width: 75px;
+      border-bottom-width: 105px;
+    }
+
     .star {
-      position: absolute;
-      top: -60px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 100px; height: 100px;
+      width: 60px;
+      height: 60px;
       background: var(--gold);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      box-shadow: 0 0 50px #fff;
-      animation: starPulse 2.5s infinite;
-    }
-    @keyframes starPulse {
-      0%,100% { transform: translateX(-50%) scale(1); }
-      50% { transform: translateX(-50%) scale(1.25); }
+      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 72%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
+      margin: -20px auto 10px;
+      animation: shine 2.5s infinite ease-in-out;
+      filter: drop-shadow(0 0 12px var(--gold));
     }
 
-    /* === НОВІ РЕАЛІСТИЧНІ ПОДАРУНКИ === */
+    @keyframes shine {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.18); }
+    }
+
+    /* Нові подарунки */
     .gifts {
       display: flex;
       justify-content: center;
-      gap: 50px;
-      margin: 60px 0 40px;
+      gap: 30px;
       flex-wrap: wrap;
-      perspective: 1000px;
+      margin-top: 40px;
     }
 
     .gift {
       width: 110px;
       height: 110px;
-      position: relative;
-      transform-style: preserve-3d;
-      animation: giftFloat 6s ease-in-out infinite;
-    }
-    .gift--1 { background: linear-gradient(135deg, #c62828, #b71c1c); animation-delay: 0s; }
-    .gift--2 { background: linear-gradient(135deg, #1565c0, #0d47a1); animation-delay: 1.5s; }
-    .gift--3 { background: linear-gradient(135deg, #ff6f00, #e65100); animation-delay: 3s; }
-
-    /* Бант */
-    .gift::before {
-      content: '';
-      position: absolute;
-      top: -30px;
-      left: 50%;
-      width: 70px; height: 30px;
-      background: var(--gold);
-      transform: translateX(-50%);
       border-radius: 10px;
-      box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+      position: relative;
+      background: linear-gradient(135deg, #c41e3a, #8b1529);
+      box-shadow: 0 8px 18px rgba(0,0,0,0.4);
+      animation: float 4s ease-in-out infinite;
     }
+
+    .gift:nth-child(2) {
+      background: linear-gradient(135deg, #1e88e5, #135c99);
+      animation-delay: 1s;
+    }
+
+    .gift:nth-child(3) {
+      background: linear-gradient(135deg, #ffa000, #c47b00);
+      animation-delay: 2s;
+    }
+
+    .gift::before,
     .gift::after {
-      content: '';
+      content: "";
       position: absolute;
-      top: -15px;
+      background: var(--gold);
+    }
+
+    .gift::before {
+      width: 22px;
+      height: 100%;
       left: 50%;
-      width: 100px; height: 100px;
-      background: var(--gold);
-      transform: translateX(-50%) rotate(45deg);
-      border-radius: 20px;
-      opacity: 0.9;
+      transform: translateX(-50%);
     }
 
-    /* Стрічка по центру */
-    .ribbon-v, .ribbon-h {
-      position: absolute;
-      background: var(--gold);
-    }
-    .ribbon-v { width: 24px; height: 140px; left: 50%; top: -20px; transform: translateX(-50%); }
-    .ribbon-h { width: 140px; height: 24px; top: 50%; left: 50%; transform: translate(-50%, -50%); }
-
-    @keyframes giftFloat {
-      0%,100% { transform: translateY(0) rotateY(0); }
-      50% { transform: translateY(-30px) rotateY(10deg); }
+    .gift::after {
+      height: 22px;
+      width: 100%;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
-    /* Текст */
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+    }
+
     .card__text {
-      font-size: 1.7rem;
-      line-height: 1.9;
-      margin: 40px 0;
-      text-shadow: 0 2px 10px rgba(0,0,0,0.6);
-    }
-    .card__signature {
-      margin-top: 60px;
-      font-size: 1.7rem;
-      color: var(--gold);
-      font-style: italic;
-      text-shadow: 0 0 20px var(--gold);
+      font-size: 1.5rem;
+      line-height: 1.7;
+      margin-top: 40px;
     }
 
-    @media (max-width: 640px) {
-      .card__title { font-size: 3.2rem; }
-      .tree--1 { border-left-width: 110px; border-right-width: 110px; border-bottom-width: 180px; }
-      .gift { width: 90px; height: 90px; }
+    .card__signature {
+      font-size: 1.3rem;
+      color: var(--gold);
+      margin-top: 40px;
+      font-style: italic;
     }
   </style>
 </head>
 <body>
+  <div class="page">
+    <div class="snow"></div>
 
-  <div class="snow"></div>
+    <div class="card">
+      <h1 class="card__title">З Новим 2026 Роком!</h1>
 
-  <main class="card">
-    <h1 class="card__title">З Новим 2026 Роком!</h1>
+      <div class="tree-wrapper">
+        <div class="star"></div>
+        <div class="tree-lights"></div>
+        <div class="tree-layer l1"></div>
+        <div class="tree-layer l2"></div>
+        <div class="tree-layer l3"></div>
+      </div>
 
-    <div class="tree-wrapper">
-      <div class="tree tree--1"></div>
-      <div class="tree tree--2"></div>
-      <div class="tree tree--3"></div>
-      <div class="trunk"></div>
-      <div class="lights"></div>
-      <div class="star"></div>
+      <div class="gifts">
+        <div class="gift"></div>
+        <div class="gift"></div>
+        <div class="gift"></div>
+      </div>
+
+      <p class="card__text">
+        Нехай 2026 рік принесе тобі море радості,<br />міцне здоров’я, успіхи в навчанні<br />та здійснення всіх мрій!
+      </p>
+
+      <p class="card__signature">
+        З найкращими побажаннями,<br /><strong>Овсієнко Олександр</strong> (група ТЦР-22)
+      </p>
     </div>
-
-    <div class="gifts">
-      <div class="gift gift--1">
-        <div class="ribbon-v"></div>
-        <div class="ribbon-h"></div>
-      </div>
-      <div class="gift gift--2">
-        <div class="ribbon-v"></div>
-        <div class="ribbon-h"></div>
-      </div>
-      <div class="gift gift--3">
-        <div class="ribbon-v"></div>
-        <div class="ribbon-h"></div>
-      </div>
-    </div>
-
-    <p class="card__text">
-      Бажаю тобі казкового настрою, тепла, затишку,<br>
-      багато сміху, любові та виконання всіх бажань!
-    </p>
-
-    <p class="card__signature">
-      З найкращими побажаннями,<br>
-      <strong>Овсієнко Олександр</strong> (ТЦР-22)
-    </p>
-  </main>
-
+  </div>
 </body>
 </html>
