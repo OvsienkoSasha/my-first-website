@@ -1,233 +1,99 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>З Новим 2026 Роком! — Овсієнко О.В.</title>
+  <meta charset="UTF-8">
+  <title>Новорічна люкс-листівка</title>
   <style>
     :root {
-      --primary: #c41e3a;
-      --gold: #ffd700;
-      --silver: #e8e8e8;
-      --dark-green: #0b3d2e;
-      --light-green: #1fa873;
-      --page-max-width: 1000px;
+      --font-main: 'Playfair Display', serif;
+      --color-bg: #0b0c10;
+      --color-card: #1f2833;
+      --color-gold: #ffd700;
+      --color-white: #ffffff;
+      --color-accent: #66fcf1;
+      --shadow: 0 12px 40px rgba(0,0,0,0.6);
     }
 
-    body {
+    body.page {
+      background: radial-gradient(circle at top, #1f2833, #0b0c10);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
       margin: 0;
-      background: radial-gradient(circle at top, #17415a, #0b1e2b 70%);
-      font-family: "Segoe UI", sans-serif;
-      color: white;
-      overflow-x: hidden;
+      font-family: var(--font-main);
     }
 
-    .page {
-      max-width: var(--page-max-width);
-      margin: auto;
-      padding: 40px 20px;
-      position: relative;
-    }
-
-    /* Сніг */
-    .snow {
-      position: fixed;
-      inset: 0;
-      pointer-events: none;
-      background-image: url("https://i.imgur.com/7RzFhDT.png");
-      background-size: contain;
-      animation: snow 18s linear infinite;
-    }
-    @keyframes snow {
-      from { transform: translateY(-100px); }
-      to   { transform: translateY(100px); }
-    }
-
-    /* Листівка */
     .card {
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255,255,255,0.25);
-      backdrop-filter: blur(14px);
-      box-shadow: 0 20px 50px rgba(0,0,0,0.5);
-      border-radius: 25px;
-      padding: 50px 30px;
+      background: var(--color-card);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      width: 500px;
       text-align: center;
-      margin-top: 40px;
+      overflow: hidden;
+      border: 2px solid var(--color-gold);
+      animation: glow 3s ease-in-out infinite alternate;
+    }
+
+    .card__header {
+      background: linear-gradient(90deg, var(--color-gold), #fff8dc);
+      padding: 25px;
     }
 
     .card__title {
-      font-size: 3.5rem;
-      color: var(--gold);
-      text-shadow: 0 0 20px rgba(255,215,0,0.7);
+      color: var(--color-white);
+      font-size: 32px;
+      margin: 0;
+      text-shadow: 0 0 10px var(--color-gold);
     }
 
-    /* НОВА КРАСИВА ЯЛИНКА */
-    .tree-wrapper {
-      width: 260px;
-      margin: 50px auto;
-      position: relative;
-    }
-
-    .tree-lights {
-      position: absolute;
-      inset: 0;
-      background: repeating-conic-gradient(
-        from 0deg,
-        #ff6b6b 0deg 10deg,
-        #ffd93d 10deg 20deg,
-        #4d96ff 20deg 30deg,
-        #6bcB77 30deg 40deg
-      );
-      mask: radial-gradient(circle at 50% 0%, transparent 45%, black 47%);
-      opacity: 0.22;
-      animation: rotate 12s linear infinite;
-    }
-
-    @keyframes rotate {
-      to { transform: rotate(360deg); }
-    }
-
-    .tree-layer {
-      width: 0;
-      height: 0;
-      margin: 0 auto;
-      border-left: solid transparent;
-      border-right: solid transparent;
-      border-bottom: solid var(--dark-green);
-      filter: drop-shadow(0 0 8px rgba(0,0,0,0.6));
-      border-radius: 6px;
-    }
-
-    .l1 {
-      border-left-width: 120px;
-      border-right-width: 120px;
-      border-bottom-width: 160px;
-    }
-    .l2 {
-      margin-top: -70px;
-      border-left-width: 100px;
-      border-right-width: 100px;
-      border-bottom-width: 130px;
-    }
-    .l3 {
-      margin-top: -60px;
-      border-left-width: 75px;
-      border-right-width: 75px;
-      border-bottom-width: 105px;
-    }
-
-    .star {
-      width: 60px;
-      height: 60px;
-      background: var(--gold);
-      clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 72%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
-      margin: -20px auto 10px;
-      animation: shine 2.5s infinite ease-in-out;
-      filter: drop-shadow(0 0 12px var(--gold));
-    }
-
-    @keyframes shine {
-      0%, 100% { transform: scale(1); }
-      50% { transform: scale(1.18); }
-    }
-
-    /* Нові подарунки */
-    .gifts {
-      display: flex;
-      justify-content: center;
-      gap: 30px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-
-    .gift {
-      width: 110px;
-      height: 110px;
-      border-radius: 10px;
-      position: relative;
-      background: linear-gradient(135deg, #c41e3a, #8b1529);
-      box-shadow: 0 8px 18px rgba(0,0,0,0.4);
-      animation: float 4s ease-in-out infinite;
-    }
-
-    .gift:nth-child(2) {
-      background: linear-gradient(135deg, #1e88e5, #135c99);
-      animation-delay: 1s;
-    }
-
-    .gift:nth-child(3) {
-      background: linear-gradient(135deg, #ffa000, #c47b00);
-      animation-delay: 2s;
-    }
-
-    .gift::before,
-    .gift::after {
-      content: "";
-      position: absolute;
-      background: var(--gold);
-    }
-
-    .gift::before {
-      width: 22px;
-      height: 100%;
-      left: 50%;
-      transform: translateX(-50%);
-    }
-
-    .gift::after {
-      height: 22px;
-      width: 100%;
-      top: 50%;
-      transform: translateY(-50%);
-    }
-
-    @keyframes float {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-20px); }
+    .card__body {
+      padding: 30px;
+      background: linear-gradient(to bottom, #1f2833, #0b0c10);
     }
 
     .card__text {
-      font-size: 1.5rem;
-      line-height: 1.7;
-      margin-top: 40px;
+      font-size: 20px;
+      margin-bottom: 25px;
+      color: var(--color-accent);
+    }
+
+    .card__image {
+      width: 100%;
+      height: 220px;
+      background: url('https://i.imgur.com/7vQFZ0H.png') center/cover no-repeat;
+      border-radius: 12px;
+      border: 2px solid var(--color-gold);
+    }
+
+    .card__footer {
+      background: var(--color-gold);
+      padding: 15px;
     }
 
     .card__signature {
-      font-size: 1.3rem;
-      color: var(--gold);
-      margin-top: 40px;
-      font-style: italic;
+      color: #000;
+      font-size: 18px;
+      margin: 0;
+    }
+
+    @keyframes glow {
+      from { box-shadow: 0 0 20px var(--color-gold); }
+      to   { box-shadow: 0 0 40px var(--color-gold); }
     }
   </style>
 </head>
-<body>
-  <div class="page">
-    <div class="snow"></div>
-
-    <div class="card">
-      <h1 class="card__title">З Новим 2026 Роком!</h1>
-
-      <div class="tree-wrapper">
-        <div class="star"></div>
-        <div class="tree-lights"></div>
-        <div class="tree-layer l1"></div>
-        <div class="tree-layer l2"></div>
-        <div class="tree-layer l3"></div>
-      </div>
-
-      <div class="gifts">
-        <div class="gift"></div>
-        <div class="gift"></div>
-        <div class="gift"></div>
-      </div>
-
-      <p class="card__text">
-        Нехай 2026 рік принесе тобі море радості,<br />міцне здоров’я, успіхи в навчанні<br />та здійснення всіх мрій!
-      </p>
-
-      <p class="card__signature">
-        З найкращими побажаннями,<br /><strong>Овсієнко Олександр</strong> (група ТЦР-22)
-      </p>
+<body class="page">
+  <div class="card">
+    <div class="card__header">
+      <h1 class="card__title">✨ З Новим Роком ✨</h1>
+    </div>
+    <div class="card__body">
+      <p class="card__text">Нехай цей рік принесе багатство радості, тепла та здійснення найзаповітніших мрій 🎄</p>
+      <div class="card__image"></div>
+    </div>
+    <div class="card__footer">
+      <p class="card__signature">З найкращими побажаннями, Speex</p>
     </div>
   </div>
 </body>
