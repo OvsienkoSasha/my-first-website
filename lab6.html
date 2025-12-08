@@ -1,178 +1,237 @@
 <!DOCTYPE html>
 <html lang="uk">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Лабораторна робота №6 — Бігучий Пікачу</title>
-<style>
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  body {
-    height: 100vh;
-    overflow: hidden;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #87CEEB 50%, #E0F7FA 100%);
-    position: relative;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Лабораторна №6 — Пікачу</title>
 
-  /* Небо з плавною зміною кольору */
-  @keyframes dayCycle {
-    0%   { background: linear-gradient(to bottom, #87CEEB 50%, #E0F7FA 100%); }
-    50%  { background: linear-gradient(to bottom, #FF9A8B 50%, #FFD1BA 100%); }
-    100% { background: linear-gradient(to bottom, #667eea 50%, #764ba2 100%); }
-  }
-  body { animation: dayCycle 30s infinite alternate; }
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  /* Сонце */
-  .sun {
-    position: absolute;
-    width: 100px; height: 100px;
-    background: radial-gradient(circle, #FFEB3B, #FFA000);
-    border-radius: 50%;
-    top: 10%;
-    left: 10%;
-    box-shadow: 0 0 50px #FFD700;
-    animation: sunMove 40s linear infinite;
-  }
-  @keyframes sunMove {
-    0%   { left: -100px; top: 15%; }
-    100% { left: 100%; top: 30%; }
-  }
+    body {
+      height: 100vh;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #87CEEB 0%, #E0F7FA 100%);
+      animation: skyCycle 15s infinite ease-in-out;
+      background-size: 100% 200%;
+    }
 
-  /* Хмари */
-  .cloud {
-    position: absolute;
-    background: white;
-    border-radius: 100px;
-    opacity: 0.9;
-    animation: drift linear infinite;
-  }
-  .cloud:nth-child(1) { width: 200px; height: 60px; top: 10%; left: -250px; animation-duration: 50s; }
-  .cloud:nth-child(2) { width: 150px; height: 50px; top: 25%; left: -200px; animation-duration: 70s; animation-delay: 10s; }
-  .cloud:nth-child(3) { width: 180px; height: 70px; top: 18%; left: -220px; animation-duration: 60s; animation-delay: 25s; }
+    /* Анімація неба */
+    @keyframes skyCycle {
+      0% { background-position: 0 0%; }
+      50% { background-position: 0 100%; }
+      100% { background-position: 0 0%; }
+    }
 
-  @keyframes drift {
-    from { transform: translateX(-300px); }
-    to   { transform: translateX(calc(100vw + 300px)); }
-  }
+    /* Сонце */
+    .sun {
+      position: absolute;
+      width: 80px;
+      height: 80px;
+      background: radial-gradient(circle, #FFD700, #FFA500);
+      border-radius: 50%;
+      box-shadow: 0 0 30px #FFD700;
+      top: 15%;
+      left: 10%;
+      animation: sunMove 20s linear infinite;
+      z-index: 1;
+    }
 
-  /* Земля */
-  .ground {
-    position: absolute;
-    bottom: 0; width: 100%; height: 180px;
-    background: linear-gradient(to top, #2E7D32, #4CAF50);
-    z-index: 2;
-  }
-  .grass {
-    position: absolute;
-    bottom: 160px; width: 100%; height: 40px;
-    background: repeating-linear-gradient(90deg, #1B5E20 0px, #1B5E20 30px, #2E7D32 30px, #2E7D32 60px);
-    animation: wave 8s linear infinite;
-  }
-  @keyframes wave { 0% { background-position: 0 0; } 100% { background-position: 120px 0; } }
+    @keyframes sunMove {
+      0% { left: 5%; }
+      100% { left: 90%; }
+    }
 
-  /* ПІКАЧУ — справжній спрайт-шит з 8 кадрами ходьби */
-  .pikachu {
-    position: absolute;
-    width: 120px;
-    height: 120px;
-    bottom: 170px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: url('https://img.pokemondb.net/sprites/home/normal/pikachu.png') 0 0 / 800% 100% no-repeat;
-    image-rendering: pixelated;
-    z-index: 10;
-    transition: bottom 0.3s;
-  }
+    /* Хмари */
+    .clouds {
+      position: absolute;
+      top: 15%;
+      width: 300%;
+      animation: cloudsMove 60s linear infinite;
+      z-index: 2;
+    }
 
-  /* Ходьба вправо */
-  .walk-right {
-    animation: walk 0.8s steps(8) infinite;
-  }
-  /* Ходьба вліво (дзеркально) */
-  .walk-left {
-    animation: walk 0.8s steps(8) infinite;
-    transform: translateX(-50%) scaleX(-1);
-  }
-  @keyframes walk {
-    0%   { background-position: 0 0; }
-    100% { background-position: -960px 0; } /* 8 × 120px */
-  }
+    @keyframes cloudsMove {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-66.666%); }
+    }
 
-  /* Стрибок */
-  @keyframes jump {
-    0%, 100% { bottom: 170px; }
-    50%      { bottom: 300px; }
-  }
-  .jumping {
-    animation: jump 0.7s ease-in-out;
-  }
+    .cloud {
+      display: inline-block;
+      width: 140px;
+      height: 45px;
+      background: white;
+      border-radius: 50px;
+      position: relative;
+      margin: 0 60px;
+    }
 
-  /* Керування */
-  .controls {
-    position: fixed;
-    bottom: 20px; left: 50%;
-    transform: translateX(-50%);
-    background: rgba(0,0,0,0.7);
-    color: white;
-    padding: 12px 24px;
-    border-radius: 50px;
-    font-size: 16px;
-    z-index: 100;
-  }
-</style>
+    .cloud::before,
+    .cloud::after {
+      content: '';
+      position: absolute;
+      background: white;
+      border-radius: 50%;
+    }
+
+    .cloud::before {
+      width: 70px;
+      height: 70px;
+      top: -25px;
+      left: 10px;
+    }
+
+    .cloud::after {
+      width: 60px;
+      height: 60px;
+      top: -15px;
+      right: 10px;
+    }
+
+    /* Земля */
+    .ground {
+      position: absolute;
+      bottom: 0;
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(to top, #2E7D32, #4CAF50);
+      z-index: 3;
+      overflow: hidden;
+    }
+
+    /* Трава, яка рухається */
+    .grass {
+      position: absolute;
+      bottom: 0;
+      width: 300%;
+      height: 120px;
+      background: url('https://i.imgur.com/UONwK5c.png');
+      background-size: 500px 120px;
+      animation: grassIdle 5s linear infinite;
+      z-index: 4;
+    }
+
+    @keyframes grassIdle {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-33.33%); }
+    }
+
+    @keyframes grassRun {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-100%); }
+    }
+
+    /* Пікачу */
+    .pikachu {
+      position: absolute;
+      width: 64px;
+      height: 64px;
+      bottom: 120px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: url('https://i.imgur.com/5V3hQFf.png') no-repeat;
+      background-size: 256px 64px;
+      z-index: 10;
+      image-rendering: pixelated;
+    }
+
+    /* Біг */
+    .pikachu.walk-right,
+    .pikachu.walk-left {
+      animation: walk 0.6s steps(4) infinite;
+    }
+
+    @keyframes walk {
+      0% { background-position: 0px 0; }
+      100% { background-position: -256px 0; }
+    }
+
+    /* Дзеркально для руху вліво */
+    .pikachu.walk-right {
+      transform: translateX(-50%) scaleX(1);
+    }
+
+    .pikachu.walk-left {
+      transform: translateX(-50%) scaleX(-1);
+    }
+
+    /* Стрибок */
+    .pikachu.jump {
+      animation: jump 0.5s ease-out;
+    }
+
+    @keyframes jump {
+      0%   { transform: translate(-50%, 0); }
+      50%  { transform: translate(-50%, -130px); }
+      100% { transform: translate(-50%, 0); }
+    }
+  </style>
 </head>
+
 <body>
 
-<div class="sun"></div>
-<div class="cloud"></div>
-<div class="cloud"></div>
-<div class="cloud"></div>
+  <div class="sun"></div>
 
-<div class="ground"></div>
-<div class="grass"></div>
+  <div class="clouds">
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+  </div>
 
-<div class="pikachu" id="pikachu"></div>
+  <div class="ground">
+    <div class="grass" id="grass"></div>
+  </div>
 
-<div class="controls">
-  Керування: ← → (біг)  •  Пробіл або ↑ (стрибок)
-</div>
+  <div class="pikachu" id="pikachu"></div>
 
-<script>
-  const p = document.getElementById('pikachu');
-  let x = window.innerWidth / 2;
+  <script>
+    const pikachu = document.getElementById("pikachu");
+    const grass = document.getElementById("grass");
 
-  document.addEventListener('keydown', (e) => {
-    // скидаємо клас стрибка
-    p.classList.remove('jumping');
+    let position = window.innerWidth / 2;
+    const speed = 7;
 
-    if (e.key === 'ArrowRight') {
-      x += 25;
-      p.className = 'pikachu walk-right';
-    } else if (e.key === 'ArrowLeft') {
-      x -= 25;
-      p.className = 'pikachu walk-left';
-    } else if (e.key === ' ' || e.key === 'ArrowUp') {
-      e.preventDefault();
-      p.classList.add('jumping');
-      // після стрибка повертаємо ходьбу (якщо стрілка затиснута)
-      setTimeout(() => {
-        if (p.classList.contains('walk-right')) p.classList.add('walk-right');
-        if (p.classList.contains('walk-left')) p.classList.add('walk-left');
-      }, 700);
-    }
+    document.addEventListener("keydown", (e) => {
+      pikachu.className = "pikachu";
 
-    // обмеження по екрану
-    x = Math.max(60, Math.min(window.innerWidth - 60, x));
-    p.style.left = x + 'px';
-  });
+      if (e.code === "ArrowLeft") {
+        position -= speed;
+        pikachu.classList.add("walk-left");
+        grass.style.animation = "grassRun 1s linear infinite";
+      }
 
-  // якщо клавіша відпущена — зупиняємо анімацію ходьби
-  document.addEventListener('keyup', (e) => {
-    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
-      p.className = 'pikachu';
-    }
-  });
-</script>
+      if (e.code === "ArrowRight") {
+        position += speed;
+        pikachu.classList.add("walk-right");
+        grass.style.animation = "grassRun 1s linear infinite";
+      }
+
+      if (e.code === "Space") {
+        e.preventDefault();
+        if (!pikachu.classList.contains("jump")) {
+          pikachu.classList.add("jump");
+          setTimeout(() => pikachu.classList.remove("jump"), 500);
+        }
+      }
+
+      const maxX = window.innerWidth - 64;
+      position = Math.max(0, Math.min(position, maxX));
+
+      pikachu.style.left = position + "px";
+    });
+
+    /* Відпустив клавішу → трава знову повільно рухається */
+    document.addEventListener("keyup", () => {
+      grass.style.animation = "grassIdle 5s linear infinite";
+    });
+  </script>
 
 </body>
 </html>
